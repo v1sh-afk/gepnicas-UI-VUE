@@ -13,8 +13,8 @@ export default{
 
 <template>
     <div id="container">
-        <div>
-            <input id="search" type="text" placeholder="Search">
+        <div id="search_c">
+            <input type="text" placeholder="Search">
         </div>
         <div id="imgs">
             <img class="home" :src="user_i"> 
@@ -28,20 +28,26 @@ export default{
 <style>
 #container{
     display: flex;
-    justify-content: end;
-    gap: 510px;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
 }
-#search{
-    margin-right: 10px;
-    border-radius: 20px;
-}
+
 input{
     width: 300px;
     height: 30px;
+    margin-right: 10px;
+    border-radius: 20px;
+}
+#search_c{
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
 }
 #imgs{
     display: flex;
     gap: 20px;
+    justify-self: end;
 }
 
 </style>

@@ -38,7 +38,7 @@ export default{
             <p>{{ date }}</p>
         </div>
 
-        <div class="center"><h1>GePNICAS</h1></div>
+        <div><h1>GePNIC Archival System</h1></div>
 
         <div class="right">
             <div><p>Welcome {{ currentUser }} </p></div>
@@ -93,5 +93,4 @@ h1{
     width: 30px; 
     height: 30px; 
 } 
-
 </style>
