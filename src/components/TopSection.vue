@@ -29,14 +29,15 @@ export default {
 <template>
 
 <div id="containerr">
-    <div id="st">
-        <h3>Storage Available</h3>
+    <div class="st">
+        <h4>Storage Available</h4>
         <div id="storage">
             <Doughnut class="pie" :data="data" />
         </div>
     </div>
-    <div id="st1">
-        <h3>Scheduled Jobs</h3>
+    <div class="stt">
+        <h4>Scheduled Jobs</h4>
+        
     </div>
 </div>
 
@@ -44,19 +45,22 @@ export default {
 </template>
 
 <style>
-#st{
+.st{
 border: 2px solid black;
 border-radius: 15px;
+margin-left: 50px;
+margin-right: 10px;
 }
-#st1{
-border: 2px solid black;
-border-radius: 15px;
+.stt{
+  border: 2px solid black;
+  border-radius: 15px;
 }
 #containerr{
     display: flex;
 }
 #storage{
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
+  margin-bottom: 10px;
 }
 </style>

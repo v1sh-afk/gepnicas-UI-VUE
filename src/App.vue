@@ -2,11 +2,13 @@
 import TopBar from './components/TopBar.vue';
 import SearchBar from './components/SearchBar.vue';
 import TopSection from './components/TopSection.vue';
+import InstanceSection from './components/InstanceSection.vue';
 export default {
   components: {
     TopBar,
     SearchBar,
-    TopSection
+    TopSection,
+    InstanceSection
   }
 }
 
@@ -16,6 +18,7 @@ export default {
 <TopBar/>
 <SearchBar />
 <TopSection />
+<InstanceSection />
 </template>
 
 <style>
