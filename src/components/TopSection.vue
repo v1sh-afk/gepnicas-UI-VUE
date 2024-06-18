@@ -37,7 +37,7 @@ export default {
     </div>
     <div class="stt">
         <h4>Scheduled Jobs</h4>
-        
+        <h5>Archival of TN tender docs</h5>
     </div>
 </div>
 
@@ -55,13 +55,18 @@ border: 2px solid black;
 border-radius: 15px;
 margin-left: 50px;
 margin-right: 10px;
+margin-right: 50px;
 }
 .stt{
   border: 2px solid black;
   border-radius: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 1115px;
 }
 #containerr{
     display: flex;
+    margin-top: 20px;
 }
 #storage{
   height: 200px;

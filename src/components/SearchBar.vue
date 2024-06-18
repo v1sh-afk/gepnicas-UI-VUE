@@ -13,6 +13,8 @@ export default{
 
 <template>
     <div id="container">
+        <div id="start">    
+        </div>
         <div id="search_c">
             <input type="text" placeholder="Search">
         </div>
@@ -30,24 +32,19 @@ export default{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-sizing: border-box;
 }
-
+#start{
+    display: flex;
+}
 input{
     width: 300px;
     height: 30px;
     margin-right: 10px;
     border-radius: 20px;
 }
-#search_c{
-    display: flex;
-    flex-grow: 1;
-    justify-content: center;
-}
 #imgs{
     display: flex;
     gap: 20px;
-    justify-self: end;
 }
 
 </style>
