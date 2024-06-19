@@ -84,8 +84,9 @@ margin-top: 10px;
 margin-left: 50px;
 margin-right: 50px;
 border: 2px solid black;
-border-radius: 15px;
-padding-top: 7px;
+border-radius: 10px;
+padding-top: 1px;
+padding-left: 10px;
 overflow: hidden;
 }
 .scroll-buttons {
