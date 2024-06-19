@@ -1,18 +1,22 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  
 
-# Dummy data to send back to the client
-data = {
-    "i1": [{"name": "TN", "description": "Description 1"}],
-    "i2": [{"name": "Kerala", "description": "Description 2"}],
-}
 
-@app.route('/handleClick', methods=['GET'])
-def handle_click():
-    value = request.args.get('value')
-    response_data = data.get(value, [])
-    return jsonify(response_data)
+
+@app.route('/getValue', methods=['POST'])
+def get_value():
+    image_id = request.json.get('imageId')
+    if image_id == 'img1':
+        value = 'Value for Image 1'
+    elif image_id == 'img2':
+        value = 'Value for Image 2'
+    else:
+        value = 'Unknown Image'
+
+    return jsonify({'value': value})
 
 if __name__ == '__main__':
     app.run(debug=True)
