@@ -2,7 +2,8 @@
 export default{
     data(){
         return{
-            instances : ['tn', 'kl','wb', 'andaman','tn', 'kl','wb', 'andaman','tn', 'kl','wb', 'andaman','andaman','andaman','andaman']
+            instances : ['tn', 'kl','wb', 'andaman','tn', 'kl','wb', 'andaman','tn', 'kl','wb', 'andaman','andaman','andaman','andaman'],
+            idd : 0
         }
     },
     methods: {
@@ -25,14 +26,14 @@ export default{
         <div class="scroll-buttons">
         <button @click="scrollLeft">‹</button>
         <div class="scroll-container" ref="scrollContainer">
-            <img class="logo" v-for="instance in instances" :src="giveIlink(instance)">
+            <img class="logo" :id="`i${index+1}`" v-for="(instance, index) in instances" :src="giveIlink(instance)" @click="handleClick(this.id)">
         </div>
         <button @click="scrollRight">›</button>
         </div>
     </div>
 </template>
 
-<style>
+<style scoped>
 .logo{
     width: 100px;
     height: 100px;
