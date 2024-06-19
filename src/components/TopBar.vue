@@ -67,6 +67,8 @@ h1{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* background-color: blue; */
+    /* border-bottom: 2px solid black; */
 }
 
 .left{
