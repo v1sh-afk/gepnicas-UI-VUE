@@ -1,167 +1,3 @@
-<!-- <script>
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Doughnut } from 'vue-chartjs'
-import * as chartConfig from './chartConfig.js'
-
-ChartJS.register(ArcElement, Tooltip, Legend)
-
-export default {
-  name: 'App',
-  components: {
-    Doughnut
-  },
-  data() {
-    return chartConfig
-  },
-  props: {
-    chartData: {
-      type: Object,
-      required: true
-    },
-    chartOptions: {
-      type: Object,
-      default: () => ({ responsive: true, maintainAspectRatio: false })
-    }
-  }
-}
-</script>
-
-<template>
-
-<div id="containerr">
-    <div class="st">
-        <h4>Storage Available</h4>
-        <div id="storage">
-            <Doughnut class="pie" :data="data" />
-        </div>
-    </div>
-    <div class="stt">
-        <h4>Scheduled Jobs</h4>
-        
-        <div>
-          <h4>Archival of TN tender docs</h4>
-        </div>
-
-    </div>
-</div>
-
-
-</template>
-
-<style>
-
-h4{
-  margin-top: 6px;
-  margin-bottom: 6px;
-  margin-left: 3px;
-}
-.st{
-border: 2px solid black;
-border-radius: 15px;
-margin-left: 50px;
-margin-right: 10px;
-margin-right: 50px;
-}
-.stt{
-  border: 2px solid black;
-  border-radius: 15px;
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 1115px;
-}
-#containerr{
-    display: flex;
-    margin-top: 20px;
-}
-#storage{
-  height: 200px;
-  width: 200px;
-  margin-bottom: 10px;
-}
-</style> -->
-
-
-<!-- <script>
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Doughnut } from 'vue-chartjs'
-import * as chartConfig from './chartConfig.js'
-
-ChartJS.register(ArcElement, Tooltip, Legend)
-
-export default {
-  name: 'App',
-  components: {
-    Doughnut
-  },
-  data() {
-    return chartConfig
-  },
-  props: {
-    chartData: {
-      type: Object,
-      required: true
-    },
-    chartOptions: {
-      type: Object,
-      default: () => ({ responsive: true, maintainAspectRatio: false })
-    }
-  }
-}
-</script>
-
-<template>
-
-<div id="containerr">
-    <div class="st">
-        <h4>Storage Available</h4>
-        <div id="storage">
-            <Doughnut class="pie" :data="data" />
-        </div>
-    </div>
-    <div class="stt">
-        <h4>Scheduled Jobs</h4>
-        
-        <div>
-          <h4>Archival of TN tender docs</h4>
-        </div>
-
-    </div>
-</div>
-
-
-</template>
-
-<style>
-h4{
-  margin-top: 6px;
-  margin-bottom: 6px;
-  margin-left: 3px;
-}
-.st{
-border: 2px solid black;
-border-radius: 15px;
-margin-left: 50px;
-margin-right: 10px;
-margin-right: 50px;
-}
-.stt{
-  border: 2px solid black;
-  border-radius: 15px;
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 1115px;
-}
-#containerr{
-    display: flex;
-    margin-top: 20px;
-}
-#storage{
-  height: 200px;
-  width: 200px;
-  margin-bottom: 10px;
-}
-</style> -->
-
 <script>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'vue-chartjs'
@@ -227,11 +63,14 @@ h4 {
   border-radius: 15px;
   margin-left: 50px;
   margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align items horizontally */
 }
 .scheduled-jobs {
   border: 2px solid black;
   border-radius: 15px;
-  margin-left: 40px;
+  margin-left: 100px; /* Increased margin to create more gap */
   margin-right: 10px;
   padding: 10px;
 }
@@ -240,8 +79,11 @@ h4 {
   flex-wrap: wrap;
 }
 #storage {
-  height: 200px;
-  width: 200px;
+  display: flex;
+  justify-content: center; /* Center align content horizontally */
+  align-items: center; /* Center align content vertically */
+  height: 200px; /* Increased height */
+  width: 400px; /* Increased width */
   margin-bottom: 10px;
 }
 .job {
