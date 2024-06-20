@@ -1,17 +1,17 @@
 <script>
 import axios from 'axios';
-export default{
-    data(){
-        return{
-            instances : ['tn', 'kl','wb', 'andaman','tn', 'kl','wb', 'andaman','tn', 'kl','wb', 'andaman','andaman','andaman','andaman'],
-            idd : 0,
-            infodiv : false,
+export default {
+    data() {
+        return {
+            instances: ['tn', 'kl', 'wb', 'andaman', 'tn', 'kl', 'wb', 'andaman', 'tn', 'kl', 'wb', 'andaman', 'andaman', 'andaman', 'andaman'],
+            idd: 0,
+            infodiv: false,
             response: []
-        }
+        };
     },
     methods: {
-        giveIlink(state){
-            return 'src/assets/'+state+'.png';
+        giveIlink(state) {
+            return 'src/assets/' + state + '.png';
         },
         scrollLeft() {
             this.$refs.scrollContainer.scrollLeft -= 100;
@@ -19,80 +19,71 @@ export default{
         scrollRight() {
             this.$refs.scrollContainer.scrollLeft += 100;
         },
-        getImages(){
+        getImages() {
             axios.get('http://192.168.0.103:5000/getImages')
-            .then(response => {
-                this.response = response.data;
-                console.log(this.rresponse)
-            })
-            .catch(error => {
-            console.error('Error:', error);
-            });
+                .then(response => {
+                    this.response = response.data;
+                    console.log(this.response);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         },
-        // getImageValue(imageId) {
-        //     this.infodiv = true
-        //     axios.post('http://192.168.0.103:5000/getImages', { imageId: imageId })
-        //     .then(response => {
-        //         this.response = response.data.value;
-        //     })
-        //     .catch(error => {
-        //     console.error('Error:', error);
-        //     });
-            
-        // }
-        imageSrc(base){
+        imageSrc(base) {
             return `data:image/png;base64,${base}`;
         }
     },
     computed: {
-            folder() {
+        folder() {
             return 'src/assets/folder.png';
-            },
-            complete() {
+        },
+        complete() {
             return 'src/assets/complete.png';
-            },
-            process() {
+        },
+        process() {
             return 'src/assets/process.png';
-            },
-            link() {
+        },
+        link() {
             return 'src/assets/link.png';
-            },
-            error() {
+        },
+        error() {
             return 'src/assets/error.png';
-            },
-            db() {
+        },
+        db() {
             return 'src/assets/database.png';
-            }
+        }
     },
     mounted() {
-        this.getImages(); 
-  }
-}
+        this.getImages();
+    }
+};
 </script>
 
 <template>
-    <div id="instance" >
+    <div id="instance">
         <h4>Instances</h4>
         <div class="scroll-buttons">
-        <button @click="scrollLeft">‹</button>
-        <div class="scroll-container" ref="scrollContainer">
-            <img class="logo" :id="`i${index+1}`" v-for="(instance, index) in response" :src="imageSrc(instance.logo)" >
-            <!-- @click="getImageValue(`i${index+1}`) -->
-        </div>
-        <button @click="scrollRight">›</button>
+            <button @click="scrollLeft">‹</button>
+            <div class="scroll-container" ref="scrollContainer">
+                <div class="instance-item" v-for="(instance, index) in response" :key="index">
+                    <img class="logo" :id="`i${index+1}`" :src="imageSrc(instance.logo)">
+                    <div class="instance-name">{{ instance.instancename }}</div>
+                </div>
+            </div>
+            <button @click="scrollRight">›</button>
         </div>
     </div>
-    <div id="infoDiv" v-if="infodiv" >
+    <div id="infoDiv" v-if="infodiv">
         <div class="details">
             <p>{{ response }}</p>
-            <h3>  &nbsp; &nbsp; Details</h3>
+            <h3>&nbsp; &nbsp; Details</h3>
             <div class="detail">
-            <img class="detail_logos" :src="folder">
-            <img class="detail_logos" :src="complete"> 
-            <img class="detail_logos" :src="process"> 
-            <img class="detail_logos" :src="link"> 
-            <img class="detail_logos" :src="error"> 
-            <img class="detail_logos" :src="db"> 
+                <img class="detail_logos" :src="folder">
+                <img class="detail_logos" :src="complete">
+                <img class="detail_logos" :src="process">
+                <img class="detail_logos" :src="link">
+                <img class="detail_logos" :src="error">
+                <img class="detail_logos" :src="db">
             </div>
         </div>
     </div>
@@ -109,7 +100,6 @@ export default{
     margin-bottom: 0.9375em; /* 15px to em */
     margin-right: 0.9375em; /* 15px to em */
 }
-
 .details {
     width: 80%;
     margin-left: 10%;
@@ -146,13 +136,27 @@ export default{
     display: none;
 }
 button {
-    background-color: transparent;
+    background-color: white;
+    color: rgb(51, 0, 255); /* Set the text color to a blue shade */
     border: none;
-    font-size: 1.5em; /* 24px to em */
+    font-size: 2.5em; /* Increase the font size to make the symbols larger */
     cursor: pointer;
+    padding: 0.5em 0.2em; /* Add some padding for better look and feel */
 }
 img {
     margin-left: 1.25em; /* 20px to em */
-    /* padding: 10px; */
+}
+h4 {
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+}
+.instance-item {
+    text-align: center; /* Center-align text below each image */
+}
+.instance-name {
+    font-weight: bold;
+    margin-left: 1em;
+    font-size: 1em; /* Adjust font size as needed */
+    margin-top: 0.5em; /* Adjust margin to control spacing */
 }
 </style>

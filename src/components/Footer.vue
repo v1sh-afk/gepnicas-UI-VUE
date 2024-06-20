@@ -3,6 +3,7 @@
       <div class="footer-content">
         <img :src="logo2" alt="Company Logo2" class="footer-logo2" />
         <img :src="logo" alt="Company Logo" class="footer-logo" />
+        <img :src="logo3" alt="Company Logo3" class="footer-logo3" />
         <p>© 2024 National Informatics Centre. All rights reserved.</p>
       </div>
     </footer>
@@ -11,13 +12,15 @@
   <script>
   import logo from '@/assets/nic.png';
   import logo2 from '@/assets/gepnic.jpg';
+  import logo3 from '@/assets/digitalindia.jpg';
   
   export default {
     name: 'Footer',
     data() {
       return {
         logo,
-        logo2
+        logo2,
+        logo3
       }
     }
   }
@@ -40,6 +43,7 @@
     justify-content: center;
   }
   
+  .footer-logo3,
   .footer-logo,
   .footer-logo2 {
     width: 6.25em; /* 100px to em */
@@ -53,6 +57,8 @@
     margin-right: 0.625em; /* 10px to em */
     margin-left: 0.625em; /* 10px to em */
   }
+
+
   
   .footer-content p {
     margin: 0; /* Remove default margin */
