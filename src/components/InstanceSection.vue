@@ -20,8 +20,9 @@ export default{
             this.$refs.scrollContainer.scrollLeft += 100;
         },
         getImageValue(imageId) {
+            imageId = 'img2'
             this.infodiv = true
-            axios.post('http://192.168.0.104/getValue', { imageId: imageId })
+            axios.post('http://192.168.0.104:5000/getValue', { imageId: imageId })
             .then(response => {
                 this.response = response.data.value;
             })
@@ -36,6 +37,18 @@ export default{
             },
             complete() {
             return 'src/assets/complete.png';
+            },
+            process() {
+            return 'src/assets/process.png';
+            },
+            link() {
+            return 'src/assets/link.png';
+            },
+            error() {
+            return 'src/assets/error.png';
+            },
+            db() {
+            return 'src/assets/database.png';
             }
         }
 }
@@ -53,11 +66,17 @@ export default{
         </div>
     </div>
     <div id="infoDiv" v-if="infodiv" >
-        <div class="detail">
-            <h3>Details</h3>
+        <div class="details">
             <p>{{ response }}</p>
+            <h3>Details</h3>
+            <div class="detail">
             <img class="detail_logos" :src="folder">
             <img class="detail_logos" :src="complete"> 
+            <img class="detail_logos" :src="process"> 
+            <img class="detail_logos" :src="link"> 
+            <img class="detail_logos" :src="error"> 
+            <img class="detail_logos" :src="db"> 
+            </div>
         </div>
     </div>
 </template>
@@ -68,12 +87,18 @@ export default{
     width: 70px;
 }
 .detail{
-    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.details{
+    width: 0%;
     margin-left: 10%;
     margin-right: 10%;
     border: 2px solid black;
     border-radius: 15px;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 .logo{
     width: 100px;
@@ -110,5 +135,6 @@ button {
 }
 img{
     margin-left: 20px;
+    /* padding: 10px; */
 }
 </style>
