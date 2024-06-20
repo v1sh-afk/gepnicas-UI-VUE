@@ -55,12 +55,12 @@ export default{
 
 <style>
 h1{
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .home{
-    height: 40px;
+    height: 2.5em;
 }
 
 #top{
@@ -73,12 +73,12 @@ h1{
 
 .left{
     display: flex;
-    gap: 20px;
+    gap: 1.25em;
 }
 
 .right{
     display: flex;
-    gap: 20px;
+    gap: 1.25em;
 }
 
 .logout-container {
@@ -88,11 +88,11 @@ h1{
 
 .logout-container p {
     margin: 0; 
-    margin-right: 3px; 
+    margin-right: 0.2em; 
 }
 
 .logout-container img.home {
-    width: 30px; 
-    height: 30px; 
+    width: 1.9em; 
+    height: 1.9em; 
 } 
 </style>

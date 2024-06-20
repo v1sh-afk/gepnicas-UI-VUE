@@ -6,7 +6,7 @@ export default{
             instances : ['tn', 'kl','wb', 'andaman','tn', 'kl','wb', 'andaman','tn', 'kl','wb', 'andaman','andaman','andaman','andaman'],
             idd : 0,
             infodiv : false,
-            response: ''
+            response: []
         }
     },
     methods: {
@@ -19,16 +19,29 @@ export default{
         scrollRight() {
             this.$refs.scrollContainer.scrollLeft += 100;
         },
-        getImageValue(imageId) {
-            imageId = 'img2'
-            this.infodiv = true
-            axios.post('http://192.168.0.104:5000/getValue', { imageId: imageId })
+        getImages(){
+            axios.get('http://192.168.0.103:5000/getImages')
             .then(response => {
-                this.response = response.data.value;
+                this.response = response.data;
+                console.log(this.rresponse)
             })
             .catch(error => {
             console.error('Error:', error);
             });
+        },
+        // getImageValue(imageId) {
+        //     this.infodiv = true
+        //     axios.post('http://192.168.0.103:5000/getImages', { imageId: imageId })
+        //     .then(response => {
+        //         this.response = response.data.value;
+        //     })
+        //     .catch(error => {
+        //     console.error('Error:', error);
+        //     });
+            
+        // }
+        imageSrc(base){
+            return `data:image/png;base64,${base}`;
         }
     },
     computed: {
@@ -50,17 +63,21 @@ export default{
             db() {
             return 'src/assets/database.png';
             }
-        }
+    },
+    mounted() {
+        this.getImages(); 
+  }
 }
 </script>
 
 <template>
-    <div id="instance">
+    <div id="instance" >
         <h4>Instances</h4>
         <div class="scroll-buttons">
         <button @click="scrollLeft">‹</button>
         <div class="scroll-container" ref="scrollContainer">
-            <img class="logo" :id="`i${index+1}`" v-for="(instance, index) in instances" :src="giveIlink(instance)" @click="getImageValue(`i${index+1}`)">
+            <img class="logo" :id="`i${index+1}`" v-for="(instance, index) in response" :src="imageSrc(instance.logo)" >
+            <!-- @click="getImageValue(`i${index+1}`) -->
         </div>
         <button @click="scrollRight">›</button>
         </div>
@@ -82,39 +99,38 @@ export default{
 </template>
 
 <style scoped>
-.detail_logos{
-    height: 70px;
-    width: 70px;
+.detail_logos {
+    height: 4.375em; /* 70px to em */
+    width: 4.375em; /* 70px to em */
 }
-.detail{
+.detail {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
-    margin-right: 15px;
-    
+    margin-bottom: 0.9375em; /* 15px to em */
+    margin-right: 0.9375em; /* 15px to em */
 }
 
-.details{
+.details {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
-    border: 2px solid black;
-    border-radius: 15px;
-    margin-top: 5px;
+    border: 0.125em solid black; /* 2px to em */
+    border-radius: 0.9375em; /* 15px to em */
+    margin-top: 0.3125em; /* 5px to em */
 }
-.logo{
-    width: 100px;
-    height: 100px;
+.logo {
+    width: 6.25em; /* 100px to em */
+    height: 6.25em; /* 100px to em */
 }
-#instance{
-margin-top: 2em;
-margin-left: 3em;
-margin-right: 6em;
-border: 2px solid black;
-border-radius: 0.625em;
-padding-top: 1px;
-padding-left: 0.625em;
-overflow: hidden;
+#instance {
+    margin-top: 2em;
+    margin-left: 3em;
+    margin-right: 6em;
+    border: 0.125em solid black; /* 2px to em */
+    border-radius: 0.625em; /* 10px to em */
+    padding-top: 0.0625em; /* 1px to em */
+    padding-left: 0.625em; /* 10px to em */
+    overflow: hidden;
 }
 .scroll-buttons {
     display: flex;
@@ -124,19 +140,19 @@ overflow: hidden;
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
-    padding: 10px 0;
+    padding: 0.625em 0; /* 10px to em */
 }
 .scroll-container::-webkit-scrollbar {
-    display: none; 
+    display: none;
 }
 button {
     background-color: transparent;
     border: none;
-    font-size: 24px;
+    font-size: 1.5em; /* 24px to em */
     cursor: pointer;
 }
-img{
-    margin-left: 20px;
+img {
+    margin-left: 1.25em; /* 20px to em */
     /* padding: 10px; */
 }
 </style>

@@ -52,15 +52,16 @@ export default {
   </div>
 </template>
 
+
 <style scoped>
 h4 {
-  margin-top: 6px;
-  margin-bottom: 6px;
-  margin-left: 3px;
+  margin-top: 0.375em; /* 6px */
+  margin-bottom: 0.375em; /* 6px */
+  margin-left: 0.1875em; /* 3px */
 }
 .storage-available {
-  border: 2px solid black;
-  border-radius: 15px;
+  border: 0.125em solid black; /* 2px */
+  border-radius: 0.9375em; /* 15px */
   margin-left: 3em;
   margin-right: 1em;
   display: flex;
@@ -68,11 +69,11 @@ h4 {
   align-items: center; /* Center align items horizontally */
 }
 .scheduled-jobs {
-  border: 2px solid black;
-  border-radius: 15px;
+  border: 0.125em solid black; /* 2px */
+  border-radius: 0.9375em; /* 15px */
   margin-left: 5em; /* Increased margin to create more gap */
   margin-right: 5em;
-  padding: 10px;
+  padding: 0.625em; /* 10px */
 }
 #containerr {
   display: flex;
@@ -82,15 +83,14 @@ h4 {
   display: flex;
   justify-content: center; /* Center align content horizontally */
   align-items: center; /* Center align content vertically */
-  height: 200px; /* Increased height */
-  width: 400px; /* Increased width */
-  margin-bottom: 10px;
+  height: 12.5em; /* 200px */
+  width: 25em; /* 400px */
+  margin-bottom: 0.625em; /* 10px */
 }
 .job {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  
+  margin-bottom: 0.625em; /* 10px */
 }
 .job a {
   color: blue;
@@ -104,9 +104,9 @@ h4 {
   font-weight: bold;
   background-color: lightgray;
   border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  width: 100px; /* Fixed width */
+  border-radius: 0.3125em; /* 5px */
+  padding: 0.3125em 0.625em; /* 5px 10px */
+  width: 7em; /* 100px */
   text-align: center;
   box-sizing: border-box;
   margin-right: 3em;
@@ -117,11 +117,11 @@ h4 {
 }
 
 /* Responsive adjustments */
-@media (max-width: 600px) {
+@media (max-width: 37.5em) { /* 600px */
   .storage-available,
   .scheduled-jobs {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 0.625em; /* 10px */
+    margin-right: 0.625em; /* 10px */
   }
   .details,
   .reschedule,

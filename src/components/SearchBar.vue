@@ -1,11 +1,11 @@
 <script>
-export default{
+export default {
     computed: {
         user_i() {
             return 'src/assets/user.png';
         },
-        setting_i(){
-            return 'src/assets/settings.png'
+        setting_i() {
+            return 'src/assets/settings.png';
         }
     }
 }
@@ -13,38 +13,47 @@ export default{
 
 <template>
     <div id="container">
-        <div id="start">    
+        <div id="start">
         </div>
         <div id="search_c">
             <input type="text" placeholder="Search">
         </div>
         <div id="imgs">
-            <img class="home" :src="user_i"> 
+            <img class="home" :src="user_i">
             <img class="home" :src="setting_i">
         </div>
     </div>
-
-
 </template>
 
-<style>
-#container{
+
+<style scoped>
+#container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-#start{
+
+#start {
     display: flex;
 }
-input{
-    width: 300px;
-    height: 30px;
-    margin-right: 10px;
-    border-radius: 20px;
+
+input {
+    width: 39.75em; /* 300px to em */
+    height: 1.875em; /* 30px to em */
+    margin-right: 0.625em; /* 10px to em */
+    border-radius: 1.25em; /* 20px to em */
 }
-#imgs{
+
+#imgs {
     display: flex;
-    gap: 20px;
+    gap: 1.25em; /* 20px to em */
+}
+
+#search_c {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Align items vertically */
+    margin-left: 14em;
 }
 
 </style>
