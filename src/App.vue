@@ -21,8 +21,7 @@ export default {
 <SearchBar />
 <TopSection />
 <InstanceSection />
-
-<Footer />
+<!-- <Footer /> -->
 </template>
 
 <style>

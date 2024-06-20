@@ -6,7 +6,8 @@ export default {
             instances: ['tn', 'kl', 'wb', 'andaman', 'tn', 'kl', 'wb', 'andaman', 'tn', 'kl', 'wb', 'andaman', 'andaman', 'andaman', 'andaman'],
             idd: 0,
             infodiv: false,
-            response: []
+            response: [],
+            details: []
         };
     },
     methods: {
@@ -31,6 +32,17 @@ export default {
         },
         imageSrc(base) {
             return `data:image/png;base64,${base}`;
+        },
+        buttonClick(iname){
+            this.infodiv = true
+            axios.get(`http://192.168.0.103:5000/getInstanceCount?instancename=${iname}`)
+                .then(response => {
+                    this.details = response.data;
+                    console.log(this.details.counts);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }
     },
     computed: {
@@ -66,7 +78,7 @@ export default {
             <button @click="scrollLeft">‹</button>
             <div class="scroll-container" ref="scrollContainer">
                 <div class="instance-item" v-for="(instance, index) in response" :key="index">
-                    <img class="logo" :id="`i${index+1}`" :src="imageSrc(instance.logo)">
+                    <img class="logo" :id="`i${index+1}`" :src="imageSrc(instance.logo)" @click="buttonClick(instance.instancename)">
                     <div class="instance-name">{{ instance.instancename }}</div>
                 </div>
             </div>
@@ -75,15 +87,32 @@ export default {
     </div>
     <div id="infoDiv" v-if="infodiv">
         <div class="details">
-            <p>{{ response }}</p>
             <h3>&nbsp; &nbsp; Details</h3>
             <div class="detail">
-                <img class="detail_logos" :src="folder">
-                <img class="detail_logos" :src="complete">
-                <img class="detail_logos" :src="process">
-                <img class="detail_logos" :src="link">
-                <img class="detail_logos" :src="error">
-                <img class="detail_logos" :src="db">
+                <div>
+                    <img class="detail_logos" :src="folder">
+                    <div class="instance-name"><p>hu</p></div>
+                </div>
+                <div>
+                    <img class="detail_logos" :src="complete">
+                    <div class="instance-name"><p>hu</p></div>
+                </div>
+                <div>
+                    <img class="detail_logos" :src="process">
+                    <div class="instance-name"><p>hu</p></div>
+                </div>
+                <div>
+                    <img class="detail_logos" :src="link">
+                    <div class="instance-name"><p>hu</p></div>
+                </div>
+                <div>
+                    <img class="detail_logos" :src="error">
+                    <div class="instance-name"><p>hu</p></div>
+                </div>
+                <div>
+                    <img class="detail_logos" :src="db">
+                    <div class="instance-name"><p>hu</p></div>
+                </div>
             </div>
         </div>
     </div>
