@@ -61,8 +61,8 @@ h4 {
 .storage-available {
   border: 2px solid black;
   border-radius: 15px;
-  margin-left: 50px;
-  margin-right: 10px;
+  margin-left: 3em;
+  margin-right: 1em;
   display: flex;
   flex-direction: column;
   align-items: center; /* Center align items horizontally */
@@ -70,8 +70,8 @@ h4 {
 .scheduled-jobs {
   border: 2px solid black;
   border-radius: 15px;
-  margin-left: 100px; /* Increased margin to create more gap */
-  margin-right: 10px;
+  margin-left: 5em; /* Increased margin to create more gap */
+  margin-right: 5em;
   padding: 10px;
 }
 #containerr {
@@ -90,15 +90,18 @@ h4 {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  
 }
 .job a {
   color: blue;
   text-decoration: none;
   flex-grow: 1;
+  margin-right: 10em;
 }
 .details,
 .reschedule,
 .abort {
+  font-weight: bold;
   background-color: lightgray;
   border: none;
   border-radius: 5px;
@@ -106,7 +109,7 @@ h4 {
   width: 100px; /* Fixed width */
   text-align: center;
   box-sizing: border-box;
-  margin-right: 10px;
+  margin-right: 3em;
 }
 .abort {
   background-color: red;

@@ -68,7 +68,7 @@ export default{
     <div id="infoDiv" v-if="infodiv" >
         <div class="details">
             <p>{{ response }}</p>
-            <h3>Details</h3>
+            <h3>  &nbsp; &nbsp; Details</h3>
             <div class="detail">
             <img class="detail_logos" :src="folder">
             <img class="detail_logos" :src="complete"> 
@@ -89,11 +89,13 @@ export default{
 .detail{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 15px;
+    margin-right: 15px;
     
 }
 
 .details{
-    width: 0%;
+    width: 80%;
     margin-left: 10%;
     margin-right: 10%;
     border: 2px solid black;
@@ -105,13 +107,13 @@ export default{
     height: 100px;
 }
 #instance{
-margin-top: 10px;
-margin-left: 50px;
-margin-right: 50px;
+margin-top: 2em;
+margin-left: 3em;
+margin-right: 6em;
 border: 2px solid black;
-border-radius: 10px;
+border-radius: 0.625em;
 padding-top: 1px;
-padding-left: 10px;
+padding-left: 0.625em;
 overflow: hidden;
 }
 .scroll-buttons {
