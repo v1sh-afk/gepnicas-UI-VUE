@@ -6,7 +6,7 @@ export default {
             instances: [],
             infodiv: false,
             response: [],
-            details: {},  // Change from array to object
+            details: {},  
             dashboard: {}
         };
     },
@@ -45,7 +45,7 @@ export default {
         },
         buttonClick(iname) {
             this.infodiv = true;
-            this.details = {};  // Clear the details before fetching new data
+
             axios.get(`http://192.168.0.103:5000/getInstanceCount?instancename=${iname}`)
                 .then(response => {
                     this.details = response.data;  // Assign the entire response to details
@@ -90,26 +90,32 @@ export default {
             <div class="details1">
                 <div class="detail1">
                     <img class="detail_logos" :src="folder">
+                    <h5>Total Folders</h5>
                     <div class="instance-name">{{ dashboard.counts.total_count }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="complete">
+                    <h5>Folders Completed</h5>
                     <div class="instance-name">{{ dashboard.counts.sync_completed_count }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="process">
+                    <h5>Soft Links</h5>
                     <div class="instance-name">{{ dashboard.counts.soft_link_created }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="link">
+                    <h5>Meta Links</h5>
                     <div class="instance-name">{{ dashboard.counts.meta_link_created }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="error">
+                    <h5>Errors</h5>
                     <div class="instance-name">{{ dashboard.counts.errors_count }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="db">
+                    <h5>Storage</h5>
                     <div class="instance-name">{{ dashboard.counts.instance_storage_size }}</div>
                 </div>
             </div>
@@ -132,37 +138,44 @@ export default {
         
         <!-- Individual Instance Details -->
         <div id="infoDiv" v-if="infodiv && details.counts">
+
             <div class="details">
                 <h3>&nbsp; &nbsp; Details</h3>
+                <img :src="imageSrc(details.counts.logo)" class="logo">
                 <div class="detail">
                     <div class="cols">
                         <img class="detail_logos" :src="folder">
+                        <h5> Total Folders </h5>
                         <div class="instance-name">{{ details.counts.total_count }}</div>
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="complete">
+                        <h5> Folders Completed</h5>
                         <div class="instance-name">{{ details.counts.sync_completed_count }}</div>
                     </div>
                     <div class= "cols">
                         <img class="detail_logos" :src="process">
+                        <h5> Soft Links </h5>
                         <div class="instance-name">{{ details.counts.soft_link_created }}</div>
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="link">
+                        <h5> Meta Links</h5>
                         <div class="instance-name">{{ details.counts.meta_link_created }}</div>
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="error">
+                        <h5> Errors </h5>
                         <div class="instance-name">{{ details.counts.errors_count }}</div>
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="db">
+                        <h5> Storage </h5>
                         <div class="instance-name">{{ details.counts.instance_storage_size }}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Add some blank space here for the footer -->
     <div style="height: 5em;"></div> <!-- Adjust height as needed -->
     </div>
 </template>
@@ -244,6 +257,10 @@ h4 {
 }
 .instance-item {
     text-align: center; /* Center-align text below each image */
+}
+
+h5{
+    margin-left: 1em;
 }
 .instance-name {
     font-weight: bold;
