@@ -1,3 +1,5 @@
+
+
 <script>
 import axios from 'axios';
 export default {
@@ -21,7 +23,7 @@ export default {
             this.$refs.scrollContainer.scrollLeft += 100;
         },
         getImages() {
-            axios.get('http://192.168.0.103:5000/getImages')
+            axios.get('http://192.168.0.110:5000/getImages')
                 .then(response => {
                     this.response = response.data;
                     console.log(this.response);
@@ -31,7 +33,7 @@ export default {
                 });
         },
         getDashboard() {
-            axios.get('http://192.168.0.103:5000/getInstanceCountAll')
+            axios.get('http://192.168.0.110:5000/getInstanceCountAll')
                 .then(response => {
                     this.dashboard = response.data;
                     console.log(this.dashboard);
@@ -46,9 +48,9 @@ export default {
         buttonClick(iname) {
             this.infodiv = true;
 
-            axios.get(`http://192.168.0.103:5000/getInstanceCount?instancename=${iname}`)
+            axios.get(`http://192.168.0.110:5000/getInstanceCount?instancename=${iname}`)
                 .then(response => {
-                    this.details = response.data;  // Assign the entire response to details
+                    this.details = response.data;  
                     console.log(this.details);
                 })
                 .catch(error => {
@@ -85,6 +87,7 @@ export default {
 <template>
     <div>
         <!-- Main Dashboard -->
+
         <div id="mainDashboard" v-if="dashboard.counts">
             <h3>Main Dashboard</h3>
             <div class="details1">
@@ -122,6 +125,7 @@ export default {
         </div>
         
         <!-- Instances Section -->
+
         <div id="instance">
             <h4>Instances</h4>
             <div class="scroll-buttons">
@@ -137,40 +141,44 @@ export default {
         </div>
         
         <!-- Individual Instance Details -->
+         
         <div id="infoDiv" v-if="infodiv && details.counts">
 
             <div class="details">
-                <h3>&nbsp; &nbsp; Details</h3>
-                <img :src="imageSrc(details.counts.logo)" class="logo">
+                <div class="infodetail-name">
+                    <img :src="imageSrc(details.counts.logo)" class="logo">
+                    <div class="instance-name-detail">{{ details.instancename }}</div>
+                </div>
+
                 <div class="detail">
                     <div class="cols">
                         <img class="detail_logos" :src="folder">
-                        <h5> Total Folders </h5>
+                        <h5>Total Folders</h5>
                         <div class="instance-name">{{ details.counts.total_count }}</div>
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="complete">
-                        <h5> Folders Completed</h5>
+                        <h5>Archieved</h5>
                         <div class="instance-name">{{ details.counts.sync_completed_count }}</div>
                     </div>
                     <div class= "cols">
                         <img class="detail_logos" :src="process">
-                        <h5> Soft Links </h5>
+                        <h5>Soft Links</h5>
                         <div class="instance-name">{{ details.counts.soft_link_created }}</div>
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="link">
-                        <h5> Meta Links</h5>
+                        <h5>Meta Links</h5>
                         <div class="instance-name">{{ details.counts.meta_link_created }}</div>
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="error">
-                        <h5> Errors </h5>
+                        <h5>Errors</h5>
                         <div class="instance-name">{{ details.counts.errors_count }}</div>
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="db">
-                        <h5> Storage </h5>
+                        <h5>Storage</h5>
                         <div class="instance-name">{{ details.counts.instance_storage_size }}</div>
                     </div>
                 </div>
@@ -182,19 +190,32 @@ export default {
 
 
 <style scoped>
+.instance-name-detail{
+    font-weight: bold;
+    /* margin-left: 2.5em; */
+    margin-left: 0;
+    font-size: 1em; /* Adjust font size as needed */
+    margin-top: 40px
+
+}
+.infodetail-name{
+    display: flex;
+    flex-direction: row;
+}
 .detail_logos {
     height: 4.375em; /* 70px to em */
     width: 4.375em; /* 70px to em */
+    margin-left: 0;
+
 }
 
 .detail {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 0.9375em; /* 15px to em */
     margin-right: 0.9375em; /* 15px to em */
 }
 .details {
-    
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
@@ -204,7 +225,7 @@ export default {
 }
 .details1 {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
@@ -218,13 +239,21 @@ export default {
     height: 6.25em; /* 100px to em */
 }
 #instance {
-    margin-top: 2em;
+    /* margin-top: 2em;
     margin-left: 3em;
     margin-right: 6em;
-    border: 0.125em solid black; /* 2px to em */
-    border-radius: 0.625em; /* 10px to em */
-    padding-top: 0.0625em; /* 1px to em */
-    padding-left: 0.625em; /* 10px to em */
+    border: 0.125em solid black;
+    border-radius: 0.625em; 
+    padding-top: 0.0625em; 
+    padding-left: 0.625em; 
+    overflow: hidden; */
+    border: 2px solid black;
+    border-radius: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
     overflow: hidden;
 }
 .scroll-buttons {
@@ -260,11 +289,14 @@ h4 {
 }
 
 h5{
-    margin-left: 1em;
+    /* margin-left: 1em; */
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .instance-name {
     font-weight: bold;
-    margin-left: 2.5em;
+    /* margin-left: 2.5em; */
+    margin-left: 0;
     font-size: 1em; /* Adjust font size as needed */
     margin-top: 0.5em; /* Adjust margin to control spacing */
 }
@@ -273,6 +305,7 @@ h5{
 .cols{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 #mainDashboard {

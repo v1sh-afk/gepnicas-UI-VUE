@@ -51,8 +51,8 @@ input {
 
 #search_c {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Align items vertically */
+    justify-content: center; 
+    align-items: center; 
     margin-left: 14em;
 }
 
