@@ -4,6 +4,7 @@
     <SearchBar />
     <TopSection />
     <InstanceSection />
+    <BidsTenders />
     <Footer ref="footer" />
   </div>
 </template>
@@ -14,6 +15,7 @@ import SearchBar from './components/SearchBar.vue';
 import TopSection from './components/TopSection.vue';
 import InstanceSection from './components/InstanceSection.vue';
 import Footer from './components/Footer.vue';
+import BidsTenders from './components/BidsTenders.vue';
 
 export default {
   components: {
@@ -21,7 +23,8 @@ export default {
     SearchBar,
     TopSection,
     InstanceSection,
-    Footer
+    Footer,
+    BidsTenders
   },
   data() {
     return {

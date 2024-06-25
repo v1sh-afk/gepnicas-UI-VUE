@@ -27,6 +27,13 @@ export default {
 
 
 <style scoped>
+h1{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.home{
+    height: 2.5em;
+}
 #container {
     display: flex;
     justify-content: space-between;

@@ -1,5 +1,3 @@
-
-
 <script>
 import axios from 'axios';
 export default {
@@ -9,7 +7,11 @@ export default {
             infodiv: false,
             response: [],
             details: {},  
-            dashboard: {}
+            dashboard: {},
+            bidstenders: {bids: [], tenders:[]},
+            perPage: 10,
+            currentPage: 1,
+            showPage :   false
         };
     },
     methods: {
@@ -23,7 +25,7 @@ export default {
             this.$refs.scrollContainer.scrollLeft += 100;
         },
         getImages() {
-            axios.get('http://192.168.0.110:5000/getImages')
+            axios.get('http://192.168.0.109:5000/getImages')
                 .then(response => {
                     this.response = response.data;
                     console.log(this.response);
@@ -33,7 +35,7 @@ export default {
                 });
         },
         getDashboard() {
-            axios.get('http://192.168.0.110:5000/getInstanceCountAll')
+            axios.get('http://192.168.0.109:5000/getInstanceCountAll')
                 .then(response => {
                     this.dashboard = response.data;
                     console.log(this.dashboard);
@@ -46,9 +48,9 @@ export default {
             return `data:image/png;base64,${base}`;
         },
         buttonClick(iname) {
-            this.infodiv = true;
-
-            axios.get(`http://192.168.0.110:5000/getInstanceCount?instancename=${iname}`)
+            this.infodiv = true
+            this.showPage = false
+            axios.get(`http://192.168.0.109:5000/getInstanceCount?instancename=${iname}`)
                 .then(response => {
                     this.details = response.data;  
                     console.log(this.details);
@@ -56,7 +58,54 @@ export default {
                 .catch(error => {
                     console.error('Error:', error);
                 });
-        }
+        },
+        Totalfile(iname){
+                this.showPage=true
+                axios.get(`http://192.168.0.109:5000/getBidsTenderInstance?instancename=${iname}`)
+                    .then(response => {
+                        this.bidstenders.bids = response.data.bids; 
+                        this.bidstenders.tenders = response.data.tenders; 
+                        console.log(this.bidstenders.bids);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+        },
+        Archived(iname){
+                this.showPage=true
+                axios.get(`http://192.168.0.109:5000/getBidsTenderInstanceArchived?instancename=${iname}`)
+                    .then(response => {
+                        this.bidstenders.bids = response.data.bids; 
+                        this.bidstenders.tenders = response.data.tenders;  
+                        console.log(this.bidstenders);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+        },
+        Metalink(iname){
+            axios.get(`http://192.168.0.109:5000/getBidsTenderInstanceMetalink?instancename=${iname}`)
+                .then(response => {
+                    this.bidstenders.bids = response.data.bids; 
+                    this.bidstenders.tenders = response.data.tenders; 
+                    console.log(this.bidstenders);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
+        Errorr(iname){
+            axios.get(`http://192.168.0.109:5000/getBidsTenderInstanceError?instancename=${iname}`)
+                .then(response => {
+                    this.bidstenders.bids = response.data.bids; 
+                    this.bidstenders.tenders = response.data.tenders; 
+                    console.log(this.bidstenders);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
+
     },
     computed: {
         folder() {
@@ -76,7 +125,10 @@ export default {
         },
         db() {
             return 'src/assets/database.png';
-        }
+        },
+        rows() {
+        return this.bidstenders.tenders.length;
+      }
     },
     mounted() {
         this.getImages();
@@ -129,14 +181,14 @@ export default {
         <div id="instance">
             <h4>Instances</h4>
             <div class="scroll-buttons">
-                <button @click="scrollLeft">‹</button>
+                <button class="ba" @click="scrollLeft">‹</button>
                 <div class="scroll-container" ref="scrollContainer">
                     <div class="instance-item" v-for="(instance, index) in response" :key="index">
                         <img class="logo" :id="`i${index+1}`" :src="imageSrc(instance.logo)" @click="buttonClick(instance.instancename)">
                         <div class="instance-name">{{ instance.instancename }}</div>
                     </div>
                 </div>
-                <button @click="scrollRight">›</button>
+                <button class="ba" @click="scrollRight">›</button>
             </div>
         </div>
         
@@ -152,12 +204,12 @@ export default {
 
                 <div class="detail">
                     <div class="cols">
-                        <img class="detail_logos" :src="folder">
+                        <img class="detail_logos" :src="folder" @click="Totalfile(details.instancename)">
                         <h5>Total Folders</h5>
                         <div class="instance-name">{{ details.counts.total_count }}</div>
                     </div>
                     <div class="cols">
-                        <img class="detail_logos" :src="complete">
+                        <img class="detail_logos" :src="complete" @click="Archived(details.instancename)">
                         <h5>Archieved</h5>
                         <div class="instance-name">{{ details.counts.sync_completed_count }}</div>
                     </div>
@@ -167,12 +219,12 @@ export default {
                         <div class="instance-name">{{ details.counts.soft_link_created }}</div>
                     </div>
                     <div class="cols">
-                        <img class="detail_logos" :src="link">
+                        <img class="detail_logos" :src="link" @click="Metalink(details.instancename)">
                         <h5>Meta Links</h5>
                         <div class="instance-name">{{ details.counts.meta_link_created }}</div>
                     </div>
                     <div class="cols">
-                        <img class="detail_logos" :src="error">
+                        <img class="detail_logos" :src="error" @click="Errorr(details.instancename)">
                         <h5>Errors</h5>
                         <div class="instance-name">{{ details.counts.errors_count }}</div>
                     </div>
@@ -182,7 +234,33 @@ export default {
                         <div class="instance-name">{{ details.counts.instance_storage_size }}</div>
                     </div>
                 </div>
+
+
+                <div class="overflow-auto" v-if="showPage">
+                    <b-pagination
+                    v-model="currentPage"
+                    :total-rows="rows"
+                    :per-page="perPage"
+                    aria-controls="my-table"
+                    ></b-pagination>
+
+                    <p class="mt-3">Current Page: {{ currentPage }}</p>
+
+                    <b-table
+                    id="my-table"
+                    :items="bidstenders.tenders"
+                    :per-page="perPage"
+                    :current-page="currentPage"
+                    small
+                    ></b-table>
+                </div>
+
+                
+
             </div>
+
+            
+
         </div>
     <div style="height: 5em;"></div> <!-- Adjust height as needed -->
     </div>
@@ -190,6 +268,19 @@ export default {
 
 
 <style scoped>
+.bt{
+  background-color: grey;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
 .instance-name-detail{
     font-weight: bold;
     /* margin-left: 2.5em; */
@@ -239,14 +330,6 @@ export default {
     height: 6.25em; /* 100px to em */
 }
 #instance {
-    /* margin-top: 2em;
-    margin-left: 3em;
-    margin-right: 6em;
-    border: 0.125em solid black;
-    border-radius: 0.625em; 
-    padding-top: 0.0625em; 
-    padding-left: 0.625em; 
-    overflow: hidden; */
     border: 2px solid black;
     border-radius: 15px;
     margin-top: 15px;
@@ -269,13 +352,13 @@ export default {
 .scroll-container::-webkit-scrollbar {
     display: none;
 }
-button {
+.ba {
     background-color: white;
-    color: rgb(51, 0, 255); /* Set the text color to a blue shade */
+    color: rgb(51, 0, 255); 
     border: none;
-    font-size: 2.5em; /* Increase the font size to make the symbols larger */
+    font-size: 2.5em; 
     cursor: pointer;
-    padding: 0.5em 0.2em; /* Add some padding for better look and feel */
+    padding: 0.5em 0.2em;
 }
 img {
     margin-left: 1.25em; /* 20px to em */

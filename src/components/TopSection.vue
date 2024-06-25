@@ -34,6 +34,7 @@ export default {
         <Doughnut class="pie" :data="data" />
       </div>
     </div>
+    
     <div class="scheduled-jobs">
       <h4>Scheduled Jobs</h4>
       <div class="job">
@@ -49,7 +50,7 @@ export default {
         <button class="abort">Abort</button>
       </div>
     </div>
-  </div>
+  </div> 
 </template>
 
 
