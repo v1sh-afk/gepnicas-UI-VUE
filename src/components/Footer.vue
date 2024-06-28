@@ -30,7 +30,7 @@ export default {
 .app-footer {
   background-color: #f8f9fa;
   text-align: center;
-  padding: 0.5em 0; /* Reduce padding */
+  padding: 0.5em 0; 
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -41,30 +41,29 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5em 0; /* Reduce padding */
+  padding: 0.5em 0; 
 }
 
 .footer-logo3,
 .footer-logo,
 .footer-logo2 {
-  width: 3.125em; /* 50px to em, reduce image size */
+  width: 3.125em;
 }
 
 .footer-logo {
-  margin-right: 0.3125em; /* 5px to em, reduce margin */
+  margin-right: 0.3125em; 
 }
-
 .footer-logo2 {
-  margin-right: 0.3125em; /* 5px to em */
-  margin-left: 0.3125em; /* 5px to em */
+  margin-right: 0.3125em; 
+  margin-left: 0.3125em; 
 }
 
 .footer-content p {
-  margin: 0; /* Remove default margin */
-  font-size: 0.75em; /* Reduce font size */
+  margin: 0; 
+  font-size: 0.75em; 
 }
 
-/* Hide the footer by default */
+
 .hidden-footer {
   transform: translateY(100%);
 }

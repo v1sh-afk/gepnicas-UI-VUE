@@ -35,13 +35,13 @@ export default{
     <div id="top">
         <div class="left">
             <img class="home" :src="image">
-            <p>{{ date }}</p>
+            <p id="datep">{{ date }}</p>
         </div>
 
-        <div><h1>GePNIC Archival System</h1></div>
+        <div><h1 id="title">GePNIC Archival System</h1></div>
 
         <div class="right">
-            <div><p>Welcome {{ currentUser }} </p></div>
+            <p id="welcomep">Welcome {{ currentUser }} </p>
             <div class="logout-container">
                 <p>Logout</p>
                 <img class="home" :src="logout_i">
@@ -53,8 +53,36 @@ export default{
     
 </template>
 
-<style>
-h1{
+<style scoped>
+#title{
+    margin-bottom: 0px;
+}
+p{
+    margin-bottom: 0;
+}
+.left{
+    display: flex;
+    gap: 20px;
+}
+.right{
+    display: flex;
+    gap: 20px;
+}
+#top{
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.home{
+    height: 30px;
+}
+.logout-container{
+    display: flex;
+    /* align-items: center; */
+    gap: 2px;
+}
+/* h1{
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
@@ -67,8 +95,6 @@ h1{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* background-color: blue; */
-    /* border-bottom: 2px solid black; */
 }
 
 .left{
@@ -94,5 +120,7 @@ h1{
 .logout-container img.home {
     width: 1.9em; 
     height: 1.9em; 
-} 
+}  */
+
+
 </style>

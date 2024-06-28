@@ -15,7 +15,6 @@ import SearchBar from './components/SearchBar.vue';
 import TopSection from './components/TopSection.vue';
 import InstanceSection from './components/InstanceSection.vue';
 import Footer from './components/Footer.vue';
-import BidsTenders from './components/BidsTenders.vue';
 
 export default {
   components: {
@@ -23,8 +22,7 @@ export default {
     SearchBar,
     TopSection,
     InstanceSection,
-    Footer,
-    BidsTenders
+    Footer
   },
   data() {
     return {

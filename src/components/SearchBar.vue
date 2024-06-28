@@ -19,20 +19,23 @@ export default {
             <input type="text" placeholder="Search">
         </div>
         <div id="imgs">
-            <img class="home" :src="user_i">
-            <img class="home" :src="setting_i">
+            <img class="homei" :src="user_i">
+            <img class="homei" :src="setting_i">
         </div>
     </div>
 </template>
 
 
 <style scoped>
+#imgs{
+    display: flex;
+}
+.homei{
+    height: 2.5em;
+}
 h1{
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-}
-.home{
-    height: 2.5em;
 }
 #container {
     display: flex;
@@ -45,15 +48,15 @@ h1{
 }
 
 input {
-    width: 39.75em; /* 300px to em */
-    height: 1.875em; /* 30px to em */
-    margin-right: 0.625em; /* 10px to em */
-    border-radius: 1.25em; /* 20px to em */
+    width: 39.75em; 
+    height: 1.875em; 
+    margin-right: 0.625em; 
+    border-radius: 1.25em; 
 }
 
 #imgs {
     display: flex;
-    gap: 1.25em; /* 20px to em */
+    gap: 1.25em; 
 }
 
 #search_c {

@@ -29,14 +29,14 @@ export default {
 <template>
   <div id="containerr">
     <div class="storage-available">
-      <h4>Storage Available</h4>
+      <h6>Storage Available</h6>
       <div id="storage">
         <Doughnut class="pie" :data="data" />
       </div>
     </div>
     
     <div class="scheduled-jobs">
-      <h4>Scheduled Jobs</h4>
+      <h6>Scheduled Jobs</h6>
       <div class="job">
         <a href="#">Archival of TN Tender Docs</a>
         <button class="details">Details</button>
@@ -55,26 +55,27 @@ export default {
 
 
 <style scoped>
-h4 {
-  margin-top: 0.375em; /* 6px */
-  margin-bottom: 0.375em; /* 6px */
-  margin-left: 0.1875em; /* 3px */
+
+h6 {
+  margin-top: 0.375em; 
+  margin-bottom: 0.375em;
+  margin-left: 0.1875em; 
 }
 .storage-available {
-  border: 0.125em solid black; /* 2px */
-  border-radius: 0.9375em; /* 15px */
+  border: 0.125em solid black;
+  border-radius: 0.9375em; 
   margin-left: 3em;
   margin-right: 1em;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center align items horizontally */
+  align-items: center; 
 }
 .scheduled-jobs {
-  border: 0.125em solid black; /* 2px */
-  border-radius: 0.9375em; /* 15px */
-  margin-left: 5em; /* Increased margin to create more gap */
+  border: 0.125em solid black; 
+  border-radius: 0.9375em; 
+  margin-left: 5em; 
   margin-right: 5em;
-  padding: 0.625em; /* 10px */
+  padding: 0.625em; 
 }
 #containerr {
   display: flex;
@@ -82,16 +83,16 @@ h4 {
 }
 #storage {
   display: flex;
-  justify-content: center; /* Center align content horizontally */
-  align-items: center; /* Center align content vertically */
-  height: 12.5em; /* 200px */
-  width: 25em; /* 400px */
-  margin-bottom: 0.625em; /* 10px */
+  justify-content: center; 
+  align-items: center; 
+  height: 12.5em; 
+  width: 25em; 
+  margin-bottom: 0.625em; 
 }
 .job {
   display: flex;
   align-items: center;
-  margin-bottom: 0.625em; /* 10px */
+  margin-bottom: 0.625em; 
 }
 .job a {
   color: blue;
@@ -105,9 +106,9 @@ h4 {
   font-weight: bold;
   background-color: lightgray;
   border: none;
-  border-radius: 0.3125em; /* 5px */
-  padding: 0.3125em 0.625em; /* 5px 10px */
-  width: 7em; /* 100px */
+  border-radius: 0.3125em; 
+  padding: 0.3125em 0.625em; 
+  width: 7em;
   text-align: center;
   box-sizing: border-box;
   margin-right: 3em;
@@ -117,18 +118,18 @@ h4 {
   color: white;
 }
 
-/* Responsive adjustments */
-@media (max-width: 37.5em) { /* 600px */
+
+@media (max-width: 37.5em) { 
   .storage-available,
   .scheduled-jobs {
-    margin-left: 0.625em; /* 10px */
-    margin-right: 0.625em; /* 10px */
+    margin-left: 0.625em;
+    margin-right: 0.625em; 
   }
   .details,
   .reschedule,
   .abort {
     width: auto;
-    flex: 1; /* Allow buttons to grow and shrink as needed */
+    flex: 1; 
   }
 }
 </style>

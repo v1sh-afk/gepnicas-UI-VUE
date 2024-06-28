@@ -1,6 +1,12 @@
 <script>
 import axios from 'axios';
 export default {
+    watch: {
+    selectedOption(newVal) {
+      if (newVal) {
+        this.changeBids();
+      }
+    }},
     data() {
         return {
             instances: [],
@@ -11,7 +17,9 @@ export default {
             bidstenders: {bids: [], tenders:[]},
             perPage: 10,
             currentPage: 1,
-            showPage :   false
+            showPage :   false,
+            displayTenders: true,
+            selectedOption: null
         };
     },
     methods: {
@@ -25,7 +33,7 @@ export default {
             this.$refs.scrollContainer.scrollLeft += 100;
         },
         getImages() {
-            axios.get('http://192.168.0.109:5000/getImages')
+            axios.get('http://192.168.0.101:5000/getImages')
                 .then(response => {
                     this.response = response.data;
                     console.log(this.response);
@@ -35,7 +43,7 @@ export default {
                 });
         },
         getDashboard() {
-            axios.get('http://192.168.0.109:5000/getInstanceCountAll')
+            axios.get('http://192.168.0.101:5000/getInstanceCountAll')
                 .then(response => {
                     this.dashboard = response.data;
                     console.log(this.dashboard);
@@ -50,7 +58,7 @@ export default {
         buttonClick(iname) {
             this.infodiv = true
             this.showPage = false
-            axios.get(`http://192.168.0.109:5000/getInstanceCount?instancename=${iname}`)
+            axios.get(`http://192.168.0.101:5000/getInstanceCount?instancename=${iname}`)
                 .then(response => {
                     this.details = response.data;  
                     console.log(this.details);
@@ -61,7 +69,7 @@ export default {
         },
         Totalfile(iname){
                 this.showPage=true
-                axios.get(`http://192.168.0.109:5000/getBidsTenderInstance?instancename=${iname}`)
+                axios.get(`http://192.168.0.101:5000/getBidsTenderInstance?instancename=${iname}`)
                     .then(response => {
                         this.bidstenders.bids = response.data.bids; 
                         this.bidstenders.tenders = response.data.tenders; 
@@ -73,7 +81,7 @@ export default {
         },
         Archived(iname){
                 this.showPage=true
-                axios.get(`http://192.168.0.109:5000/getBidsTenderInstanceArchived?instancename=${iname}`)
+                axios.get(`http://192.168.0.101:5000/getBidsTenderInstanceArchived?instancename=${iname}`)
                     .then(response => {
                         this.bidstenders.bids = response.data.bids; 
                         this.bidstenders.tenders = response.data.tenders;  
@@ -84,7 +92,7 @@ export default {
                     });
         },
         Metalink(iname){
-            axios.get(`http://192.168.0.109:5000/getBidsTenderInstanceMetalink?instancename=${iname}`)
+            axios.get(`http://192.168.0.101:5000/getBidsTenderInstanceMetalink?instancename=${iname}`)
                 .then(response => {
                     this.bidstenders.bids = response.data.bids; 
                     this.bidstenders.tenders = response.data.tenders; 
@@ -95,7 +103,7 @@ export default {
                 });
         },
         Errorr(iname){
-            axios.get(`http://192.168.0.109:5000/getBidsTenderInstanceError?instancename=${iname}`)
+            axios.get(`http://192.168.0.101:5000/getBidsTenderInstanceError?instancename=${iname}`)
                 .then(response => {
                     this.bidstenders.bids = response.data.bids; 
                     this.bidstenders.tenders = response.data.tenders; 
@@ -105,6 +113,9 @@ export default {
                     console.error('Error:', error);
                 });
         },
+        changeBids() {
+            this.displayTenders = !this.displayTenders;
+    }
 
     },
     computed: {
@@ -128,7 +139,10 @@ export default {
         },
         rows() {
         return this.bidstenders.tenders.length;
-      }
+      },
+        currentItems() {
+        return this.displayTenders ? this.bidstenders.tenders : this.bidstenders.bids;
+        }
     },
     mounted() {
         this.getImages();
@@ -141,7 +155,7 @@ export default {
         <!-- Main Dashboard -->
 
         <div id="mainDashboard" v-if="dashboard.counts">
-            <h3>Main Dashboard</h3>
+            <h3 id="MD">Main Dashboard</h3>
             <div class="details1">
                 <div class="detail1">
                     <img class="detail_logos" :src="folder">
@@ -245,10 +259,19 @@ export default {
                     ></b-pagination>
 
                     <p class="mt-3">Current Page: {{ currentPage }}</p>
+                    <!-- <button @click="changeBids()">Bids</button> -->
+
+
+                    
+                    <input type="radio" v-model="selectedOption" value="Bids">
+                    <label>Bids</label><br>
+                    <input type="radio" v-model="selectedOption" value="Tenders">
+                    <label>Tenders</label>
+            
 
                     <b-table
                     id="my-table"
-                    :items="bidstenders.tenders"
+                    :items="currentItems"
                     :per-page="perPage"
                     :current-page="currentPage"
                     small
@@ -262,7 +285,7 @@ export default {
             
 
         </div>
-    <div style="height: 5em;"></div> <!-- Adjust height as needed -->
+    <div style="height: 5em;"></div> 
     </div>
 </template>
 
@@ -283,9 +306,8 @@ export default {
 
 .instance-name-detail{
     font-weight: bold;
-    /* margin-left: 2.5em; */
     margin-left: 0;
-    font-size: 1em; /* Adjust font size as needed */
+    font-size: 1em; 
     margin-top: 40px
 
 }
@@ -294,8 +316,8 @@ export default {
     flex-direction: row;
 }
 .detail_logos {
-    height: 4.375em; /* 70px to em */
-    width: 4.375em; /* 70px to em */
+    height: 4.375em; 
+    width: 4.375em; 
     margin-left: 0;
 
 }
@@ -303,16 +325,16 @@ export default {
 .detail {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 0.9375em; /* 15px to em */
-    margin-right: 0.9375em; /* 15px to em */
+    margin-bottom: 0.9375em; 
+    margin-right: 0.9375em; 
 }
 .details {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
-    border: 0.125em solid black; /* 2px to em */
-    border-radius: 0.9375em; /* 15px to em */
-    margin-top: 0.3125em; /* 5px to em */
+    border: 0.125em solid black; 
+    border-radius: 0.9375em; 
+    margin-top: 0.3125em; 
 }
 .details1 {
     display: flex;
@@ -320,14 +342,14 @@ export default {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
-    border: 0.125em solid black; /* 2px to em */
-    border-radius: 0.9375em; /* 15px to em */
-    margin-top: 0.5em; /* 5px to em */
+    border: 0.125em solid black;
+    border-radius: 0.9375em; 
+    margin-top: 0.5em;
     padding-top: 1em;
 }
 .logo {
-    width: 6.25em; /* 100px to em */
-    height: 6.25em; /* 100px to em */
+    width: 6.25em; 
+    height: 6.25em; 
 }
 #instance {
     border: 2px solid black;
@@ -347,7 +369,7 @@ export default {
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
-    padding: 0.625em 0; /* 10px to em */
+    padding: 0.625em 0; 
 }
 .scroll-container::-webkit-scrollbar {
     display: none;
@@ -361,27 +383,25 @@ export default {
     padding: 0.5em 0.2em;
 }
 img {
-    margin-left: 1.25em; /* 20px to em */
+    margin-left: 1.25em;
 }
 h4 {
     margin-top: 0.4em;
     margin-bottom: 0.4em;
 }
 .instance-item {
-    text-align: center; /* Center-align text below each image */
+    text-align: center; 
 }
 
 h5{
-    /* margin-left: 1em; */
     margin-top: 0;
     margin-bottom: 0;
 }
 .instance-name {
     font-weight: bold;
-    /* margin-left: 2.5em; */
     margin-left: 0;
-    font-size: 1em; /* Adjust font size as needed */
-    margin-top: 0.5em; /* Adjust margin to control spacing */
+    font-size: 1em; 
+    margin-top: 0.5em; 
 }
 
 .detail1,
@@ -392,6 +412,6 @@ h5{
 }
 
 #mainDashboard {
-    text-align: center; /* Center the text inside the div */
+    text-align: center; 
 }
 </style>
