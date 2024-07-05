@@ -1,9 +1,12 @@
 <template>
   <div>
     <TopBar />
-    <SearchBar />
-    <TopSection />
-    <InstanceSection />
+    <SearchBar @settingsclicked="goToSettings"/>
+    <!-- <router-view v-if="!showSettings && !showForm"/> -->
+    <PortalSettings v-if="showSettings" @back="goToSettings"/>
+    <TopSection v-if="!showSettings && !showForm" @open-form="toggleForm"/>
+    <!-- <Storageform v-if="showForm" @back="toggleForm"/> -->
+    <InstanceSection v-if="!showSettings && !showForm"/>
     <BidsTenders />
     <Footer ref="footer" />
   </div>
@@ -15,6 +18,10 @@ import SearchBar from './components/SearchBar.vue';
 import TopSection from './components/TopSection.vue';
 import InstanceSection from './components/InstanceSection.vue';
 import Footer from './components/Footer.vue';
+import PortalSettings from './components/PortalSettings.vue';
+import { onBeforeUnmount } from 'vue';
+import Storageform from './components/Storageform.vue'; 
+
 
 export default {
   components: {
@@ -22,11 +29,15 @@ export default {
     SearchBar,
     TopSection,
     InstanceSection,
-    Footer
+    Footer,
+    PortalSettings,
+    Storageform
   },
   data() {
     return {
       isFooterVisible: false,
+      showSettings: false,
+      showForm : false,
     };
   },
   methods: {
@@ -39,12 +50,18 @@ export default {
       } else {
         footer.classList.add('hidden-footer');
       }
+    },
+    goToSettings() {
+      this.showSettings = !this.showSettings;
+    },
+    toggleForm(){
+      this.showForm = !this.showForm; // Toggle the showForm state
     }
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
 };

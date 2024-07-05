@@ -10,7 +10,6 @@ export default{
     },
     data(){
         return{
-            date: this.getTime(),
             currentUser: 'Ranjith'
         }
     },
@@ -34,17 +33,19 @@ export default{
 <template>
     <div id="top">
         <div class="left">
-            <img class="home" :src="image">
-            <p id="datep">{{ date }}</p>
+            <!-- <img class="home" :src="image"> -->
+            <h1 id="title">GePNIC Archival System</h1>
         </div>
 
-        <div><h1 id="title">GePNIC Archival System</h1></div>
+        <div >
+
+        </div>
 
         <div class="right">
             <p id="welcomep">Welcome {{ currentUser }} </p>
             <div class="logout-container">
                 <p>Logout</p>
-                <img class="home" :src="logout_i">
+                <!-- <img class="home" :src="logout_i"> -->
             </div>
         </div>
        
@@ -54,7 +55,7 @@ export default{
 </template>
 
 <style scoped>
-#title{
+/* #title{
     margin-bottom: 0px;
 }
 p{
@@ -79,22 +80,28 @@ p{
 }
 .logout-container{
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     gap: 2px;
+} */
+#title{
+    color: white;
 }
-/* h1{
+
+h1{
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
 
 .home{
     height: 2.5em;
+    margin-top: 1.5rem
 }
 
 #top{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #ef621b;
 }
 
 .left{
@@ -120,7 +127,7 @@ p{
 .logout-container img.home {
     width: 1.9em; 
     height: 1.9em; 
-}  */
+}  
 
 
 </style>

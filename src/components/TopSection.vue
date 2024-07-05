@@ -1,17 +1,50 @@
+<template>
+  <div id="containerr">
+    <div class="storage-available">
+      <h4>Storage Available</h4>
+      <div id="storage">
+        <Doughnut class="pie" :data="data" />
+      </div>
+    </div>
+    <div class="storage-available2">
+      <h4>Primary Storage</h4>
+      <div id="storage" v-if="!showForm">
+        <Doughnut class="pie" :data="data" />
+        <Doughnut class="pie" :data="data" />
+      </div>
+      <button v-if="!showForm" @click="openForm" class="btn">Open Storage Form</button>
+      <!-- <Storageform />  -->
+      <Storageform v-if="showForm" @back="closeForm"/>
+    </div>
+  </div>
+</template>
 <script>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'vue-chartjs'
 import * as chartConfig from './chartConfig.js'
+import Storageform from './Storageform.vue' // Add this line
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default {
-  name: 'App',
+  name: 'TopSection',
   components: {
-    Doughnut
+    Doughnut,
+    Storageform
   },
   data() {
-    return chartConfig
+    return {
+      ...chartConfig,
+      showForm: false // Add this data property
+    }
+  },
+  methods: {
+    openForm() {
+      this.showForm = true;
+    },
+    closeForm() {
+      this.showForm = false;
+    }
   },
   props: {
     chartData: {
@@ -25,38 +58,9 @@ export default {
   }
 }
 </script>
-
-<template>
-  <div id="containerr">
-    <div class="storage-available">
-      <h6>Storage Available</h6>
-      <div id="storage">
-        <Doughnut class="pie" :data="data" />
-      </div>
-    </div>
-    
-    <div class="scheduled-jobs">
-      <h6>Scheduled Jobs</h6>
-      <div class="job">
-        <a href="#">Archival of TN Tender Docs</a>
-        <button class="details">Details</button>
-        <button class="reschedule">Reschedule</button>
-        <button class="abort">Abort</button>
-      </div>
-      <div class="job">
-        <a href="#">Archival of DNH Tender Docs</a>
-        <button class="details">Details</button>
-        <button class="reschedule">Reschedule</button>
-        <button class="abort">Abort</button>
-      </div>
-    </div>
-  </div> 
-</template>
-
-
 <style scoped>
 
-h6 {
+h4 {
   margin-top: 0.375em; 
   margin-bottom: 0.375em;
   margin-left: 0.1875em; 
@@ -64,8 +68,16 @@ h6 {
 .storage-available {
   border: 0.125em solid black;
   border-radius: 0.9375em; 
-  margin-left: 3em;
-  margin-right: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  width: 37%;
+  margin-right: 3%;
+}
+.storage-available2 {
+  border: 0.125em solid black;
+  border-radius: 0.9375em; 
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center; 
@@ -79,45 +91,30 @@ h6 {
 }
 #containerr {
   display: flex;
-  flex-wrap: wrap;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 10px;
 }
 #storage {
   display: flex;
-  justify-content: center; 
-  align-items: center; 
-  height: 12.5em; 
-  width: 25em; 
-  margin-bottom: 0.625em; 
-}
-.job {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.625em; 
-}
-.job a {
-  color: blue;
-  text-decoration: none;
-  flex-grow: 1;
-  margin-right: 10em;
-}
-.details,
-.reschedule,
-.abort {
-  font-weight: bold;
-  background-color: lightgray;
-  border: none;
-  border-radius: 0.3125em; 
-  padding: 0.3125em 0.625em; 
-  width: 7em;
-  text-align: center;
-  box-sizing: border-box;
-  margin-right: 3em;
-}
-.abort {
-  background-color: red;
-  color: white;
+  height: 12.5em;
 }
 
+.btn {
+  background-color: #ef621b; /* Orange color */
+  color: white;
+  padding: 10px 20px; /* Increase the padding to make the button bigger */
+  font-size: 1.2em; /* Increase the font size */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #BE5825; /* Darker shade on hover */
+}
 
 @media (max-width: 37.5em) { 
   .storage-available,

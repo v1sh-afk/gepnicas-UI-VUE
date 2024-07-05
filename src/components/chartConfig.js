@@ -2,7 +2,7 @@ export const data = {
     labels: ['Free', 'Used'],
     datasets: [
       {
-        backgroundColor: ['#0000FF', '#FF0000'],
+        backgroundColor: ['#ef621b', '#BE5825'],
         data: [40, 20]
       }
     ]
