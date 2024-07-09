@@ -3,14 +3,14 @@
     <div class="storage-available">
       <h4>Storage Available</h4>
       <div id="storage">
-        <Doughnut class="pie" :data="data" />
+        <Doughnut class="pie" :data="data" :options="options"/>
       </div>
     </div>
     <div class="storage-available2">
       <h4>Primary Storage</h4>
-      <div id="storage" v-if="!showForm">
-        <Doughnut class="pie" :data="data" />
-        <Doughnut class="pie" :data="data" />
+      <div id="storagee" v-if="!showForm">
+        <Doughnut class="pie" :data="data" :options="options"/>
+        <Doughnut class="pie" :data="data" :options="options"/>
       </div>
       <button v-if="!showForm" @click="openForm" class="btn">Open Storage Form</button>
       <!-- <Storageform />  -->
@@ -21,8 +21,8 @@
 <script>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'vue-chartjs'
-import * as chartConfig from './chartConfig.js'
-import Storageform from './Storageform.vue' // Add this line
+import {data, options} from './chartConfig.js'
+import Storageform from './Storageform.vue'// Add this line
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -34,7 +34,8 @@ export default {
   },
   data() {
     return {
-      ...chartConfig,
+      data,
+      options,
       showForm: false // Add this data property
     }
   },
@@ -98,22 +99,31 @@ h4 {
 }
 #storage {
   display: flex;
-  height: 12.5em;
+  height: 10em;
+}
+
+#storagee {
+  display: flex;
+  height: 10em;
+  gap: 10px;
 }
 
 .btn {
-  background-color: #ef621b; /* Orange color */
+  background-color: #09222E; /* Orange color */
   color: white;
-  padding: 10px 20px; /* Increase the padding to make the button bigger */
-  font-size: 1.2em; /* Increase the font size */
+  /* padding: 10px 20px;  */
+  font-size: 1em; /* Increase the font size */
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
+/* .pie{
+  height: 200px;
+  width: 200px;
+} */
 .btn:hover {
-  background-color: #BE5825; /* Darker shade on hover */
+  background-color: #09222E; /* Darker shade on hover */
 }
 
 @media (max-width: 37.5em) { 

@@ -101,7 +101,7 @@ h1{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ef621b;
+    background-color: #09222E;
 }
 
 .left{

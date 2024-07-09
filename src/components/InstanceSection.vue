@@ -175,32 +175,32 @@ export default {
             <div class="details1">
                 <div class="detail1">
                     <img class="detail_logos" :src="folder" @click="TotalMain('getBidsTenderInstance')">
-                    <h5>Total Folders</h5>
+                    <h6>Total Folders</h6>
                     <div class="instance-name">{{ dashboard.counts.total_count }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="complete" @click="TotalMain('getBidsTenderInstanceArchived')">
-                    <h5>Folders Completed</h5>
+                    <h6>Folders Completed</h6>
                     <div class="instance-name">{{ dashboard.counts.sync_completed_count }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="process" @click="TotalMain('d')">
-                    <h5>Soft Links</h5>
+                    <h6>Soft Links</h6>
                     <div class="instance-name">{{ dashboard.counts.soft_link_created }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="link" @click="TotalMain('getBidsTenderInstanceMetalink')">
-                    <h5>Meta Links</h5>
+                    <h6>Meta Links</h6>
                     <div class="instance-name">{{ dashboard.counts.meta_link_created }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="error" @click="TotalMain('getBidsTenderInstanceError')">
-                    <h5>Errors</h5>
+                    <h6>Errors</h6>
                     <div class="instance-name">{{ dashboard.counts.errors_count }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="db" @click="TotalMain('sd')">
-                    <h5>Storage</h5>
+                    <h6>Storage</h6>
                     <div class="instance-name">{{ dashboard.counts.instance_storage_size }}</div>
                 </div>
             </div>
@@ -209,7 +209,7 @@ export default {
      
 
         <div id="instance">
-            <h3>Instances</h3>
+            <h4>Instances</h4>
             <div class="scroll-buttons">
                 <button class="ba" @click="scrollLeft">‹</button>
                 <div class="scroll-container" ref="scrollContainer">
@@ -283,7 +283,11 @@ export default {
 
 
 <style>
-
+h4 {
+  margin-top: 0.375em; 
+  margin-bottom: 0.375em;
+  margin-left: 0.1875em; 
+}
 #rad{
     display: flex;
     justify-content: center;
@@ -334,8 +338,8 @@ h3 {
 .detail_logos {
     /* height: 4.375em;  */
     /* width: 4.375em;  */
-    height: 3em;
-    width: 3em;
+    height: 2em;
+    width: 2em;
     margin-left: 0;
 }
 
@@ -364,9 +368,9 @@ h3 {
 .details1 {
     display: flex;
     justify-content: space-around;
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
     border: 0.125em solid black;
     border-radius: 0.9375em; 
     margin-top: 0.5em;
@@ -423,15 +427,16 @@ h4 {
     /* align-items: center; */
 }
 
-h5{
+h6{
     margin-top: 0;
     margin-bottom: 0;
 }
 .instance-name{
     font-weight: bold;
     margin-left: 0;
-    font-size: 1em; 
-    margin-top: 0.5em; 
+    font-size: 0.75em; 
+    margin-top: 0em;
+
 }
 
 .detail1,

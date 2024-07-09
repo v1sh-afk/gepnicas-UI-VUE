@@ -65,7 +65,7 @@ export default {
     height: 25px;
 }
 .date2{
-    background-color: #BE5825;
+    background-color: #09222E;
     display: flex;
     width: 20%;
     justify-content: space-between;
@@ -74,13 +74,13 @@ export default {
 .date{
     display: flex;
     width: 20%;
-    background-color: #BE5825;
+    background-color: #09222E;
     color: white;
     justify-content: center;
     align-items: center;
 }
 #menubar{
-    background-color: #BE5825;
+    background-color: #09222E;
     width: 60%;
 
 }
