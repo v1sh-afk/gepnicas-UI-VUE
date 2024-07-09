@@ -50,9 +50,15 @@ export default {
             <p>fkh</p>
         </div>
         <div class="date2">
-            <p>Home</p>
+            <div class="menuu">
+                <img class="menuicon" src="/src/assets/home.png">
+                <p>Home</p>
+            </div>
             <p>User Management</p>
-            <p id='date2' @click="handleSettingsClick">Settings</p>
+            <div class="menuu">
+                <img class="menuicon" src="/src/assets/settings2.png">
+                <p id='date2' @click="handleSettingsClick">Settings</p>
+            </div>
         </div>
     </div>
 
@@ -60,28 +66,40 @@ export default {
 
 
 <style scoped>
+.menuu{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.menuicon{
+    width: 25px;
+    height: 25px;
+}
 #menu{
     width: 100%;
     height: 25px;
 }
 .date2{
-    background-color: #09222E;
+    background-color: #2f6b77;
     display: flex;
-    width: 20%;
+    width: 30%;
     justify-content: space-between;
     color: white;
+    padding: 15px;
 }
 .date{
     display: flex;
     width: 20%;
-    background-color: #09222E;
+    background-color: #2f6b77;
     color: white;
     justify-content: center;
     align-items: center;
+    padding: 15px;
 }
 #menubar{
-    background-color: #09222E;
-    width: 60%;
+    background-color: #2f6b77;
+    width: 70%;
+    padding: 15px;
 
 }
 p{

@@ -109,9 +109,9 @@ h4 {
 }
 
 .btn {
-  background-color: #09222E; /* Orange color */
+  background-color: #1a4d57;
   color: white;
-  /* padding: 10px 20px;  */
+  padding: 5px 5px; 
   font-size: 1em; /* Increase the font size */
   border: none;
   border-radius: 5px;
@@ -123,7 +123,7 @@ h4 {
   width: 200px;
 } */
 .btn:hover {
-  background-color: #09222E; /* Darker shade on hover */
+  background-color: #2f6b77; /* Darker shade on hover */
 }
 
 @media (max-width: 37.5em) { 

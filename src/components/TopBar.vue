@@ -86,7 +86,9 @@ p{
 #title{
     color: white;
 }
-
+p{
+    color: white;
+}
 h1{
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -101,7 +103,7 @@ h1{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #09222E;
+    background-color: #1a4d57;
 }
 
 .left{
