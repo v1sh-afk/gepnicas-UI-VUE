@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     fetchConfig() {
-      axios.get('http://192.168.0.112:5000/postConfigMaster')
+      axios.get('http://192.168.0.113:5000/postConfigMaster')
         .then(response => {
           console.log(this.config)
           this.config = response.data;
@@ -27,7 +27,7 @@ export default {
     },
     saveConfig() {
       console.log(this.config)
-      axios.post('http://192.168.0.112:5000/postConfigMaster', this.config)
+      axios.post('http://192.168.0.113:5000/postConfigMaster', this.config)
         .then(response => {
           alert(response.data.message);
         })
@@ -134,12 +134,12 @@ export default {
 }
 
 .btn-save {
-  background-color: #ef621b;
+  background-color: #1a4d57;
   color: white;
 }
 
 .btn-save:hover {
-  background-color: #BE5825;
+  background-color: #33899a;
 }
 
 .btn-back {

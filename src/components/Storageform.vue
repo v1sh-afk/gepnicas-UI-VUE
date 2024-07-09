@@ -1,24 +1,26 @@
 <template>
   <div class="storage-form">
-    <h1>STORAGE FORM</h1>
+    <!-- <h1>STORAGE FORM</h1> -->
     <form @submit.prevent="updateStorage" class="form">
-      <div class="form-group">
-        <label for="storageType">Storage Type:</label>
-        <select id="storageType" v-model="selectedStorage" @change="loadStorageData">
-          <option v-for="(storage, key) in storageOptions" :key="key" :value="key">
-            {{ storage.storage_name }}
-          </option>
-        </select>
-      </div>
-      
-      <div class="form-group">
-        <label>Storage Capacity:</label>
-        <span>{{ storageData.storage_capacity }}</span>
-      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="storageType">Storage Type:</label>
+          <select id="storageType" v-model="selectedStorage" @change="loadStorageData">
+            <option v-for="(storage, key) in storageOptions" :key="key" :value="key">
+              {{ storage.storage_name }}
+            </option>
+          </select>
+        </div>
 
-      <div class="form-group">
-        <label for="storageUsed">Storage Used:</label>
-        <input id="storageUsed" type="number" v-model="storageData.storage_used" />
+        <div class="form-group">
+          <label>Storage Capacity:</label>
+          <span>{{ storageData.storage_capacity }}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="storageUsed">Storage Used:</label>
+          <input id="storageUsed" type="number" v-model="storageData.storage_used" />
+        </div>
       </div>
 
       <div class="form-actions">
@@ -100,18 +102,17 @@ export default {
 
 <style scoped>
 .storage-form {
-  max-width: 400px;
-  margin: 10px auto;
-  padding: 20px;
+  width: 750px; /* Use width instead of max-width */
+  margin: 10px auto; /* Adjusted margin */
+  padding: 0.5px; /* Reduced padding */
   background-color: #f8f9fa;
   border-radius: 10px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-
 .storage-form h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
+  font-size: 1em; /* Font size can remain the same or be adjusted as needed */
+  margin-bottom: 10px; 
   text-align: center;
   color: #495057;
 }
@@ -121,21 +122,35 @@ export default {
   flex-direction: column;
 }
 
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
 .form-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Make form groups take equal space */
+  margin-right: 8px;
+}
+
+.form-group:last-child {
+  margin-right: 0; /* Remove margin for the last form group */
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
   font-weight: bold;
   color: #495057;
+  font-size: 0.875em;
 }
 
 .form-group select, .form-group input {
   width: 100%;
-  padding: 10px;
-  font-size: 1em;
+  padding: 5px;
+  font-size: 0.75em;
   border: 1px solid #ced4da;
   border-radius: 5px;
   transition: border-color 0.2s;
@@ -149,12 +164,12 @@ export default {
 .form-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 8px;
 }
 
 .btn-save, .btn-back {
-  padding: 10px 20px;
-  font-size: 1em;
+  padding: 5px 10px;
+  font-size: 0.75em;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -162,12 +177,12 @@ export default {
 }
 
 .btn-save {
-  background-color: #ef621b;
+  background-color: #1a4d57;
   color: white;
 }
 
 .btn-save:hover {
-  background-color: #BE5825;
+  background-color: #33899a;
 }
 
 .btn-back {

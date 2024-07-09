@@ -39,7 +39,7 @@ export const options = {
       display: true,
       labels: {
         font: {
-          size: 12,
+          size: 10,
         },
       },
       position: 'right', 

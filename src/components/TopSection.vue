@@ -3,26 +3,27 @@
     <div class="storage-available">
       <h4>Storage Available</h4>
       <div id="storage">
-        <Doughnut class="pie" :data="data" :options="options"/>
+        <Doughnut class="pie" :data="storageAvailableData" :options="options"/>
       </div>
     </div>
     <div class="storage-available2">
       <h4>Primary Storage</h4>
       <div id="storagee" v-if="!showForm">
-        <Doughnut class="pie" :data="data" :options="options"/>
-        <Doughnut class="pie" :data="data" :options="options"/>
+        <div class="charts">
+          <Doughnut class="pie" :data="primaryStorageData1" :options="options"/>
+          <Doughnut class="pie" :data="primaryStorageData2" :options="options"/>
+        </div>
+        <button v-if="!showForm" @click="openForm" class="btn">Open Storage Form</button>
       </div>
-      <button v-if="!showForm" @click="openForm" class="btn">Open Storage Form</button>
-      <!-- <Storageform />  -->
       <Storageform v-if="showForm" @back="closeForm"/>
     </div>
   </div>
 </template>
+
 <script>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'vue-chartjs'
-import {data, options} from './chartConfig.js'
-import Storageform from './Storageform.vue'// Add this line
+import Storageform from './Storageform.vue'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -34,9 +35,47 @@ export default {
   },
   data() {
     return {
-      data,
-      options,
-      showForm: false // Add this data property
+      storageAvailableData: {
+        labels: ['Free', 'Used'],
+        datasets: [
+          {
+            backgroundColor: ['#072E2D', '#42997C'],
+            data: [50, 20]
+          }
+        ]
+      },
+      primaryStorageData1: {
+        labels: ['Free', 'Used'],
+        datasets: [
+          {
+            backgroundColor: ['#072E2D', '#42997C'],
+            data: [25, 75]
+          }
+        ]
+      },
+      primaryStorageData2: {
+        labels: ['Free', 'Used'],
+        datasets: [
+          {
+            backgroundColor: ['#072E2D', '#42997C'],
+            data: [60, 40]
+          }
+        ]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 9,
+              },
+            },
+            position: 'right',
+          }
+        }
+      },
+      showForm: false
     }
   },
   methods: {
@@ -46,24 +85,15 @@ export default {
     closeForm() {
       this.showForm = false;
     }
-  },
-  props: {
-    chartData: {
-      type: Object,
-      required: true
-    },
-    chartOptions: {
-      type: Object,
-      default: () => ({ responsive: true, maintainAspectRatio: false })
-    }
   }
 }
 </script>
-<style scoped>
 
+
+<style scoped>
 h4 {
-  margin-top: 0.375em; 
-  margin-bottom: 0.375em;
+  margin-top: -0.2em; /* Adjust margin-top */
+  margin-bottom: -0.2em; /* Adjust margin-bottom */
   margin-left: 0.1875em; 
 }
 .storage-available {
@@ -74,6 +104,7 @@ h4 {
   align-items: center; 
   width: 37%;
   margin-right: 3%;
+  height: 8em;
 }
 .storage-available2 {
   border: 0.125em solid black;
@@ -82,13 +113,8 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: center; 
-}
-.scheduled-jobs {
-  border: 0.125em solid black; 
-  border-radius: 0.9375em; 
-  margin-left: 5em; 
-  margin-right: 5em;
-  padding: 0.625em; 
+  position: relative;
+  height: 8em;
 }
 #containerr {
   display: flex;
@@ -100,30 +126,41 @@ h4 {
 #storage {
   display: flex;
   height: 10em;
+  margin-top: -1em;
 }
-
 #storagee {
   display: flex;
-  height: 10em;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  margin-top: -1em;
+}
+.charts {
+  display: flex;
+  justify-content: center;
   gap: 10px;
 }
-
+.pie {
+  width: 150px !important;
+  height: 150px !important;
+}
 .btn {
   background-color: #1a4d57;
   color: white;
-  padding: 5px 5px; 
-  font-size: 1em; /* Increase the font size */
+  padding: 0.5em 1em;
+  font-size: 0.875em;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  position: absolute;
+  bottom: 30px;
+  margin-left: 45em;
+  white-space: nowrap;
 }
-/* .pie{
-  height: 200px;
-  width: 200px;
-} */
 .btn:hover {
-  background-color: #2f6b77; /* Darker shade on hover */
+  background-color: #2f6b77;
 }
 
 @media (max-width: 37.5em) { 
