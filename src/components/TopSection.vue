@@ -10,22 +10,23 @@
       <h4>Primary Storage</h4>
       <div id="storagee" v-if="!showForm">
         <div class="charts">
-          <Doughnut class="pie" :data="primaryStorageData1" :options="options"/>
-          <Doughnut class="pie" :data="primaryStorageData2" :options="options"/>
+          <Doughnut class="pie" :data="primaryStorageDataHCI" :options="options"/>
+          <Doughnut class="pie" :data="primaryStorageDataHitachi" :options="options"/>
         </div>
         <button v-if="!showForm" @click="openForm" class="btn">Open Storage Form</button>
       </div>
-      <Storageform v-if="showForm" @back="closeForm"/>
+      <Storageform v-if="showForm" @back="closeForm" @storage-updated="handleStorageUpdated"/>
     </div>
   </div>
 </template>
 
 <script>
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Doughnut } from 'vue-chartjs'
-import Storageform from './Storageform.vue'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'vue-chartjs';
+import Storageform from './Storageform.vue';
+import axios from 'axios';
 
-ChartJS.register(ArcElement, Tooltip, Legend)
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default {
   name: 'TopSection',
@@ -40,25 +41,25 @@ export default {
         datasets: [
           {
             backgroundColor: ['#072E2D', '#42997C'],
-            data: [50, 20]
+            data: [50, 20]  // Placeholder, will be updated dynamically
           }
         ]
       },
-      primaryStorageData1: {
+      primaryStorageDataHCI: {
         labels: ['Free', 'Used'],
         datasets: [
           {
             backgroundColor: ['#072E2D', '#42997C'],
-            data: [25, 75]
+            data: [30, 40]  // Placeholder, will be updated dynamically
           }
         ]
       },
-      primaryStorageData2: {
+      primaryStorageDataHitachi: {
         labels: ['Free', 'Used'],
         datasets: [
           {
             backgroundColor: ['#072E2D', '#42997C'],
-            data: [60, 40]
+            data: [50, 30]  // Placeholder, will be updated dynamically
           }
         ]
       },
@@ -84,11 +85,55 @@ export default {
     },
     closeForm() {
       this.showForm = false;
-    }
-  }
-}
-</script>
+    },
+    handleStorageUpdated() {
+      this.closeForm();
+      this.fetchStorageData();
+    },
+    fetchStorageData() {
+      axios.get('http://192.168.0.113:5000/postSystemInfo')
+        .then(response => {
+          const storageOptions = response.data;
+          const hciData = storageOptions["1"];
+          const hitachiData = storageOptions["2"];
 
+          this.primaryStorageDataHCI = {
+            ...this.primaryStorageDataHCI,
+            datasets: [
+              {
+                ...this.primaryStorageDataHCI.datasets[0],
+                data: [
+                  hciData.storage_capacity - hciData.storage_used,
+                  hciData.storage_used
+                ]
+              }
+            ]
+          };
+
+          this.primaryStorageDataHitachi = {
+            ...this.primaryStorageDataHitachi,
+            datasets: [
+              {
+                ...this.primaryStorageDataHitachi.datasets[0],
+                data: [
+                  hitachiData.storage_capacity - hitachiData.storage_used,
+                  hitachiData.storage_used
+                ]
+              }
+            ]
+          };
+        })
+        .catch(error => {
+          console.error('Error fetching storage data:', error);
+          alert('Error fetching storage data: ' + error.message);
+        });
+    }
+  },
+  mounted() {
+    this.fetchStorageData();
+  }
+};
+</script>
 
 <style scoped>
 h4 {

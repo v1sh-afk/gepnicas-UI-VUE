@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     fetchStorageOptions() {
-      axios.get('http://192.168.0.112:5000/postSystemInfo')
+      axios.get('http://192.168.0.113:5000/postSystemInfo')
         .then(response => {
           console.log('GET response:', response.data);
           this.storageOptions = response.data;
@@ -76,22 +76,21 @@ export default {
       }
     },
     updateStorage() {
-      // Clone the current storageOptions to avoid mutating the original data directly
       const updatedStorageOptions = JSON.parse(JSON.stringify(this.storageOptions));
-      // Update the selected storage with the new used value
       updatedStorageOptions[this.selectedStorage].storage_used = this.storageData.storage_used;
       
       console.log('Updated storage options:', updatedStorageOptions);
 
-      axios.post('http://192.168.0.112:5000/postSystemInfo', updatedStorageOptions)
-      .then(response => {
-        console.log('POST response:', response.data);
-        alert('Storage updated successfully!');
-      })
-      .catch(error => {
-        console.error('Error updating storage:', error);
-        alert('Failed to update storage: ' + error.message);
-      });
+      axios.post('http://192.168.0.113:5000/postSystemInfo', updatedStorageOptions)
+        .then(response => {
+          console.log('POST response:', response.data);
+          alert('Storage updated successfully!');
+          this.$emit('storage-updated');
+        })
+        .catch(error => {
+          console.error('Error updating storage:', error);
+          alert('Failed to update storage: ' + error.message);
+        });
     }
   },
   mounted() {
