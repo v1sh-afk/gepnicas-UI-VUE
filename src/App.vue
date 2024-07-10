@@ -1,12 +1,13 @@
 <template>
   <div>
     <TopBar />
-    <SearchBar @settingsclicked="goToSettings"/>
+    <SearchBar @infraclicked="goToInfra" @settingsclicked="goToSettings"/>
     <!-- <router-view v-if="!showSettings && !showForm"/> -->
     <PortalSettings v-if="showSettings" @back="goToSettings"/>
-    <TopSection v-if="!showSettings && !showForm" @open-form="toggleForm"/>
+    <InfraSettings v-if="showInfra" @back="goToInfra"/>
+    <TopSection v-if="!showSettings && !showInfra && !showForm" @open-form="toggleForm"/>
     <!-- <Storageform v-if="showForm" @back="toggleForm"/> -->
-    <InstanceSection v-if="!showSettings && !showForm"/>
+    <InstanceSection v-if="!showSettings && !showInfra && !showForm"/>
     <BidsTenders />
     <Footer ref="footer" />
   </div>
@@ -19,9 +20,8 @@ import TopSection from './components/TopSection.vue';
 import InstanceSection from './components/InstanceSection.vue';
 import Footer from './components/Footer.vue';
 import PortalSettings from './components/PortalSettings.vue';
-import { onBeforeUnmount } from 'vue';
 import Storageform from './components/Storageform.vue'; 
-
+import InfraSettings from './components/InfraSettings.vue';
 
 export default {
   components: {
@@ -31,13 +31,15 @@ export default {
     InstanceSection,
     Footer,
     PortalSettings,
-    Storageform
+    Storageform,
+    InfraSettings
   },
   data() {
     return {
       isFooterVisible: false,
       showSettings: false,
-      showForm : false,
+      showForm: false,
+      showInfra: false,
     };
   },
   methods: {
@@ -54,7 +56,10 @@ export default {
     goToSettings() {
       this.showSettings = !this.showSettings;
     },
-    toggleForm(){
+    goToInfra() {
+      this.showInfra = !this.showInfra;
+    },
+    toggleForm() {
       this.showForm = !this.showForm; // Toggle the showForm state
     }
   },
@@ -68,5 +73,5 @@ export default {
 </script>
 
 <style>
-
+/* Your styles here */
 </style>
