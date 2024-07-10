@@ -1,162 +1,131 @@
-<script>
-export default {
+<template>
+    <div id="menu">
+      <div class="date">
+        <p>{{ date }}</p>
+      </div>
+      <div class="menu-content">
+        <div class="menu-item">
+          <div class="menuu">
+            <p class="menu-link" @click="handleInfraSettingsClick">Infra Settings</p>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menuu">
+            <img class="menuicon" src="/src/assets/home.png" alt="Home">
+            <p class="menu-link" @click="handleHomeClick">Home</p>
+          </div>
+        </div>
+        <div class="menu-item">
+          <p class="menu-link" @click="handleUserManagementClick">User Management</p>
+        </div>
+        <div class="menu-item">
+          <div class="menuu">
+            <img class="menuicon" src="/src/assets/settings2.png" alt="Settings">
+            <p class="menu-link" @click="handleSettingsClick">Settings</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
     data() {
-        return {
-            date: this.getTime()
-        }
+      return {
+        date: this.getTime()
+      }
     },
     computed: {
-        user_i() {
-            return 'src/assets/user.png';
-        },
-        setting_i() {
-            return 'src/assets/settings.png';
-        }
+      user_i() {
+        return 'src/assets/user.png';
+      },
+      setting_i() {
+        return 'src/assets/settings.png';
+      },
+      infraSetting_i() {
+        return 'src/assets/infra-settings.png'; // Adjust path as needed
+      }
     },
     methods: {
-        getTime() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0'); 
-            const day = String(now.getDate()).padStart(2, '0');
-            const hours = now.getHours();
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-
-            const date = `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
-            return date;
-        },
-        handleSettingsClick(){
-            this.$emit('settingsclicked');
-        }
+      getTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+  
+        const date = `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
+        return date;
+      },
+      handleSettingsClick() {
+        this.$emit('settingsclicked');
+      },
+      handleInfraSettingsClick() {
+        this.$emit('infraclicked');
+        console.log('Infra Settings clicked');
+      },
+      handleHomeClick() {
+        // Handle click for Home, if needed
+        console.log('Home clicked');
+      },
+      handleUserManagementClick(){
+        console.log('User Management Clicked')
+      }
     }
-}
-</script>
-
-<template>
-    <!-- <div id="container">
-        <div id="start">
-        </div>
-        <div id="imgs">
-            <img class="homei" :src="user_i">
-            <img class="homei" :src="setting_i">
-        </div>
-    </div> -->
-    <div id="menu">
-        <div class="date">
-            <p>{{ date }}</p>
-        </div>
-        <div id="menubar">
-            <p>fkh</p>
-        </div>
-        <div class="date2">
-            <div class="menuu">
-                <img class="menuicon" src="/src/assets/home.png">
-                <p>Home</p>
-            </div>
-            <p>User Management</p>
-            <div class="menuu">
-                <img class="menuicon" src="/src/assets/settings2.png">
-                <p id='date2' @click="handleSettingsClick">Settings</p>
-            </div>
-        </div>
-    </div>
-
-</template>
-
-
-<style scoped>
-.menuu{
+  }
+  </script>
+  
+  <style scoped>
+  #menu {
+    width: 100%;
+    background-color: #2f6b77;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px; /* Reduce padding for a smaller menu */
+    box-sizing: border-box;
+  }
+  
+  .date {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .menu-content {
+    width: 80%;
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menuu {
     display: flex;
     align-items: center;
     gap: 3px;
-}
-.menuicon{
+  }
+  
+  .menuicon {
     width: 25px;
     height: 25px;
-}
-#menu{
-    width: 100%;
-    height: 25px;
-}
-.date2{
-    background-color: #2f6b77;
-    display: flex;
-    width: 30%;
-    justify-content: space-between;
-    color: white;
-    padding: 15px;
-}
-.date{
-    display: flex;
-    width: 20%;
-    background-color: #2f6b77;
-    color: white;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-}
-#menubar{
-    background-color: #2f6b77;
-    width: 70%;
-    padding: 15px;
-
-}
-p{
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 14px;
-}
-#menu{
-    display: flex;
-}
-
-/* Add this CSS */
-#date2 {
-  cursor: pointer;
-}
-
-#date2:hover {
-  text-decoration: underline;
-}
-
-/* #imgs{
-    display: flex;
-}
-.homei{
-    height: 2.5em;
-}
-h1{
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-}
-#container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#start {
-    display: flex;
-}
-
-input {
-    width: 39.75em; 
-    height: 1.875em; 
-    margin-right: 0.625em; 
-    border-radius: 1.25em; 
-}
-
-#imgs {
-    display: flex;
-    gap: 1.25em; 
-}
-
-#search_c {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    margin-left: 14em;
-} */
-
-</style>
+  }
+  
+  .menu-link {
+    cursor: pointer;
+    margin: 0;
+    padding: 0 10px; /* Increase padding for better spacing */
+  }
+  
+  .menu-link:hover {
+    text-decoration: underline;
+  }
+  </style>
+  
