@@ -1,13 +1,14 @@
 <template>
   <div>
     <TopBar />
-    <SearchBar @infraclicked="goToInfra" @settingsclicked="goToSettings"/>
+    <SearchBar @infraclicked="goToGrid" @settingsclicked="goToSettings"/>
     <!-- <router-view v-if="!showSettings && !showForm"/> -->
-    <PortalSettings v-if="showSettings" @back="goToSettings"/>
-    <InfraSettings v-if="showInfra" @back="goToInfra"/>
-    <TopSection v-if="!showSettings && !showInfra && !showForm" @open-form="toggleForm"/>
+    <PortalSettings v-if="showSettings && !showGrid" @back="goToSettings"/>
+    <!-- <InfraSettings v-if="showInfra" @back="goToInfra"/> -->
+    <InventoryGrid v-if="showGrid" @back="goToGrid"></InventoryGrid>
+    <TopSection v-if="!showSettings && !showInfra && !showForm && !showGrid" @open-form="toggleForm"/>
     <!-- <Storageform v-if="showForm" @back="toggleForm"/> -->
-    <InstanceSection v-if="!showSettings && !showInfra && !showForm"/>
+    <InstanceSection v-if="!showSettings && !showInfra && !showForm && !showGrid"/>
     <BidsTenders />
     <Footer ref="footer" />
   </div>
@@ -22,6 +23,7 @@ import Footer from './components/Footer.vue';
 import PortalSettings from './components/PortalSettings.vue';
 import Storageform from './components/Storageform.vue'; 
 import InfraSettings from './components/InfraSettings.vue';
+import InventoryGrid from './components/InventoryGrid.vue';
 
 export default {
   components: {
@@ -31,11 +33,11 @@ export default {
     InstanceSection,
     Footer,
     PortalSettings,
-    Storageform,
-    InfraSettings
+    Storageform
   },
   data() {
     return {
+      showGrid: false,
       isFooterVisible: false,
       showSettings: false,
       showForm: false,
@@ -56,8 +58,8 @@ export default {
     goToSettings() {
       this.showSettings = !this.showSettings;
     },
-    goToInfra() {
-      this.showInfra = !this.showInfra;
+    goToGrid() {
+      this.showGrid = !this.showGrid;
     },
     toggleForm() {
       this.showForm = !this.showForm; // Toggle the showForm state
