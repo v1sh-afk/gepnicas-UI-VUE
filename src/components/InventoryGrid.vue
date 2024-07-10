@@ -1,8 +1,8 @@
 <template>
-    <div class="buttonclass">
-        <button>Add New Instance</button>
-    </div>
-    <div class="container">
+  <div class="buttonclass">
+    <button @click="addInstance">Add New Instance</button>
+  </div>
+  <div class="container">
     <table>
       <tr>
         <th>Datacentre</th>
@@ -75,54 +75,56 @@
         <td>{{ item.xmluserid }}</td>
       </tr>
     </table>
-    </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
-    data() {
-      return {
-        gridData: []
-      };
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      gridData: []
+    };
+  },
+  methods: {
+    takeGridData() {
+      axios.get('http://192.168.0.113:5500/getConfigMaster')
+        .then(response => {
+          this.gridData = response.data;
+          console.log(this.gridData);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
     },
-    methods: {
-      takeGridData() {
-        axios.get('http://192.168.0.113:5500/getConfigMaster')
-          .then(response => {
-            this.gridData = response.data;
-            console.log(this.gridData);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-      }
-    },
-    mounted() {
-      this.takeGridData();
+    addInstance() {
+      this.$emit('add-instance'); // Emit event to parent to handle the navigation
     }
-  };
-  </script>
-  
-  <style scoped>
-  table {
-    width: 100%;
-    border-collapse: collapse;
+  },
+  mounted() {
+    this.takeGridData();
   }
-  th, td {
-    border: 1px solid black;
-    padding: 8px;
-    white-space: nowrap;
-    text-align: left;
-  }
-  th {
-    background-color: #f2f2f2;
-  }
-  .buttonclass{
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-  }
-  </style>
-  
+};
+</script>
+
+<style scoped>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  white-space: nowrap;
+  text-align: left;
+}
+th {
+  background-color: #f2f2f2;
+}
+.buttonclass {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+</style>

@@ -3,14 +3,14 @@
     <TopBar />
     <SearchBar @infraclicked="goToGrid" @settingsclicked="goToSettings"/>
     <PortalSettings v-if="showSettings && !showGrid" @back="goToSettings"/>
-    <InventoryGrid v-if="showGrid && !showSettings" @back="goToGrid"/>
-    <TopSection v-if="!showSettings && !showGrid && !showForm" @open-form="toggleForm"/>
-    <InstanceSection v-if="!showSettings && !showGrid && !showForm"/>
+    <InventoryGrid v-if="showGrid && !showSettings && !showInfra" @back="goToGrid" @addInstance="showInfraInventory"/>
+    <InfraInventory v-if="showInfra" @back="hideInfraInventory"/>
+    <TopSection v-if="!showSettings && !showGrid && !showForm && !showInfra" @open-form="toggleForm"/>
+    <InstanceSection v-if="!showSettings && !showGrid && !showForm && !showInfra"/>
     <BidsTenders />
     <Footer ref="footer" />
   </div>
 </template>
-
 
 <script>
 import TopBar from './components/TopBar.vue';
@@ -19,7 +19,7 @@ import TopSection from './components/TopSection.vue';
 import InstanceSection from './components/InstanceSection.vue';
 import Footer from './components/Footer.vue';
 import PortalSettings from './components/PortalSettings.vue';
-import Storageform from './components/Storageform.vue'; 
+import Storageform from './components/Storageform.vue';
 import InfraInventory from './components/InfraInventory.vue';
 import InventoryGrid from './components/InventoryGrid.vue';
 
@@ -38,7 +38,6 @@ export default {
   data() {
     return {
       showGrid: false,
-      isFooterVisible: false,
       showSettings: false,
       showForm: false,
       showInfra: false,
@@ -47,9 +46,9 @@ export default {
   methods: {
     handleScroll() {
       const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-      const footer = this.$refs.footer.$el; // Access the actual element
+      const footer = this.$refs.footer.$el;
       
-      if (scrollPosition > 200) {  // Adjust the scroll position threshold as needed
+      if (scrollPosition > 200) {
         footer.classList.remove('hidden-footer');
       } else {
         footer.classList.add('hidden-footer');
@@ -68,7 +67,16 @@ export default {
       }
     },
     toggleForm() {
-      this.showForm = !this.showForm; // Toggle the showForm state
+      this.showForm = !this.showForm;
+    },
+    showInfraInventory() {
+      this.showInfra = true;
+      this.showGrid = false;
+      this.showSettings = false;
+    },
+    hideInfraInventory() {
+      this.showInfra = false;
+      this.showGrid = true;
     }
   },
   mounted() {
@@ -79,7 +87,6 @@ export default {
   }
 };
 </script>
-
 
 <style>
 /* Your styles here */
