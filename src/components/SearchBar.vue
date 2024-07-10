@@ -6,7 +6,7 @@
     <div class="menu-content">
       <div class="menu-item">
         <div class="menuu">
-          <p class="menu-link" @click="handleInfraSettingsClick">Infra Settings</p>
+          <p class="menu-link" @click="handleInfraInventoryClick">Infra Inventory</p>
         </div>
       </div>
       <div class="menu-item">
@@ -51,9 +51,9 @@ export default {
     handleSettingsClick() {
       this.$emit('settingsclicked');
     },
-    handleInfraSettingsClick() {
+    handleInfraInventoryClick() {
       this.$emit('infraclicked');
-      console.log('Infra Settings clicked');
+      console.log('Infra Inventory clicked');
     },
     handleHomeClick() {
       console.log('Home clicked');

@@ -1,9 +1,9 @@
 <template>
-    <div class="infra-settings">
-      <h2>Infra Settings</h2>
-      <form @submit.prevent="saveConfig" class="settings-form">
+    <div class="infra-inventory">
+      <h2>Infra Inventory</h2>
+      <form @submit.prevent="saveConfig" class="inventory-form">
         <fieldset>
-          <!-- <legend>Portal Information:</legend> -->
+          <legend>Portal Information:</legend>
           <div class="form-group">
             <label>Portal Name:</label>
             <input v-model="config.portal_name" />
@@ -247,7 +247,7 @@
   </script>
   
   <style scoped>
-  .infra-settings {
+  .infra-inventory {
     max-width: 600px;
     margin: 20px auto;
     padding: 30px;
@@ -256,14 +256,14 @@
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   }
   
-  .infra-settings h2 {
+  .infra-inventory h2 {
     font-size: 2em;
     margin-bottom: 20px;
     text-align: center;
     color: #495057;
   }
   
-  .settings-form {
+  .inventory-form {
     display: flex;
     flex-direction: column;
   }
