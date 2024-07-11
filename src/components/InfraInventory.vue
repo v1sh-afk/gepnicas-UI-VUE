@@ -3,166 +3,139 @@
     <h2>Infra Inventory</h2>
     <form @submit.prevent="saveConfig" class="inventory-form">
       <fieldset>
-        <legend>Portal Information:</legend>
         <div class="form-group">
-          <label>Portal Name:</label>
-          <input v-model="config.portal_name" />
+          <label>Data Centre</label>
+          <input v-model="config.datacentre" />
         </div>
         <div class="form-group">
-          <label>URL:</label>
-          <input v-model="config.url" />
+          <label>Instance Name</label>
+          <input v-model="config.instance_name" />
         </div>
         <div class="form-group">
-          <label>XML User ID:</label>
+          <label>Portal Category</label>
+          <input v-model="config.portal_category" />
+        </div>
+        <div class="form-group">
+          <label>IP Segment</label>
+          <input v-model="config.ip_segment" type="number" />
+        </div>
+        <div class="form-group">
+          <label>URL</label>
+          <input v-model="config.url" type="number" />
+        </div>
+        <div class="form-group">
+          <label>XML User ID</label>
           <input v-model="config.xml_user_id" />
         </div>
         <div class="form-group">
-          <label>MSR Serial Number:</label>
-          <input v-model="config.msr_slno" type="number" />
+          <label>MSR SL NO</label>
+          <input v-model="config.msr_slno" />
         </div>
         <div class="form-group">
-          <label>NESD Code:</label>
-          <input v-model="config.nesd_code" type="number" />
+          <label>NESD Code</label>
+          <input v-model="config.nesd_code" />
         </div>
         <div class="form-group">
-          <label>Running From:</label>
+          <label>Running From</label>
           <input v-model="config.running_from" />
         </div>
         <div class="form-group">
-          <label>Storage Box:</label>
+          <label>Storage Box</label>
           <input v-model="config.storage_box" />
         </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Primary Web Nodes:</legend>
         <div class="form-group">
-          <label>Node 1 IP:</label>
+          <label>Primary Web Node 1</label>
           <input v-model="config.primary_web_node1" />
         </div>
         <div class="form-group">
-          <label>Node 2 IP:</label>
+          <label>Primary Web Node 2</label>
           <input v-model="config.primary_web_node2" />
         </div>
         <div class="form-group">
-          <label>Web Script 1:</label>
+          <label>Primary WebScript 1</label>
           <input v-model="config.primary_web_script1" />
         </div>
         <div class="form-group">
-          <label>Web Script 2:</label>
+          <label>Primary WebScript 2</label>
           <input v-model="config.primary_web_script2" />
         </div>
         <div class="form-group">
-          <label>Worker File:</label>
+          <label>Primary Worker File</label>
           <input v-model="config.primary_worker_file" />
         </div>
         <div class="form-group">
-          <label>Blue Worker:</label>
+          <label>Gep Balancer</label>
+          <input v-model="config.primary_gepbalancer" />
+        </div>
+        <div class="form-group">
+          <label>Blue Work der</label>
           <input v-model="config.primary_blue_worker" />
         </div>
         <div class="form-group">
-          <label>Apache Config Path:</label>
+          <label>Green Work der</label>
+          <input v-model="config.primary_greenworkder" />
+        </div>
+        <div class="form-group">
+          <label>Apache Config</label>
           <input v-model="config.primary_apache_conf" />
         </div>
         <div class="form-group">
-          <label>Apache SSL Path:</label>
+          <label>Apache SSL</label>
           <input v-model="config.primary_apache_ssl" />
         </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Primary App Nodes:</legend>
         <div class="form-group">
-          <label>Node 1 IP:</label>
-          <input v-model="config.primary_app_node1" />
-        </div>
-        <div class="form-group">
-          <label>Node 2 IP:</label>
-          <input v-model="config.primary_app_node2" />
-        </div>
-        <div class="form-group">
-          <label>App Script 1:</label>
-          <input v-model="config.primary_app_script1" />
-        </div>
-        <div class="form-group">
-          <label>App Script 2:</label>
-          <input v-model="config.primary_app_script2" />
-        </div>
-        <div class="form-group">
-          <label>App User:</label>
-          <input v-model="config.primary_app_user" />
-        </div>
-        <div class="form-group">
-          <label>Replication User:</label>
-          <input v-model="config.primary_rep_user" />
-        </div>
-        <div class="form-group">
-          <label>Replication Script 1:</label>
-          <input v-model="config.primary_rep_script1" />
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>DR Web Nodes:</legend>
-        <div class="form-group">
-          <label>Node 1 IP:</label>
-          <input v-model="config.dr_web_node1" />
-        </div>
-        <div class="form-group">
-          <label>Node 2 IP:</label>
-          <input v-model="config.dr_web_node2" />
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>DR App Nodes:</legend>
-        <div class="form-group">
-          <label>Node 1 IP:</label>
+          <label>App Node 1</label>
           <input v-model="config.dr_app_node1" />
         </div>
         <div class="form-group">
-          <label>Node 2 IP:</label>
-          <input v-model="config.dr_app_node2" />
+          <label>App Node 2</label>
+          <input v-model="config.primary_app_node2" />
         </div>
-        <div class="form-group">
-          <label>Catalina App Path:</label>
-          <input v-model="config.dr_catalina_app" />
-        </div>
-        <div class="form-group">
-          <label>Catalina Rep Path:</label>
-          <input v-model="config.dr_catalina_rep" />
-        </div>
-        <div class="form-group">
-          <label>App Script 1:</label>
-          <input v-model="config.dr_app_script1" />
-        </div>
-        <div class="form-group">
-          <label>Replication Script 1:</label>
-          <input v-model="config.dr_rep_script1" />
-        </div>
-      </fieldset>
 
-      <fieldset>
-        <legend>DR DB Node:</legend>
         <div class="form-group">
-          <label>DB Node IP:</label>
-          <input v-model="config.dr_db_node" />
+          <label>App Script 11</label>
+          <input v-model="config.primary_app_script11" />
         </div>
         <div class="form-group">
-          <label>DBA User:</label>
-          <input v-model="config.dr_dba_user" />
+          <label>App Script 12</label>
+          <input v-model="config.primary_app_script12" />
         </div>
-      </fieldset>
 
-      <fieldset>
-        <legend>Backup Information:</legend>
         <div class="form-group">
-          <label>Backup Node IP:</label>
-          <input v-model="config.backup_node" />
+          <label>App Script 21</label>
+          <input v-model="config.primary_app_script21" />
         </div>
         <div class="form-group">
-          <label>Backup Path:</label>
-          <input v-model="config.backup_path" />
+          <label>App Script 22</label>
+          <input v-model="config.primary_app_script22" />
+        </div>
+        <div class="form-group">
+          <label>AppUser</label>
+          <input v-model="config.primary_app_user" />
+        </div>
+        <div class="form-group">
+          <label>RepUser</label>
+          <input v-model="config.primary_rep_user" />
+        </div>
+        <div class="form-group">
+          <label>Rep Script 11</label>
+          <input v-model="config.primary_rep_script11" />
+        </div>
+        <div class="form-group">
+          <label>Rep Script 21</label>
+          <input v-model="config.primary_rep_script21" />
+        </div>
+        <div class="form-group">
+          <label>Mob Script 11</label>
+          <input v-model="config.primary_mob_script11" />
+        </div>
+        <div class="form-group">
+          <label>Mob Script 21</label>
+          <input v-model="config.primary_mob_script21" />
+        </div>
+        <div class="form-group">
+          <label>Primary DBNrDR Node</label>
+          <input v-model="config.primary_dbnrnode" />
         </div>
       </fieldset>
 
@@ -181,7 +154,10 @@ export default {
   data() {
     return {
       config: {
-        portal_name: '',
+        datacentre: '',
+        instance_name: '',
+        ip_segment: '',
+        portal_category: '',
         url: '',
         xml_user_id: '',
         msr_slno: 0,
@@ -193,81 +169,66 @@ export default {
         primary_web_script1: '',
         primary_web_script2: '',
         primary_worker_file: '',
+        primary_gepbalancer: '',
         primary_blue_worker: '',
+        primary_greenworkder: '',
         primary_apache_conf: '',
         primary_apache_ssl: '',
         primary_app_node1: '',
         primary_app_node2: '',
-        primary_app_script1: '',
-        primary_app_script2: '',
+        primary_app_script11: '',
+        primary_app_script12: '',
+        primary_app_script21: '',
+        primary_app_script22: '',
         primary_app_user: '',
         primary_rep_user: '',
-        primary_rep_script1: '',
-        dr_web_node1: '',
-        dr_web_node2: '',
-        dr_app_node1: '',
-        dr_app_node2: '',
-        dr_catalina_app: '',
-        dr_catalina_rep: '',
-        dr_app_script1: '',
-        dr_rep_script1: '',
-        dr_db_node: '',
-        dr_dba_user: '',
-        backup_node: '',
-        backup_path: '',
+        primary_rep_script11: '',
+        primary_rep_script21: '',
+        primary_mob_script11: '',
+        primary_mob_script21: '',
+        primary_dbnrnode: ''
       }
     };
   },
   methods: {
-    fetchConfig() {
-      axios.get('http://192.168.0.113:5500/getConfigMaster')
-        .then(response => {
-          this.config = response.data;
-          console.log(this.config);
-        })
-        .catch(error => {
-          console.error('Error fetching config:', error);
-          alert('Error fetching config: ' + error.message);
-        });
-    },
     saveConfig() {
       const payload = {
-        datacentre: "Applications",
-        instancename: this.config.portal_name,
-        ip_segment: this.config.url,
+        instancename: this.config.instance_name,
+        datacentre: this.config.datacentre,
+        portal_category: this.config.portal_category,
+        ip_segment: this.config.ip_segment,
+        url: this.config.url,
+        xmluserid: this.config.xml_user_id,
         msrslno: this.config.msr_slno.toString(),
         nesdcode: this.config.nesd_code.toString(),
-        portal_category: "eTender",
-        primary_apacheconf: this.config.primary_apache_conf,
-        primary_apachessl: this.config.primary_apache_ssl,
-        primary_appnode1: this.config.primary_app_node1,
-        primary_appnode2: this.config.primary_app_node2 || "-",
-        primary_appscript11: this.config.primary_app_script1 || "-",
-        primary_appscript12: "-",
-        primary_appscript21: "-",
-        primary_appscript22: "-",
-        primary_appuser: this.config.primary_app_user,
-        primary_blueworkder: this.config.primary_blue_worker,
-        primary_dbnrdrnode: "-insert sample data for the table where instancename is TN",
-        primary_gepbalancer: "-",
-        primary_greenworkder: "-",
-        primary_mobscript11: "-",
-        primary_mobscript21: "-",
-        primary_repscript11: this.config.primary_rep_script1,
-        primary_repscript21: "-",
-        primary_repuser: this.config.primary_rep_user,
+        running_from: this.config.running_from,
+        storage_box: this.config.storage_box,
         primary_webnode1: this.config.primary_web_node1,
         primary_webnode2: this.config.primary_web_node2,
         primary_webscript1: this.config.primary_web_script1,
         primary_webscript2: this.config.primary_web_script2,
         primary_workerfile: this.config.primary_worker_file,
-        running_from: this.config.running_from,
-        storage_box: this.config.storage_box,
-        url: this.config.url,
-        xmluserid: this.config.xml_user_id
+        primary_gepbalancer: this.config.primary_gepbalancer,
+        primary_blueworkder: this.config.primary_blue_worker,
+        primary_greenworkder: this.config.primary_greenworkder,
+        primary_apacheconf: this.config.primary_apache_conf,
+        primary_apachessl: this.config.primary_apache_ssl,
+        primary_appnode1: this.config.primary_app_node1,
+        primary_appnode2: this.config.primary_app_node2,
+        primary_appscript11: this.config.primary_app_script11,
+        primary_appscript12: this.config.primary_app_script12,
+        primary_appscript21: this.config.primary_app_script21,
+        primary_appscript22: this.config.primary_app_script22,
+        primary_appuser: this.config.primary_app_user,
+        primary_repuser: this.config.primary_rep_user,
+        primary_repscript11: this.config.primary_rep_script11,
+        primary_repscript21: this.config.primary_rep_script21,
+        primary_mobscript11: this.config.primary_mob_script11,
+        primary_mobscript21: this.config.primary_mob_script21,
+        primary_dbnrdrnode: this.config.primary_dbnrnode      
       };
-
-      axios.post('http://192.168.0.113:5500/postConfigMaster', payload)
+      console.log(payload)
+      axios.post('http://192.168.0.113:8000/postConfigMaster', payload)
         .then(response => {
           alert(response.data.message);
         })
@@ -276,11 +237,7 @@ export default {
           alert('Error saving config: ' + error.message);
         });
     }
-  },
-  mounted() {
-    this.fetchConfig();
-  }
-};
+  }};
 </script>
 
 <style scoped>

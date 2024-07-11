@@ -4,7 +4,7 @@
     <SearchBar @infraclicked="goToGrid" @settingsclicked="goToSettings"/>
     <PortalSettings v-if="showSettings && !showGrid" @back="goToSettings"/>
     <InventoryGrid v-if="showGrid && !showSettings && !showInfra" @back="goToGrid" @addInstance="showInfraInventory"/>
-    <InfraInventory v-if="showInfra" @back="hideInfraInventory"/>
+    <InfraInventory v-if="showInfra" @back="hideInfraInventory" @addInstance="showInfraInventory"/>
     <TopSection v-if="!showSettings && !showGrid && !showForm && !showInfra" @open-form="toggleForm"/>
     <InstanceSection v-if="!showSettings && !showGrid && !showForm && !showInfra"/>
     <BidsTenders />
@@ -41,6 +41,7 @@ export default {
       showSettings: false,
       showForm: false,
       showInfra: false,
+      showEdit: false
     };
   },
   methods: {
