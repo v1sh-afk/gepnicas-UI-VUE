@@ -1,10 +1,11 @@
 <template>
   <div class="buttonclass">
-    <button @click="addInstance">Add New Instance</button>
+    <button class="edit" @click="addInstance">Add New Instance</button>
   </div>
   <div class="container">
     <table>
       <tr>
+        <th>Edit</th>
         <th>Datacentre</th>
         <th>Instance Name</th>
         <th>Ip Segment</th>
@@ -40,6 +41,7 @@
         <th>Xmluserid</th>
       </tr>
       <tr v-for="item in gridData['records']" :key="item.id">
+        <td><Button class="edit">Edit</Button></td>
         <td>{{ item.datacentre }}</td>
         <td>{{ item.instancename }}</td>
         <td>{{ item.ip_segment }}</td>
@@ -109,6 +111,7 @@ export default {
 </script>
 
 <style scoped>
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -121,6 +124,15 @@ th, td {
 }
 th {
   background-color: #f2f2f2;
+}
+.edit{
+  padding: 6px;
+  background-color: #2f6b77;
+  border-radius: 5px;
+  color: white;
+}
+.edit:hover{
+  background-color: #1a4d57;
 }
 .buttonclass {
   display: flex;

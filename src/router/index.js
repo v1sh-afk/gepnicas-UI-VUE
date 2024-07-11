@@ -6,7 +6,8 @@ import Footer from '@/components/Footer.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import TopBar from '@/components/TopBar.vue';
 import TopSection from '@/components/TopSection.vue';
-import Storageform from '@/components/Storageform.vue'; // Add this line
+import Storageform from '@/components/Storageform.vue'; 
+import InventoryGrid from '../components/InventoryGrid.vue';
 
 const routes = [
   {
@@ -45,7 +46,7 @@ const routes = [
     component: TopSection
   },
   {
-    path: '/storage', // Add this route
+    path: '/storage', 
     name: 'Storageform',
     component: Storageform
   }
