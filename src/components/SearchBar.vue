@@ -65,6 +65,30 @@ export default {
 };
 </script>
 
+<!-- <template>
+    <div id="menu">
+        <div class="date">
+            <p>{{ date }}</p>
+        </div>
+        <div id="menubar">
+            <p>fkh</p>
+        </div>
+        <div class="date2">
+            <div class="menuu">
+                <img class="menuicon" src="/src/assets/home.png">
+                <p>Home</p>
+            </div>
+            <p>User Management</p>
+            <div class="menuu">
+                <img class="menuicon" src="/src/assets/settings2.png">
+                <p id='date2' @click="handleSettingsClick">Settings</p>
+            </div>
+        </div>
+    </div>
+
+</template> -->
+
+
 <style scoped>
 #menu {
   width: 100%;
