@@ -143,6 +143,9 @@ export default {
         complete() {
             return 'src/assets/complete.png';
         },
+        sync() {
+         return 'src/assets/sync.png';
+        },
         process() {
             return 'src/assets/process.png';
         },
@@ -182,6 +185,11 @@ export default {
                     <img class="detail_logos" :src="complete" @click="TotalMain('getBidsTenderInstanceArchived')">
                     <h6>Folders Completed</h6>
                     <div class="instance-name">{{ dashboard.counts.sync_completed_count }}</div>
+                </div>
+                <div class="detail1">
+                    <img class="detail_logos" :src="sync" @click="TotalMain('getBidsTenderInstanceSync')">
+                    <h6>Sync</h6>
+                    <div class="instance-name">{{ dashboard.counts.sync_count }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="process" @click="TotalMain('d')">
@@ -243,6 +251,11 @@ export default {
                         <img class="detail_logos" :src="complete" @click="Archived(details.instancename)">
                         <h5>Archieved</h5>
                         <div class="instance-name">{{ details.counts.sync_completed_count }}</div>
+                    </div>
+                    <div class="cols">
+                        <img class="detail_logos" :src="sync">
+                        <h5>Sync</h5>
+                        <div class="instance-name">{{ details.counts.sync_count }}</div>
                     </div>
                     <div class= "cols">
                         <img class="detail_logos" :src="process">
