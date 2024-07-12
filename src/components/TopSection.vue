@@ -91,7 +91,7 @@ export default {
       this.fetchStorageData();
     },
     fetchStorageData() {
-      axios.get('http://192.168.0.113:5000/postSystemInfo')
+      axios.get('http://192.168.0.103:5000/postSystemInfo')
         .then(response => {
           const storageOptions = response.data;
           const hciData = storageOptions["1"];

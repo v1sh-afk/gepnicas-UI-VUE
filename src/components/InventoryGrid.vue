@@ -41,7 +41,7 @@
         <th>Xmluserid</th>
       </tr>
       <tr v-for="item in gridData['records']" :key="item.id">
-        <td><Button @click="editInstance(item.config.instancename)" class="edit">Edit</Button></td>
+        <td><Button @click="addInstance" class="edit">Edit</Button></td>
         <td>{{ item.datacentre }}</td>
         <td>{{ item.instancename }}</td>
         <td>{{ item.ip_segment }}</td>
@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     takeGridData() {
-      axios.get('http://192.168.0.113:8000/getConfigMaster')
+      axios.get('http://192.168.0.103:8000/getConfigMaster')
         .then(response => {
           this.gridData = response.data;
           console.log(this.gridData);

@@ -1,6 +1,7 @@
 <template>
   <div id="menu">
     <div class="date">
+      <img class="menuicon" src="/src/assets/home.png" alt="Home">
       <p>{{ date }}</p>
     </div>
     <div class="menu-content">
@@ -11,8 +12,8 @@
       </div>
       <div class="menu-item">
         <div class="menuu">
-          <img class="menuicon" src="/src/assets/home.png" alt="Home">
-          <p class="menu-link" @click="handleHomeClick">Home</p>
+          <!-- <img class="menuicon" src="/src/assets/home.png" alt="Home"> -->
+          <!-- <p class="menu-link" @click="handleHomeClick">Home</p> -->
         </div>
       </div>
       <div class="menu-item">
@@ -20,7 +21,7 @@
       </div>
       <div class="menu-item">
         <div class="menuu">
-          <img class="menuicon" src="/src/assets/settings2.png" alt="Settings">
+          <!-- <img class="menuicon" src="/src/assets/settings2.png" alt="Settings"> -->
           <p class="menu-link" @click="handleSettingsClick">Settings</p>
         </div>
       </div>
@@ -102,10 +103,11 @@ export default {
 }
 
 .date {
-  width: 20%;
+  /* width: 20%; */
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 
 .menu-content {

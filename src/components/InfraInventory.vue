@@ -228,7 +228,7 @@ export default {
         primary_dbnrdrnode: this.config.primary_dbnrnode      
       };
       console.log(payload)
-      axios.post('http://192.168.0.113:8000/postConfigMaster', payload)
+      axios.post('http://192.168.0.103:8000/postConfigMaster', payload)
         .then(response => {
           alert(response.data.message);
         })
