@@ -3,11 +3,11 @@
     <TopBar />
     <SearchBar @infraclicked="goToGrid" @settingsclicked="goToSettings"/>
     <PortalSettings v-if="showSettings && !showGrid" @back="goToSettings"/>
-    <InventoryGrid v-if="showGrid && !showSettings && !showInfra" @back="goToGrid" @edit="editRecord" @addInstance="showInfraInventory"/>
+    <InventoryGrid v-if="showGrid && !showSettings && !showInfra && !showEdit" @back="goToGrid" @edit="editRecord" @addInstance="showInfraInventory"/>
     <InfraInventory v-if="showInfra" @back="hideInfraInventory"/>
     <EditInventory v-if="showEdit" :instancename="editingInstance" @back="goToGrid"/>
-    <TopSection v-if="!showSettings && !showGrid && !showForm && !showInfra" @open-form="toggleForm"/>
-    <InstanceSection v-if="!showSettings && !showGrid && !showForm && !showInfra"/>
+    <TopSection v-if="!showSettings && !showGrid && !showForm && !showInfra && !showEdit" @open-form="toggleForm"/>
+    <InstanceSection v-if="!showSettings && !showGrid && !showForm && !showInfra && !showEdit"/>
     <BidsTenders />
     <!-- <Footer ref="footer" /> -->
   </div>
@@ -58,16 +58,16 @@ export default {
     this.showSettings = false;
     // You may want to fetch the instance data here
     },
-    handleScroll() {
-      const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-      const footer = this.$refs.footer.$el;
+    // handleScroll() {
+    //   const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+    //   const footer = this.$refs.footer.$el;
       
-      if (scrollPosition > 200) {
-        footer.classList.remove('hidden-footer');
-      } else {
-        footer.classList.add('hidden-footer');
-      }
-    },
+    //   if (scrollPosition > 200) {
+    //     footer.classList.remove('hidden-footer');
+    //   } else {
+    //     footer.classList.add('hidden-footer');
+    //   }
+    // },
     goToSettings() {
       this.showSettings = !this.showSettings;
       if (this.showSettings) {
@@ -78,6 +78,9 @@ export default {
       this.showGrid = !this.showGrid;
       if (this.showGrid) {
         this.showSettings = false;
+      }
+      if(this.showEdit){
+        this.showEdit = false
       }
     },
     toggleForm() {

@@ -11,6 +11,10 @@ export default defineConfig({
       resolvers: [BootstrapVueNextResolver()],
     }),
   ],
+  server: {
+    host: '0.0.0.0',
+    port: '8081'
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

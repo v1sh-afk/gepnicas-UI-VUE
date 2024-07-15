@@ -93,6 +93,7 @@ export default {
   methods: {
     takeGridData() {
       axios.get('http://192.168.0.109:8000/getConfigMaster')
+      // axios.get('http://192.168.0.109:8111/getConfig?table=gepnicas_primary_infra')
         .then(response => {
           this.gridData = response.data;
           console.log(this.gridData);
