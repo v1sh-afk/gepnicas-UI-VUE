@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     fetchConfig() {
-      axios.get('http://192.168.0.103:5000/postConfigMaster')
+      axios.get('http://192.168.0.109:5000/postConfigMaster')
         .then(response => {
           console.log(this.config)
           this.config = response.data;
@@ -27,7 +27,7 @@ export default {
     },
     saveConfig() {
       console.log(this.config)
-      axios.post('http://192.168.0.113:5000/postConfigMaster', this.config)
+      axios.post('http://192.168.0.109:5000/postConfigMaster', this.config)
         .then(response => {
           alert(response.data.message);
         })

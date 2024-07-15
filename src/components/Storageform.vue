@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     fetchStorageOptions() {
-      axios.get('http://192.168.0.103:5000/postSystemInfo')
+      axios.get('http://192.168.0.109:5000/postSystemInfo')
         .then(response => {
           console.log('GET response:', response.data);
           this.storageOptions = response.data;
@@ -81,7 +81,7 @@ export default {
       
       console.log('Updated storage options:', updatedStorageOptions);
 
-      axios.post('http://192.168.0.103:5000/postSystemInfo', updatedStorageOptions)
+      axios.post('http://192.168.0.109:5000/postSystemInfo', updatedStorageOptions)
         .then(response => {
           console.log('POST response:', response.data);
           alert('Storage updated successfully!');

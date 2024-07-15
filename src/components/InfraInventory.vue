@@ -228,7 +228,7 @@ export default {
         primary_dbnrdrnode: this.config.primary_dbnrnode      
       };
       console.log(payload)
-      axios.post('http://192.168.0.103:8000/postConfigMaster', payload)
+      axios.post('http://192.168.0.109:8000/postConfigMaster', payload)
         .then(response => {
           alert(response.data.message);
         })
@@ -236,8 +236,12 @@ export default {
           console.error('Error saving config:', error);
           alert('Error saving config: ' + error.message);
         });
-    }
-  }};
+    }},
+    mounted(){
+      if (this.instanceData) {
+        this.config = { ...this.instanceData }; // Populate the form with the instance data
+      }
+    }};
 </script>
 
 <style scoped>

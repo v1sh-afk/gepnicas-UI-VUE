@@ -3,15 +3,16 @@
     <TopBar />
     <SearchBar @infraclicked="goToGrid" @settingsclicked="goToSettings"/>
     <PortalSettings v-if="showSettings && !showGrid" @back="goToSettings"/>
-    <InventoryGrid v-if="showGrid && !showSettings && !showInfra" @back="goToGrid" @addInstance="showInfraInventory"/>
-    <InfraInventory v-if="showInfra" @back="hideInfraInventory" @addInstance="showInfraInventory"/>
-    <InfraInventory v-if="showEdit" @addinstance="showInfraInventory"/>
-    <TopSection v-if="!showSettings && !showGrid && !showForm && !showInfra " @open-form="toggleForm"/>
+    <InventoryGrid v-if="showGrid && !showSettings && !showInfra" @back="goToGrid" @edit="editRecord" @addInstance="showInfraInventory"/>
+    <InfraInventory v-if="showInfra" @back="hideInfraInventory"/>
+    <EditInventory v-if="showEdit" :instancename="editingInstance" @back="goToGrid"/>
+    <TopSection v-if="!showSettings && !showGrid && !showForm && !showInfra" @open-form="toggleForm"/>
     <InstanceSection v-if="!showSettings && !showGrid && !showForm && !showInfra"/>
     <BidsTenders />
-    <Footer ref="footer" />
+    <!-- <Footer ref="footer" /> -->
   </div>
 </template>
+
 
 <script>
 import TopBar from './components/TopBar.vue';
@@ -23,6 +24,8 @@ import PortalSettings from './components/PortalSettings.vue';
 import Storageform from './components/Storageform.vue';
 import InfraInventory from './components/InfraInventory.vue';
 import InventoryGrid from './components/InventoryGrid.vue';
+import EditInventory from './components/EditInventory.vue';
+
 
 export default {
   components: {
@@ -34,7 +37,8 @@ export default {
     PortalSettings,
     Storageform,
     InfraInventory,
-    InventoryGrid
+    InventoryGrid,
+    EditInventory
   },
   data() {
     return {
@@ -42,11 +46,18 @@ export default {
       showSettings: false,
       showForm: false,
       showInfra: false,
-      showEdit: false,
-      config: null
+      showEdit: false
     };
   },
   methods: {
+    editRecord(instancename) {
+    this.editingInstance = instancename;
+    this.showEdit = true;
+    this.showInfra = false;
+    this.showGrid = false;
+    this.showSettings = false;
+    // You may want to fetch the instance data here
+    },
     handleScroll() {
       const scrollPosition = window.scrollY || document.documentElement.scrollTop;
       const footer = this.$refs.footer.$el;

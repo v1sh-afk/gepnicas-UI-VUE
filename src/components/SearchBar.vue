@@ -74,9 +74,6 @@ export default {
     },
     handleUserManagementClick() {
       console.log('User Management Clicked');
-    },
-    homePage(){
-      this.$emit('homeclicked')
     }
   }
 };
