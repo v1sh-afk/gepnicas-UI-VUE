@@ -1,39 +1,48 @@
 <template>
-  <div id="menu">
-    <div class="date">
-      <img class="menuicon" src="/src/assets/home.png" alt="Home">
-      <p>{{ date }}</p>
+<div id="menu">
+  <div class="date">
+    <img class="menuicon" @click="homePage" src="/src/assets/home.png" alt="Home">
+    <p>{{ date }}</p>
+  </div>
+  <div class="menu-content">
+    <div class="menu-item">
+      <div class="menuu">
+        <!-- <p class="menu-link" @click="handleInfraInventoryClick">Infra Inventory</p> -->
+      </div>
     </div>
-    <div class="menu-content">
-      <div class="menu-item">
-        <div class="menuu">
-          <p class="menu-link" @click="handleInfraInventoryClick">Infra Inventory</p>
-        </div>
+    <div class="menu-item">
+      <div class="menuu">
       </div>
-      <div class="menu-item">
-        <div class="menuu">
-          <!-- <img class="menuicon" src="/src/assets/home.png" alt="Home"> -->
-          <!-- <p class="menu-link" @click="handleHomeClick">Home</p> -->
-        </div>
+    </div>
+    <!-- <div class="menu-item">
+      <a>Site Settings</a>
+    </div> -->
+    <div class="menu-item">
+      <a href="#" @click="toggleDropdown">Site Settings</a>
+      <div class="dropdown-content" v-if="dropdownVisible">
+        <a @click="handleInfraInventoryClick">Infra Inventory</a>
+        <a @click="handleSettingsClick">Settings</a>
+        <a @click="handleUserManagementClick">Manage Users</a>
       </div>
-      <div class="menu-item">
-        <p class="menu-link" @click="handleUserManagementClick">User Management</p>
-      </div>
-      <div class="menu-item">
-        <div class="menuu">
-          <!-- <img class="menuicon" src="/src/assets/settings2.png" alt="Settings"> -->
-          <p class="menu-link" @click="handleSettingsClick">Settings</p>
-        </div>
+    </div>
+    <div class="menu-item">
+      <!-- <p class="menu-link" @click="handleUserManagementClick">User Management</p> -->
+    </div>
+    <div class="menu-item">
+      <div class="menuu">
+        <!-- <p class="menu-link" @click="handleSettingsClick">Settings</p> -->
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      date: this.getTime()
+      date: this.getTime(),
+      dropdownVisible: false
     };
   },
   methods: {
@@ -49,6 +58,10 @@ export default {
       const date = `${hours}:${minutes} ${ampm} ${day}-${month}-${year} `;
       return date;
     },
+    toggleDropdown(event) {
+      event.preventDefault();
+      this.dropdownVisible = !this.dropdownVisible;
+    },
     handleSettingsClick() {
       this.$emit('settingsclicked');
     },
@@ -61,34 +74,13 @@ export default {
     },
     handleUserManagementClick() {
       console.log('User Management Clicked');
+    },
+    homePage(){
+      this.$emit('homeclicked')
     }
   }
 };
 </script>
-
-<!-- <template>
-    <div id="menu">
-        <div class="date">
-            <p>{{ date }}</p>
-        </div>
-        <div id="menubar">
-            <p>fkh</p>
-        </div>
-        <div class="date2">
-            <div class="menuu">
-                <img class="menuicon" src="/src/assets/home.png">
-                <p>Home</p>
-            </div>
-            <p>User Management</p>
-            <div class="menuu">
-                <img class="menuicon" src="/src/assets/settings2.png">
-                <p id='date2' @click="handleSettingsClick">Settings</p>
-            </div>
-        </div>
-    </div>
-
-</template> -->
-
 
 <style scoped>
 #menu {
@@ -98,27 +90,57 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1px; /* Adjust padding as needed */
+  padding: 1px; 
   box-sizing: border-box;
 }
 
 .date {
-  /* width: 20%; */
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
 }
 
-.menu-content {
+/* .menu-content {
   width: 80%;
   display: flex;
-  justify-content: flex-end; /* Align items to the right */
+  justify-content: flex-end; 
 }
 
 .menu-item {
   display: flex;
   align-items: center;
+} */
+.menu-item {
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.menu-item a {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  display: block;
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
 }
 
 .menuu {
@@ -136,7 +158,7 @@ export default {
 .menu-link {
   cursor: pointer;
   margin: 0;
-  padding: 0 5px; /* Increase padding for better spacing */
+  padding: 0 5px; 
 }
 
 .menu-link:hover {

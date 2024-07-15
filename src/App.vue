@@ -6,7 +6,7 @@
     <InventoryGrid v-if="showGrid && !showSettings && !showInfra" @back="goToGrid" @addInstance="showInfraInventory"/>
     <InfraInventory v-if="showInfra" @back="hideInfraInventory" @addInstance="showInfraInventory"/>
     <InfraInventory v-if="showEdit" @addinstance="showInfraInventory"/>
-    <TopSection v-if="!showSettings && !showGrid && !showForm && !showInfra" @open-form="toggleForm"/>
+    <TopSection v-if="!showSettings && !showGrid && !showForm && !showInfra " @open-form="toggleForm"/>
     <InstanceSection v-if="!showSettings && !showGrid && !showForm && !showInfra"/>
     <BidsTenders />
     <Footer ref="footer" />
