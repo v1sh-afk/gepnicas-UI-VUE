@@ -1,7 +1,7 @@
 <template>
   <div>
     <TopBar />
-    <SearchBar @infraclicked="goToGrid" @settingsclicked="goToSettings"/>
+    <SearchBar @infraclicked="goToGrid" @settingsclicked="goToSettings" @homeclicked="handleHomeClick"/>
     <PortalSettings v-if="showSettings && !showGrid" @back="goToSettings"/>
     <InventoryGrid v-if="showGrid && !showSettings && !showInfra && !showEdit" @back="goToGrid" @edit="editRecord" @addInstance="showInfraInventory"/>
     <InfraInventory v-if="showInfra" @back="hideInfraInventory"/>
@@ -94,6 +94,13 @@ export default {
     hideInfraInventory() {
       this.showInfra = false;
       this.showGrid = true;
+    },
+    handleHomeClick() {
+      this.showSettings = false;
+      this.showGrid = false;
+      this.showInfra = false;
+      this.showForm = false;
+      this.showEdit = false;
     }
   },
   mounted() {

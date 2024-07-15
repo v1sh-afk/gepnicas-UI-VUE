@@ -71,12 +71,18 @@ export default {
     },
     handleHomeClick() {
       console.log('Home clicked');
+      this.$emit('homeclicked');
     },
     handleUserManagementClick() {
       console.log('User Management Clicked');
-    }
+    },
+    homePage(){
+      console.log('Home clicked')
+      // this.$router.push({ path: '/' });
+      this.handleHomeClick();
   }
-};
+}
+}
 </script>
 
 <style scoped>
