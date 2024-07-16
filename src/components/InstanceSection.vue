@@ -192,14 +192,14 @@ export default {
                     <div class="instance-name">{{ dashboard.counts.sync_count }}</div>
                 </div>
                 <div class="detail1">
+                    <img class="detail_logos" :src="link" @click="TotalMain('getBidsTenderInstanceMetalink')">
+                    <h6>Meta Data</h6>
+                    <div class="instance-name">{{ dashboard.counts.meta_link_created }}</div>
+                </div>
+                <div class="detail1">
                     <img class="detail_logos" :src="process" @click="TotalMain('d')">
                     <h6>Soft Links</h6>
                     <div class="instance-name">{{ dashboard.counts.soft_link_created }}</div>
-                </div>
-                <div class="detail1">
-                    <img class="detail_logos" :src="link" @click="TotalMain('getBidsTenderInstanceMetalink')">
-                    <h6>Meta Links</h6>
-                    <div class="instance-name">{{ dashboard.counts.meta_link_created }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="error" @click="TotalMain('getBidsTenderInstanceError')">
@@ -301,6 +301,7 @@ export default {
 #ins{
     display: flex;
     justify-content: center;
+    
 }
 h4 {
   margin-top: 0.375em; 
@@ -353,6 +354,7 @@ h3 {
 .infodetail-name{
     display: flex;
     flex-direction: row;
+    cursor: pointer;
 }
 .detail_logos {
     /* height: 4.375em;  */
@@ -375,6 +377,7 @@ h3 {
     justify-content: space-around;
     margin-bottom: 0.9375em; 
     margin-right: 0.9375em; 
+    
 }
 .details {
     width: 80%;
@@ -383,6 +386,7 @@ h3 {
     border: 0.125em solid black; 
     border-radius: 0.9375em; 
     margin-top: 0.3125em; 
+    
 }
 .details1 {
     display: flex;
@@ -401,6 +405,7 @@ h3 {
     height: 4em;
     width: 4em;
     /* align-items: center; */
+    cursor: pointer;
 }
 #instance {
     border: 2px solid black;
@@ -444,6 +449,7 @@ h4 {
 .instance-item {
     text-align: center; 
     /* align-items: center; */
+    /* cursor: pointer; */
 }
 
 h6{
@@ -463,9 +469,11 @@ h6{
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 }
 
 #mainDashboard {
     text-align: center; 
+   
 }
 </style>
