@@ -1,6 +1,9 @@
 <script>
 import axios from 'axios';
 
+const BASE_URL= 'http://192.168.0.112:5000';
+
+
 export default {
   data() {
     return {
@@ -14,7 +17,7 @@ export default {
   },
   methods: {
     fetchConfig() {
-      axios.get('http://192.168.0.109:5000/postConfigMaster')
+      axios.get(`${BASE_URL}/postConfigMaster`)
         .then(response => {
           console.log(this.config)
           this.config = response.data;
@@ -27,7 +30,7 @@ export default {
     },
     saveConfig() {
       console.log(this.config)
-      axios.post('http://192.168.0.109:5000/postConfigMaster', this.config)
+      axios.post(`${BASE_URL}/postConfigMaster`, this.config)
         .then(response => {
           alert(response.data.message);
         })

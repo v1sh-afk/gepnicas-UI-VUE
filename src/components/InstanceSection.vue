@@ -2,6 +2,7 @@
 import axios from 'axios';
 import Pagination from './Pagination.vue';
 
+const BASE_URL = 'http://192.168.0.112:5000';
 
 export default {
     components: {
@@ -40,7 +41,7 @@ export default {
             this.$refs.scrollContainer.scrollLeft += 100;
         },
         getImages() {
-            axios.get('http://192.168.0.109:5000/getImages')
+            axios.get(`${BASE_URL}/getImages`)
                 .then(response => {
                     this.response = response.data;
                     console.log(this.response);
@@ -50,7 +51,7 @@ export default {
                 });
         },
         getDashboard() {
-            axios.get('http://192.168.0.109:5000/getInstanceCount')
+            axios.get(`${BASE_URL}/getInstanceCount`)
                 .then(response => {
                     this.dashboard = response.data;
                     console.log(this.dashboard);
@@ -66,7 +67,7 @@ export default {
             this.infodiv = true
             // this.showPage = false
             this.showformain = false
-            axios.get(`http://192.168.0.109:5000/getInstanceCount?instancename=${iname}`)
+            axios.get(`${BASE_URL}/getInstanceCount?instancename=${iname}`)
                 .then(response => {
                     this.details = response.data;  
                     console.log(this.details);
@@ -77,7 +78,7 @@ export default {
         },
         Totalfile(iname){
                 this.showPage=true
-                axios.get(`http://192.168.0.109:5000/getBidsTenderInstance?instancename=${iname}`)
+                axios.get(`${BASE_URL}/getBidsTenderInstance?instancename=${iname}`)
                     .then(response => {
                         this.bidstenders.bids = response.data.bids; 
                         this.bidstenders.tenders = response.data.tenders; 
@@ -90,7 +91,7 @@ export default {
             this.infodiv = false
             this.showformain=true
             this.currentPage = 1
-            axios.get(`http://192.168.0.109:5000/${reqq}`)
+            axios.get(`${BASE_URL}/${reqq}`)
             .then(response => {
                 this.bidstenders.bids = response.data.bids; 
                 this.bidstenders.tenders = response.data.tenders; 
@@ -102,7 +103,7 @@ export default {
         },
         Archived(iname){
                 this.showPage=true
-                axios.get(`http://192.168.0.109:5000/getBidsTenderInstanceArchived?instancename=${iname}`)
+                axios.get(`${BASE_URL}/getBidsTenderInstanceArchived?instancename=${iname}`)
                     .then(response => {
                         this.bidstenders.bids = response.data.bids; 
                         this.bidstenders.tenders = response.data.tenders;  
@@ -112,7 +113,7 @@ export default {
                     });
         },
         Metalink(iname){
-            axios.get(`http://192.168.0.109:5000/getBidsTenderInstanceMetalink?instancename=${iname}`)
+            axios.get(`${BASE_URL}/getBidsTenderInstanceMetalink?instancename=${iname}`)
                 .then(response => {
                     this.bidstenders.bids = response.data.bids; 
                     this.bidstenders.tenders = response.data.tenders;
@@ -122,7 +123,7 @@ export default {
                 });
         },
         Errorr(iname){
-            axios.get(`http://192.168.0.109:5000/getBidsTenderInstanceError?instancename=${iname}`)
+            axios.get(`${BASE_URL}/getBidsTenderInstanceError?instancename=${iname}`)
                 .then(response => {
                     this.bidstenders.bids = response.data.bids; 
                     this.bidstenders.tenders = response.data.tenders; 

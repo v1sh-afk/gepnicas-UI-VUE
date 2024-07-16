@@ -151,6 +151,7 @@
 <script>
 import axios from 'axios';
 
+const BASE_URL = 'http://192.168.0.112:8000'
 export default {
     props: ['instancename'],
     data() {
@@ -195,7 +196,7 @@ export default {
     methods: {
         fetchData(instancename){
         console.log(instancename)
-        axios.get(`http://192.168.0.109:8000/getConfigMaster?instancename=${instancename}`)
+        axios.get(`${BASE_URL}/getConfigMaster?instancename=${instancename}`)
             .then(response => {
             console.log('gotresponse')
             this.config = response.data.records[0];
@@ -243,7 +244,7 @@ export default {
             primary_dbnrdrnode: this.config.primary_dbnrdbnode      
         };
         console.log(payload)
-        axios.post('http://192.168.0.109:8000/updateConfigMaster', payload)
+        axios.post(`${BASE_URL}/updateConfigMaster`, payload)
             .then(response => {
             alert(response.data.message);
             })

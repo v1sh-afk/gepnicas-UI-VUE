@@ -84,6 +84,8 @@
 <script>
 import axios from 'axios';
 
+const BASE_URL = 'http://192.168.0.112:8000';
+
 export default {
   // props: ['instancename'],
   data() {
@@ -103,7 +105,7 @@ export default {
     //         });
     //     },
     deleteData(instancename) {
-    axios.delete(`http://192.168.0.109:8000/deleteConfigMaster?instancename=${instancename}`)
+    axios.delete(`${BASE_URL}/deleteConfigMaster?instancename=${instancename}`)
         .then(response => {
             alert(response.data.message);
             this.takeGridData()
@@ -114,7 +116,7 @@ export default {
         });
     },
     takeGridData() {
-      axios.get('http://192.168.0.109:8000/getConfigMaster')
+      axios.get(`${BASE_URL}/getConfigMaster`)
       // axios.get('http://192.168.0.109:8111/getConfig?table=gepnicas_primary_infra')
         .then(response => {
           this.gridData = response.data;
