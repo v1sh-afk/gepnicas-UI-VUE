@@ -20,7 +20,8 @@
       <div class="menu-item rightmost">
         <a href="#" @click="toggleDropdown">Site Settings</a>
         <div class="dropdown-content" v-if="dropdownVisible">
-          <a @click="handleDropdownClick(handleInfraInventoryClick)">Infra Inventory</a>
+          <a @click="handleDropdownClick(handleInfraInventoryClick)">Infra Inventory - Primary</a>
+          <a @click="handleDropdownClick(handleInfraInventoryClick)">Infra Inventory - DR</a>
           <a @click="handleDropdownClick(handleSettingsClick)">Settings</a>
           <a @click="handleDropdownClick(handleUserManagementClick)">Manage Users</a>
         </div>

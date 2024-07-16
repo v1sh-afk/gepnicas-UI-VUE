@@ -68,11 +68,11 @@
         <input v-model="config.primary_gepbalancer" />
         </div>
         <div class="form-group">
-        <label>Blue Work der</label>
-        <input v-model="config.primary_blueworker" />
+        <label>Blue Workder</label>
+        <input v-model="config.primary_blueworkder" />
         </div>
         <div class="form-group">
-        <label>Green Work der</label>
+        <label>Green Worker</label>
         <input v-model="config.primary_greenworkder" />
         </div>
         <div class="form-group">
@@ -135,7 +135,15 @@
         </div>
         <div class="form-group">
         <label>Primary DBNrDR Node</label>
-        <input v-model="config.primary_dbnrdbnode" />
+        <input v-model="config.primary_dbnrdrnode" />
+        </div>
+        <div class="form-group">
+          <label>Primary Db Backup Node</label>
+          <input v-model="config.primary_dbbackupnode" />
+        </div>
+        <div class="form-group">
+          <label>Primary Db Backup Path</label>
+          <input v-model="config.primary_dbbackuppath" />
         </div>
     </fieldset>
 
@@ -173,7 +181,7 @@ export default {
             primary_webscript2: '',
             primary_workerfile: '',
             primary_gepbalancer: '',
-            primary_blueworker: '',
+            primary_blueworkder: '',
             primary_greenworkder: '',
             primary_apacheconf: '',
             primary_apachessl: '',
@@ -189,7 +197,9 @@ export default {
             primary_repscript21: '',
             primary_mobscript11: '',
             primary_mobscript21: '',
-            primary_dbnrdbnode: ''
+            primary_dbnrdrnode: '',
+            primary_dbbackupnode: '',
+            primary_dbbackuppath: ''
         }
         };
     },
@@ -225,7 +235,7 @@ export default {
             primary_webscript2: this.config.primary_webscript2,
             primary_workerfile: this.config.primary_workerfile,
             primary_gepbalancer: this.config.primary_gepbalancer,
-            primary_blueworkder: this.config.primary_blueworker,
+            primary_blueworkder: this.config.primary_blueworkder,
             primary_greenworkder: this.config.primary_greenworkder,
             primary_apacheconf: this.config.primary_apacheconf,
             primary_apachessl: this.config.primary_apachessl,
@@ -241,7 +251,9 @@ export default {
             primary_repscript21: this.config.primary_repscript21,
             primary_mobscript11: this.config.primary_mobscript11,
             primary_mobscript21: this.config.primary_mobscript21,
-            primary_dbnrdrnode: this.config.primary_dbnrdbnode      
+            primary_dbnrdrnode: this.config.primary_dbnrdrnode,
+            primary_dbbackupnode: this.config.primary_dbbackupnode,
+            primary_dbbackuppath: this.config.primary_dbbackuppath    
         };
         console.log(payload)
         axios.post(`${BASE_URL}/updateConfigMaster`, payload)

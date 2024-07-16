@@ -69,7 +69,7 @@
         </div>
         <div class="form-group">
           <label>Blue Work der</label>
-          <input v-model="config.primary_blue_worker" />
+          <input v-model="config.primary_blueworkder" />
         </div>
         <div class="form-group">
           <label>Green Work der</label>
@@ -85,11 +85,11 @@
         </div>
         <div class="form-group">
           <label>App Node 1</label>
-          <input v-model="config.dr_app_node1" />
+          <input v-model="config.primary_appnode1" />
         </div>
         <div class="form-group">
           <label>App Node 2</label>
-          <input v-model="config.primary_app_node2" />
+          <input v-model="config.primary_appnode2" />
         </div>
 
         <div class="form-group">
@@ -135,7 +135,15 @@
         </div>
         <div class="form-group">
           <label>Primary DBNrDR Node</label>
-          <input v-model="config.primary_dbnrnode" />
+          <input v-model="config.primary_dbnrdrnode" />
+        </div>
+        <div class="form-group">
+          <label>Primary Db Backup Node</label>
+          <input v-model="config.primary_dbbackupnode" />
+        </div>
+        <div class="form-group">
+          <label>Primary Db Backup Path</label>
+          <input v-model="config.primary_dbbackuppath" />
         </div>
       </fieldset>
 
@@ -170,12 +178,12 @@ export default {
         primary_web_script2: '',
         primary_worker_file: '',
         primary_gepbalancer: '',
-        primary_blue_worker: '',
+        primary_blueworkder: '',
         primary_greenworkder: '',
         primary_apache_conf: '',
         primary_apache_ssl: '',
-        primary_app_node1: '',
-        primary_app_node2: '',
+        primary_appnode1: '',
+        primary_appnode2: '',
         primary_app_script11: '',
         primary_app_script12: '',
         primary_app_script21: '',
@@ -186,7 +194,9 @@ export default {
         primary_rep_script21: '',
         primary_mob_script11: '',
         primary_mob_script21: '',
-        primary_dbnrnode: ''
+        primary_dbnrdrnode: '',
+        primary_dbbackupnode: '',
+        primary_dbbackuppath: ''
       }
     };
   },
@@ -209,12 +219,12 @@ export default {
       primary_web_script2: '',
       primary_worker_file: '',
       primary_gepbalancer: '',
-      primary_blue_worker: '',
+      primary_blueworkder: '',
       primary_greenworkder: '',
       primary_apache_conf: '',
       primary_apache_ssl: '',
-      primary_app_node1: '',
-      primary_app_node2: '',
+      primary_appnode1: '',
+      primary_appnode2: '',
       primary_app_script11: '',
       primary_app_script12: '',
       primary_app_script21: '',
@@ -225,7 +235,9 @@ export default {
       primary_rep_script21: '',
       primary_mob_script11: '',
       primary_mob_script21: '',
-      primary_dbnrnode: ''
+      primary_dbnrdrnode: '',
+      primary_dbbackupnode: '',
+      primary_dbbackupnode: ''
     };
     },
     saveConfig() {
@@ -246,12 +258,12 @@ export default {
         primary_webscript2: this.config.primary_web_script2,
         primary_workerfile: this.config.primary_worker_file,
         primary_gepbalancer: this.config.primary_gepbalancer,
-        primary_blueworkder: this.config.primary_blue_worker,
+        primary_blueworkder: this.config.primary_blueworkder,
         primary_greenworkder: this.config.primary_greenworkder,
         primary_apacheconf: this.config.primary_apache_conf,
         primary_apachessl: this.config.primary_apache_ssl,
-        primary_appnode1: this.config.primary_app_node1,
-        primary_appnode2: this.config.primary_app_node2,
+        primary_appnode1: this.config.primary_appnode1,
+        primary_appnode2: this.config.primary_appnode2,
         primary_appscript11: this.config.primary_app_script11,
         primary_appscript12: this.config.primary_app_script12,
         primary_appscript21: this.config.primary_app_script21,
@@ -262,7 +274,9 @@ export default {
         primary_repscript21: this.config.primary_rep_script21,
         primary_mobscript11: this.config.primary_mob_script11,
         primary_mobscript21: this.config.primary_mob_script21,
-        primary_dbnrdrnode: this.config.primary_dbnrnode      
+        primary_dbnrdrnode: this.config.primary_dbnrdrnode  ,
+        primary_dbbackuppath: this.config.primary_dbbackupnode,
+        primary_dbbackuppath: this.config.primary_dbbackuppath    
       };
       console.log(payload)
       axios.post('http://192.168.0.112:8000/postConfigMaster', payload)

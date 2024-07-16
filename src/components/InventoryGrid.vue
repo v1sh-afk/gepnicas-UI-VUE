@@ -21,10 +21,10 @@
         <th>Primary App Script21</th>
         <th>Primary App Script22</th>
         <th>Primary App User</th>
-        <th>Primary Blue Workder</th>
-        <th>Primary Db Nrd Node</th>
+        <th>Primary Blue Worker</th>
+        <th>Primary DbNrdr Node</th>
         <th>Primary Gep Balancer</th>
-        <th>Primary Green Workder</th>
+        <th>Primary Green Worker</th>
         <th>Primary Mob Script11</th>
         <th>Primary Mob Script21</th>
         <th>Primary Rep Script11</th>
@@ -39,6 +39,8 @@
         <th>Storage Box</th>
         <th>Url</th>
         <th>Xmluserid</th>
+        <th>Primary DB Backup Node</th>
+        <th>Primary DB Backup Path</th>
       </tr>
       <tr v-for="item in gridData['records']" :key="item.id">
         <td><Button @click="edit(item.instancename)" class="edit">Edit</Button>&nbsp;
@@ -59,7 +61,7 @@
         <td>{{ item.primary_appscript22 }}</td>
         <td>{{ item.primary_appuser }}</td>
         <td>{{ item.primary_blueworkder }}</td>
-        <td>{{ item.primary_dbnrdnode }}</td>
+        <td>{{ item.primary_dbnrdrnode }}</td>
         <td>{{ item.primary_gepbalancer }}</td>
         <td>{{ item.primary_greenworkder }}</td>
         <td>{{ item.primary_mobscript11 }}</td>
@@ -76,6 +78,8 @@
         <td>{{ item.storage_box }}</td>
         <td>{{ item.url }}</td>
         <td>{{ item.xmluserid }}</td>
+        <td>{{ item.primary_dbbackuppath }}</td>
+        <td>{{ item.primary_dbbackupnode }}</td>
       </tr>
     </table>
   </div>
