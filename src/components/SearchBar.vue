@@ -1,40 +1,40 @@
 <template>
-<div id="menu">
-  <div class="date">
-    <img class="menuicon" @click="homePage" src="/src/assets/home.png" alt="Home">
-    <p>{{ date }}</p>
+  <div id="menu">
+    <div class="date">
+      <img class="menuicon" @click="homePage" src="/src/assets/home.png" alt="Home">
+      <p>{{ date }}</p>
+    </div>
+    <div class="menu-content">
+      <div class="menu-item">
+        <div class="menuu">
+          <!-- <p class="menu-link" @click="handleInfraInventoryClick">Infra Inventory</p> -->
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menuu">
+        </div>
+      </div>
+      <!-- <div class="menu-item">
+        <a>Site Settings</a>
+      </div> -->
+      <div class="menu-item rightmost">
+        <a href="#" @click="toggleDropdown">Site Settings</a>
+        <div class="dropdown-content" v-if="dropdownVisible">
+          <a @click="handleDropdownClick(handleInfraInventoryClick)">Infra Inventory</a>
+          <a @click="handleDropdownClick(handleSettingsClick)">Settings</a>
+          <a @click="handleDropdownClick(handleUserManagementClick)">Manage Users</a>
+        </div>
+      </div>
+      <div class="menu-item">
+        <!-- <p class="menu-link" @click="handleUserManagementClick">User Management</p> -->
+      </div>
+      <div class="menu-item">
+        <div class="menuu">
+          <!-- <p class="menu-link" @click="handleSettingsClick">Settings</p> -->
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="menu-content">
-    <div class="menu-item">
-      <div class="menuu">
-        <!-- <p class="menu-link" @click="handleInfraInventoryClick">Infra Inventory</p> -->
-      </div>
-    </div>
-    <div class="menu-item">
-      <div class="menuu">
-      </div>
-    </div>
-    <!-- <div class="menu-item">
-      <a>Site Settings</a>
-    </div> -->
-    <div class="menu-item">
-      <a href="#" @click="toggleDropdown">Site Settings</a>
-      <div class="dropdown-content" v-if="dropdownVisible">
-        <a @click="handleInfraInventoryClick">Infra Inventory</a>
-        <a @click="handleSettingsClick">Settings</a>
-        <a @click="handleUserManagementClick">Manage Users</a>
-      </div>
-    </div>
-    <div class="menu-item">
-      <!-- <p class="menu-link" @click="handleUserManagementClick">User Management</p> -->
-    </div>
-    <div class="menu-item">
-      <div class="menuu">
-        <!-- <p class="menu-link" @click="handleSettingsClick">Settings</p> -->
-      </div>
-    </div>
-  </div>
-</div>
 </template>
 
 <script>
@@ -62,6 +62,10 @@ export default {
       event.preventDefault();
       this.dropdownVisible = !this.dropdownVisible;
     },
+    handleDropdownClick(action) {
+      action();
+      this.dropdownVisible = false; // Hide the dropdown
+    },
     handleSettingsClick() {
       this.$emit('settingsclicked');
     },
@@ -77,11 +81,11 @@ export default {
       console.log('User Management Clicked');
     },
     homePage(){
-      console.log('Home clicked')
+      console.log('Home clicked');
       // this.$router.push({ path: '/' });
       this.handleHomeClick();
+    }
   }
-}
 }
 </script>
 
