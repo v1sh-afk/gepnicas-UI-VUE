@@ -191,6 +191,43 @@ export default {
     };
   },
   methods: {
+    resetForm() {
+    this.config = {
+      datacentre: '',
+      instance_name: '',
+      ip_segment: '',
+      portal_category: '',
+      url: '',
+      xml_user_id: '',
+      msr_slno: 0,
+      nesd_code: 0,
+      running_from: '',
+      storage_box: '',
+      primary_web_node1: '',
+      primary_web_node2: '',
+      primary_web_script1: '',
+      primary_web_script2: '',
+      primary_worker_file: '',
+      primary_gepbalancer: '',
+      primary_blue_worker: '',
+      primary_greenworkder: '',
+      primary_apache_conf: '',
+      primary_apache_ssl: '',
+      primary_app_node1: '',
+      primary_app_node2: '',
+      primary_app_script11: '',
+      primary_app_script12: '',
+      primary_app_script21: '',
+      primary_app_script22: '',
+      primary_app_user: '',
+      primary_rep_user: '',
+      primary_rep_script11: '',
+      primary_rep_script21: '',
+      primary_mob_script11: '',
+      primary_mob_script21: '',
+      primary_dbnrnode: ''
+    };
+    },
     saveConfig() {
       const payload = {
         instancename: this.config.instance_name,
@@ -231,6 +268,7 @@ export default {
       axios.post('http://192.168.0.109:8000/postConfigMaster', payload)
         .then(response => {
           alert(response.data.message);
+          this.resetForm();
         })
         .catch(error => {
           console.error('Error saving config:', error);

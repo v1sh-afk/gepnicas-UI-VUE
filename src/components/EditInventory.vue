@@ -135,12 +135,13 @@
         </div>
         <div class="form-group">
         <label>Primary DBNrDR Node</label>
-        <input v-model="config.primary_dbnrdrnode" />
+        <input v-model="config.primary_dbnrdbnode" />
         </div>
     </fieldset>
 
     <div class="form-actions">
         <button type="submit" class="btn-save">Save</button>
+        <button type="button" @click="deleteData(config.instancename)">Delete</button>
         <button type="button" @click="$emit('back')" class="btn-back">Back</button>
     </div>
     </form>

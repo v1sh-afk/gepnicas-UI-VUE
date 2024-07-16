@@ -7,7 +7,7 @@
       <tr>
         <th>Edit</th>
         <th>Datacentre</th>
-        <th>Instance Name</th>
+        <th>Instance Name</th>  
         <th>Ip Segment</th>
         <th>Msrslno</th>
         <th>Nesdcode</th>
@@ -41,7 +41,8 @@
         <th>Xmluserid</th>
       </tr>
       <tr v-for="item in gridData['records']" :key="item.id">
-        <td><Button @click="edit(item.instancename)" class="edit">Edit</Button></td>
+        <td><Button @click="edit(item.instancename)" class="edit">Edit</Button>&nbsp;
+        <button @click="deleteData(item.instancename)" class="edit">Delete</button></td>
         <td>{{ item.datacentre }}</td>
         <td>{{ item.instancename }}</td>
         <td>{{ item.ip_segment }}</td>
@@ -91,6 +92,27 @@ export default {
     };
   },
   methods: {
+    // deleteData(instancename){
+    //     axios.delete(`http://192.168.0.109:8000/deleteConfigMaster?instancename=${instancename}`)
+    //         .then(response => {
+    //         alert(response.data.message);
+    //         })
+    //         .catch(error => {
+    //         console.error('Error saving config:', error);
+    //         alert('Error saving config: ' + error.message);
+    //         });
+    //     },
+    deleteData(instancename) {
+    axios.delete(`http://192.168.0.109:8000/deleteConfigMaster?instancename=${instancename}`)
+        .then(response => {
+            alert(response.data.message);
+            this.takeGridData()
+        })
+        .catch(error => {
+            console.error('Error deleting config:', error);
+            alert('Error deleting config: ' + error.message);
+        });
+    },
     takeGridData() {
       axios.get('http://192.168.0.109:8000/getConfigMaster')
       // axios.get('http://192.168.0.109:8111/getConfig?table=gepnicas_primary_infra')
