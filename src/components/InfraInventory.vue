@@ -17,11 +17,11 @@
         </div>
         <div class="form-group">
           <label>IP Segment</label>
-          <input v-model="config.ip_segment" type="number" />
+          <input v-model="config.ip_segment"/>
         </div>
         <div class="form-group">
           <label>URL</label>
-          <input v-model="config.url" type="number" />
+          <input v-model="config.url"/>
         </div>
         <div class="form-group">
           <label>XML User ID</label>
