@@ -1,4 +1,6 @@
 <script>
+import axios from 'axios';
+const BASE_URL= 'http://192.168.0.112:5000';
 export default{
     computed:{
         image() {
@@ -10,10 +12,25 @@ export default{
     },
     data(){
         return{
-            currentUser: 'Vishal'
+            config: {
+        archive_solution_shortname: '',
+        archive_solution_fullname: '',
         }
+    };
     },
     methods: {
+        fetchConfig() {
+      axios.get(`${BASE_URL}/postConfigMaster`)
+        .then(response => {
+          console.log(this.config)
+          this.config = response.data;
+          console.log(this.config);
+        })
+        .catch(error => {
+          console.error('Error fetching config:', error);
+          alert('Error fetching config: ' + error.message);
+        });
+    },
         getTime() {
             const now = new Date();
             const year = now.getFullYear();
@@ -26,15 +43,18 @@ export default{
             const date = `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
             return date;
         }
-    }
-}
+    },
+    mounted() {
+    this.fetchConfig();
+  }
+};
 </script>
 
 <template>
     <div id="top">
         <div class="left">
             <!-- <img class="home" :src="image"> -->
-            <h1 id="title">GePNIC Archival System</h1>
+            <h1 id="title">{{ config.archive_solution_shortname }} {{  config.archive_solution_fullname }}</h1>
         </div>
 
         <div >
@@ -42,9 +62,9 @@ export default{
         </div>
 
         <div class="right">
-            <p id="welcomep">Welcome {{ currentUser }} </p>
+            <!-- <p id="welcomep">Welcome {{ currentUser }} </p> -->
             <div class="logout-container">
-                <p>Logout</p>
+                <!-- <p>Logout</p> -->
                 <!-- <img class="home" :src="logout_i"> -->
             </div>
         </div>
