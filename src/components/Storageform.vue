@@ -81,7 +81,7 @@ export default {
       
       console.log('Updated storage options:', updatedStorageOptions);
 
-      axios.post('http://192.168.0.112:5000/postSystemInfo', updatedStorageOptions)
+      axios.post('http://192.168.0.108:5000/postSystemInfo', updatedStorageOptions)
         .then(response => {
           console.log('POST response:', response.data);
           alert('Storage updated successfully!');

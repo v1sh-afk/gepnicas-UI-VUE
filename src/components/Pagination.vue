@@ -93,7 +93,9 @@
 
 <template>
   <div class="overflow-auto total">
-    <b-pagination 
+    <div class="pgtitle">
+      <h4 class="title">{{ this.title }}</h4>
+      <b-pagination 
       v-model="currentPage"
       :total-rows="totalRows"
       :per-page="perPage"
@@ -101,8 +103,8 @@
       first-number
       last-number
       @input="currentPageChanged"
-    ></b-pagination>
-
+      ></b-pagination>
+    </div>
     <div id="search_c">
       <input type="text" placeholder="Search" v-model="search_text">
     </div>
@@ -145,6 +147,7 @@ export default {
     perPage: Number,
     selectedOption: String,
     bidstenders: Object,
+    title: String
   },
   data() {
     return {
@@ -157,6 +160,7 @@ export default {
     filteredItems() {
       const items = this.selectedOption === 'Tenders' ? this.bidstenders.tenders : this.bidstenders.bids;
       if (!this.search_text.trim()) {
+        
         return items;
       } else {
         const searchTerm = this.search_text.trim().toLowerCase();
@@ -183,4 +187,14 @@ export default {
 <style scoped>
 @import 'bootstrap/dist/css/bootstrap.css';
 @import 'bootstrap-vue-next/dist/bootstrap-vue-next.css';
+
+.pgtitle{
+  display: flex;
+  justify-content: space-between;
+}
+
+.title{
+  color: #1a4d57;
+  font-weight: bold;
+}
 </style>

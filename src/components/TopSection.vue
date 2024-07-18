@@ -1,7 +1,7 @@
 <template>
   <div id="containerr">
     <div class="storage-available">
-      <h4> Archival Storage</h4>
+      <h4>Archieval Storage</h4>
       <div id="storage">
         <Doughnut class="pie" :data="storageAvailableData" :options="options"/>
       </div>

@@ -1,8 +1,133 @@
+<template>
+    <div>
+        <div id="mainDashboard" v-if="dashboard.counts">
+            <div class="details1">
+                <div class="detail1">
+                    <img class="detail_logos" :src="folder" @click="TotalMain({iname: 'getBidsTenderInstance',title: 'Total Folders'})">
+                    <h6>Total Folders</h6>
+                    <div class="instance-name">{{ dashboard.counts.total_count }}</div>
+                </div>
+                <div class="detail1">
+                    <img class="detail_logos" :src="complete" @click="TotalMain({iname: 'getBidsTenderInstanceArchived', title: 'Folders Completed'})">
+                    <h6>Folders Completed</h6>
+                    <div class="instance-name">{{ dashboard.counts.sync_completed_count }}</div>
+                </div>
+                <div class="detail1">
+                    <img class="detail_logos" :src="sync" @click="TotalMain({iname: 'getBidsTenderInstanceSync', title: 'Sync'})">
+                    <h6>Sync</h6>
+                    <div class="instance-name">{{ dashboard.counts.sync_count }}</div>
+                </div>
+                <div class="detail1">
+                    <img class="detail_logos" :src="link" @click="TotalMain({iname: 'getBidsTenderInstanceMetalink', title: 'Meta Data'})">
+                    <h6>Meta Data</h6>
+                    <div class="instance-name">{{ dashboard.counts.meta_link_created }}</div>
+                </div>
+                <div class="detail1">
+                    <img class="detail_logos" :src="process" @click="TotalMain('d')">
+                    <h6>Soft Links</h6>
+                    <div class="instance-name">{{ dashboard.counts.soft_link_created }}</div>
+                </div>
+                <div class="detail1">
+                    <img class="detail_logos" :src="error" @click="TotalMain({iname: 'getBidsTenderInstanceError', title: 'Errors'})">
+                    <h6>Errors</h6>
+                    <div class="instance-name">{{ dashboard.counts.errors_count }}</div>
+                </div>
+                <div class="detail1">
+                    <img class="detail_logos" :src="db" @click="TotalMain('sd')">
+                    <h6>Storage</h6>
+                    <div class="instance-name">{{ dashboard.counts.instance_storage_size }}</div>
+                </div>
+            </div>
+        </div>
+        
+     
+
+        <div id="instance">
+            <div id="ins">
+                <h4>Instances</h4>
+            </div>
+            <div class="scroll-buttons">
+                <button class="ba" @click="scrollLeft">‹</button>
+                <div class="scroll-container" ref="scrollContainer">
+                    <div class="instance-item" v-for="(instance, index) in response" :key="index">
+                        <img class="logo" :id="`i${index+1}`" :src="imageSrc(instance.logo)" @click="buttonClick(instance.instancename)">
+                        <!-- <div class="instance-name">{{ instance.instancename }}</div> -->
+                         <div class="instance-name">
+                            <h5>{{ instance.instancename }}</h5>
+                         </div>
+                    </div>
+                </div>
+                <button class="ba" @click="scrollRight">›</button>
+            </div>
+        </div>
+        
+        <div id="infoDiv" v-if="infodiv && details.counts">
+
+            <div class="details">
+                <div class="infodetail-name">
+                    <img :src="imageSrc(details.counts.logo)" class="logo">
+                    <div class="instance-name-detail">{{ details.instancename }}</div>
+                </div>
+
+                <div class="detail">
+                    <div class="cols">
+                        <img class="detail_logos" :src="folder" @click="Totalfile(details.instancename)">
+                        <h6>Total Folders</h6>
+                        <div class="instance-name">{{ details.counts.total_count }}</div>
+                    </div>
+                    <div class="cols">
+                        <img class="detail_logos" :src="complete" @click="Archived(details.instancename)">
+                        <h6>Archieved</h6>
+                        <div class="instance-name">{{ details.counts.sync_completed_count }}</div>
+                    </div>
+                    <div class="cols">
+                        <img class="detail_logos" :src="sync">
+                        <h6>Sync</h6>
+                        <div class="instance-name">{{ details.counts.sync_count }}</div>
+                    </div>
+                    <div class= "cols">
+                        <img class="detail_logos" :src="process">
+                        <h6>Soft Links</h6>
+                        <div class="instance-name">{{ details.counts.soft_link_created }}</div>
+                    </div>
+                    <div class="cols">
+                        <img class="detail_logos" :src="link" @click="Metalink(details.instancename)">
+                        <h6>Meta Links</h6>
+                        <div class="instance-name">{{ details.counts.meta_link_created }}</div>
+                    </div>
+                    <div class="cols">
+                        <img class="detail_logos" :src="error" @click="Errorr(details.instancename)">
+                        <h6>Errors</h6>
+                        <div class="instance-name">{{ details.counts.errors_count }}</div>
+                    </div>
+                    <div class="cols">
+                        <img class="detail_logos" :src="db">
+                        <h6>Storage</h6>
+                        <div class="instance-name">{{ details.counts.instance_storage_size }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div v-if="showformain || showPage">
+            <Pagination 
+            :currentPage="currentPage"
+            :perPage="perPage"
+            :rows="rows"
+            :selectedOption="selectedOption"
+            :bidstenders= bidstenders
+            :title="title"
+            @changeBids="handleChangeBids"/>
+        </div>
+    <div style="height: 5em;"></div> 
+    </div>
+</template>
+
 <script>
 import axios from 'axios';
 import Pagination from './Pagination.vue';
 
-const BASE_URL = 'http://192.168.108:5000';
+const BASE_URL = 'http://192.168.0.108:5000';
 
 export default {
     components: {
@@ -27,7 +152,8 @@ export default {
             showPage :   false,
             displayTenders: true,
             selectedOption: null,
-            showformain: false
+            showformain: false,
+            title: null
         };
     },
     methods: {
@@ -82,6 +208,7 @@ export default {
                     .then(response => {
                         this.bidstenders.bids = response.data.bids; 
                         this.bidstenders.tenders = response.data.tenders; 
+                        this.title = 'Total Folders'
                     })
                     .catch(error => {
                         console.error('Error:', error);
@@ -91,10 +218,11 @@ export default {
             this.infodiv = false
             this.showformain=true
             this.currentPage = 1
-            axios.get(`${BASE_URL}/${reqq}`)
+            axios.get(`${BASE_URL}/${reqq.iname}`)
             .then(response => {
                 this.bidstenders.bids = response.data.bids; 
                 this.bidstenders.tenders = response.data.tenders; 
+                this.title = reqq.title
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -107,6 +235,7 @@ export default {
                     .then(response => {
                         this.bidstenders.bids = response.data.bids; 
                         this.bidstenders.tenders = response.data.tenders;  
+                        this.title = 'Folders Archieved'
                     })
                     .catch(error => {
                         console.error('Error:', error);
@@ -117,6 +246,7 @@ export default {
                 .then(response => {
                     this.bidstenders.bids = response.data.bids; 
                     this.bidstenders.tenders = response.data.tenders;
+                    this.title = 'Meta Data'
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -127,6 +257,7 @@ export default {
                 .then(response => {
                     this.bidstenders.bids = response.data.bids; 
                     this.bidstenders.tenders = response.data.tenders; 
+                    this.title = 'Errors'
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -172,130 +303,6 @@ export default {
     }
 };
 </script>
-<template>
-    <div>
-        <div id="mainDashboard" v-if="dashboard.counts">
-            <div class="details1">
-                <div class="detail1">
-                    <img class="detail_logos" :src="folder" @click="TotalMain('getBidsTenderInstance')">
-                    <h6>Total Folders</h6>
-                    <div class="instance-name">{{ dashboard.counts.total_count }}</div>
-                </div>
-                <div class="detail1">
-                    <img class="detail_logos" :src="complete" @click="TotalMain('getBidsTenderInstanceArchived')">
-                    <h6>Folders Completed</h6>
-                    <div class="instance-name">{{ dashboard.counts.sync_completed_count }}</div>
-                </div>
-                <div class="detail1">
-                    <img class="detail_logos" :src="sync" @click="TotalMain('getBidsTenderInstanceSync')">
-                    <h6>Sync</h6>
-                    <div class="instance-name">{{ dashboard.counts.sync_count }}</div>
-                </div>
-                <div class="detail1">
-                    <img class="detail_logos" :src="link" @click="TotalMain('getBidsTenderInstanceMetalink')">
-                    <h6>Meta Data</h6>
-                    <div class="instance-name">{{ dashboard.counts.meta_link_created }}</div>
-                </div>
-                <div class="detail1">
-                    <img class="detail_logos" :src="process" @click="TotalMain('d')">
-                    <h6>Soft Links</h6>
-                    <div class="instance-name">{{ dashboard.counts.soft_link_created }}</div>
-                </div>
-                <div class="detail1">
-                    <img class="detail_logos" :src="error" @click="TotalMain('getBidsTenderInstanceError')">
-                    <h6>Errors</h6>
-                    <div class="instance-name">{{ dashboard.counts.errors_count }}</div>
-                </div>
-                <div class="detail1">
-                    <img class="detail_logos" :src="db" @click="TotalMain('sd')">
-                    <h6>Storage</h6>
-                    <div class="instance-name">{{ dashboard.counts.instance_storage_size }}</div>
-                </div>
-            </div>
-        </div>
-        
-     
-
-        <div id="instance">
-            <div id="ins">
-                <h4>Instances</h4>
-            </div>
-            <div class="scroll-buttons">
-                <button class="ba" @click="scrollLeft">‹</button>
-                <div class="scroll-container" ref="scrollContainer">
-                    <div class="instance-item" v-for="(instance, index) in response" :key="index">
-                        <img class="logo" :id="`i${index+1}`" :src="imageSrc(instance.logo)" @click="buttonClick(instance.instancename)">
-                        <!-- <div class="instance-name">{{ instance.instancename }}</div> -->
-                         <div class="instance-name">
-                            <h5>{{ instance.instancename }}</h5>
-                         </div>
-                    </div>
-                </div>
-                <button class="ba" @click="scrollRight">›</button>
-            </div>
-        </div>
-        
-        <div id="infoDiv" v-if="infodiv && details.counts">
-
-            <div class="details">
-                <div class="infodetail-name">
-                    <img :src="imageSrc(details.counts.logo)" class="logo">
-                    <div class="instance-name-detail">{{ details.instancename }}</div>
-                </div>
-
-                <div class="detail">
-                    <div class="cols">
-                        <img class="detail_logos" :src="folder" @click="Totalfile(details.instancename)">
-                        <h5>Total Folders</h5>
-                        <div class="instance-name">{{ details.counts.total_count }}</div>
-                    </div>
-                    <div class="cols">
-                        <img class="detail_logos" :src="complete" @click="Archived(details.instancename)">
-                        <h5>Archieved</h5>
-                        <div class="instance-name">{{ details.counts.sync_completed_count }}</div>
-                    </div>
-                    <div class="cols">
-                        <img class="detail_logos" :src="sync">
-                        <h5>Sync</h5>
-                        <div class="instance-name">{{ details.counts.sync_count }}</div>
-                    </div>
-                    <div class= "cols">
-                        <img class="detail_logos" :src="process">
-                        <h5>Soft Links</h5>
-                        <div class="instance-name">{{ details.counts.soft_link_created }}</div>
-                    </div>
-                    <div class="cols">
-                        <img class="detail_logos" :src="link" @click="Metalink(details.instancename)">
-                        <h5>Meta Links</h5>
-                        <div class="instance-name">{{ details.counts.meta_link_created }}</div>
-                    </div>
-                    <div class="cols">
-                        <img class="detail_logos" :src="error" @click="Errorr(details.instancename)">
-                        <h5>Errors</h5>
-                        <div class="instance-name">{{ details.counts.errors_count }}</div>
-                    </div>
-                    <div class="cols">
-                        <img class="detail_logos" :src="db">
-                        <h5>Storage</h5>
-                        <div class="instance-name">{{ details.counts.instance_storage_size }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-       
-        <div v-if="showformain || showPage">
-            <Pagination 
-            :currentPage="currentPage"
-            :perPage="perPage"
-            :rows="rows"
-            :selectedOption="selectedOption"
-            :bidstenders= bidstenders
-            @changeBids="handleChangeBids"/>
-        </div>
-    <div style="height: 5em;"></div> 
-    </div>
-</template>
-
 
 <style>
 #ins{
@@ -348,13 +355,15 @@ h3 {
     font-weight: bold;
     margin-left: 0;
     font-size: 1em; 
-    margin-top: 40px
+    /* margin-top: 40px */
 
 }
 .infodetail-name{
     display: flex;
-    flex-direction: row;
-    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    /* flex-direction: row; */
+    /* cursor: pointer; */
 }
 .detail_logos {
     /* height: 4.375em;  */
@@ -375,14 +384,12 @@ h3 {
 .detail{
     display: flex;
     justify-content: space-around;
-    margin-bottom: 0.9375em; 
-    margin-right: 0.9375em; 
     
 }
 .details {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
     border: 0.125em solid black; 
     border-radius: 0.9375em; 
     margin-top: 0.3125em; 
