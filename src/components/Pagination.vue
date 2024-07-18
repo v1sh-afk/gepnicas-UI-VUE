@@ -160,7 +160,7 @@ export default {
     filteredItems() {
       const items = this.selectedOption === 'Tenders' ? this.bidstenders.tenders : this.bidstenders.bids;
       if (!this.search_text.trim()) {
-        
+        console.log(items)
         return items;
       } else {
         const searchTerm = this.search_text.trim().toLowerCase();

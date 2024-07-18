@@ -206,8 +206,23 @@ export default {
                 this.showPage=true
                 axios.get(`${BASE_URL}/getBidsTenderInstance?instancename=${iname}`)
                     .then(response => {
-                        this.bidstenders.bids = response.data.bids; 
-                        this.bidstenders.tenders = response.data.tenders; 
+
+                        const transformedBids = response.data.bids.map(bid => ({
+                        bids_datafolder: bid.bids_datafolder,
+                        bids_archivefolder: bid.bids_archivefolder
+                        }));
+
+                        const transformedTenders = response.data.tenders.map(tender => ({
+                        tenders_datafolder: tender.tenders_datafolder,
+                        tenders_archivefolder: tender.tenders_archivefolder
+                        }));
+
+                        // this.bidstenders.bids = response.data.bids; 
+                        // this.bidstenders.tenders = response.data.tenders;
+                        
+                        this.bidstenders.bids = transformedBids;
+                        this.bidstenders.tenders = transformedTenders;
+
                         this.title = 'Total Folders'
                     })
                     .catch(error => {
@@ -220,8 +235,18 @@ export default {
             this.currentPage = 1
             axios.get(`${BASE_URL}/${reqq.iname}`)
             .then(response => {
-                this.bidstenders.bids = response.data.bids; 
-                this.bidstenders.tenders = response.data.tenders; 
+                const transformedBids = response.data.bids.map(bid => ({
+                bids_datafolder: bid.bids_datafolder,
+                bids_archivefolder: bid.bids_archivefolder
+                }));
+
+                const transformedTenders = response.data.tenders.map(tender => ({
+                tenders_datafolder: tender.tenders_datafolder,
+                tenders_archivefolder: tender.tenders_archivefolder
+                }));
+
+                this.bidstenders.bids = transformedBids;
+                this.bidstenders.tenders = transformedTenders;
                 this.title = reqq.title
             })
             .catch(error => {
@@ -233,8 +258,18 @@ export default {
                 this.showPage=true
                 axios.get(`${BASE_URL}/getBidsTenderInstanceArchived?instancename=${iname}`)
                     .then(response => {
-                        this.bidstenders.bids = response.data.bids; 
-                        this.bidstenders.tenders = response.data.tenders;  
+                        const transformedBids = response.data.bids.map(bid => ({
+                        bids_datafolder: bid.bids_datafolder,
+                        bids_archivefolder: bid.bids_archivefolder
+                        }));
+
+                        const transformedTenders = response.data.tenders.map(tender => ({
+                        tenders_datafolder: tender.tenders_datafolder,
+                        tenders_archivefolder: tender.tenders_archivefolder
+                        }));
+
+                        this.bidstenders.bids = transformedBids;
+                        this.bidstenders.tenders = transformedTenders; 
                         this.title = 'Folders Archieved'
                     })
                     .catch(error => {
@@ -244,8 +279,18 @@ export default {
         Metalink(iname){
             axios.get(`${BASE_URL}/getBidsTenderInstanceMetalink?instancename=${iname}`)
                 .then(response => {
-                    this.bidstenders.bids = response.data.bids; 
-                    this.bidstenders.tenders = response.data.tenders;
+                    const transformedBids = response.data.bids.map(bid => ({
+                    bids_datafolder: bid.bids_datafolder,
+                    bids_archivefolder: bid.bids_archivefolder
+                    }));
+
+                    const transformedTenders = response.data.tenders.map(tender => ({
+                    tenders_datafolder: tender.tenders_datafolder,
+                    tenders_archivefolder: tender.tenders_archivefolder
+                    }));
+
+                    this.bidstenders.bids = transformedBids;
+                    this.bidstenders.tenders = transformedTenders;
                     this.title = 'Meta Data'
                 })
                 .catch(error => {
@@ -255,8 +300,18 @@ export default {
         Errorr(iname){
             axios.get(`${BASE_URL}/getBidsTenderInstanceError?instancename=${iname}`)
                 .then(response => {
-                    this.bidstenders.bids = response.data.bids; 
-                    this.bidstenders.tenders = response.data.tenders; 
+                    const transformedBids = response.data.bids.map(bid => ({
+                    bids_datafolder: bid.bids_datafolder,
+                    bids_archivefolder: bid.bids_archivefolder
+                    }));
+
+                    const transformedTenders = response.data.tenders.map(tender => ({
+                    tenders_datafolder: tender.tenders_datafolder,
+                    tenders_archivefolder: tender.tenders_archivefolder
+                    }));
+
+                    this.bidstenders.bids = transformedBids;
+                    this.bidstenders.tenders = transformedTenders;
                     this.title = 'Errors'
                 })
                 .catch(error => {
