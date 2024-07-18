@@ -279,7 +279,7 @@ export default {
         primary_dbbackuppath: this.config.primary_dbbackuppath    
       };
       console.log(payload)
-      axios.post('http://192.168.0.112:8000/postConfigMaster', payload)
+      axios.post('http://192.168.0.108:8001/postConfig?table=gepnicas_primary_infra', payload)
         .then(response => {
           alert(response.data.message);
           this.resetForm();

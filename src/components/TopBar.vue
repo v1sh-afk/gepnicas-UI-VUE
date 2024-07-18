@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-const BASE_URL= 'http://192.168.0.112:5000';
+const BASE_URL= 'http://192.168.0.108:5000';
 export default{
     computed:{
         image() {
@@ -54,7 +54,7 @@ export default{
     <div id="top">
         <div class="left">
             <!-- <img class="home" :src="image"> -->
-            <h1 id="title">{{ config.archive_solution_shortname }} {{  config.archive_solution_fullname }}</h1>
+            <h1 id="title">{{  config.archive_solution_fullname }}</h1>
         </div>
 
         <div >

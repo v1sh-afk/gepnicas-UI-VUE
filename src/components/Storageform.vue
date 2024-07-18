@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     fetchStorageOptions() {
-      axios.get('http://192.168.0.112:5000/postSystemInfo')
+      axios.get('http://192.168.0.108:5000/postSystemInfo')
         .then(response => {
           console.log('GET response:', response.data);
           this.storageOptions = response.data;

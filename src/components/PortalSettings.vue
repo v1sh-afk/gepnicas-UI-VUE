@@ -1,7 +1,7 @@
 <script>
 import axios from 'axios';
 
-const BASE_URL= 'http://192.168.0.112:5000';
+const BASE_URL= 'http://192.168.0.108:5000';
 
 
 export default {

@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Pagination from './Pagination.vue';
 
-const BASE_URL = 'http://192.168.0.112:5000';
+const BASE_URL = 'http://192.168.108:5000';
 
 export default {
     components: {

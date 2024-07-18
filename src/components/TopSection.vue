@@ -1,7 +1,7 @@
 <template>
   <div id="containerr">
     <div class="storage-available">
-      <h4>Storage Available</h4>
+      <h4> Archival Storage</h4>
       <div id="storage">
         <Doughnut class="pie" :data="storageAvailableData" :options="options"/>
       </div>
@@ -10,15 +10,22 @@
       <h4>Primary Storage</h4>
       <div id="storagee" v-if="!showForm">
         <div class="charts">
-          <Doughnut class="pie" :data="primaryStorageDataHCI" :options="options"/>
-          <Doughnut class="pie" :data="primaryStorageDataHitachi" :options="options"/>
-        </div>
+          <div class="pie-chart">
+            <h5>HCI Storage</h5>
+            <Doughnut class="pie" :data="primaryStorageDataHCI" :options="options" />
+          </div>
+          <div class="pie-chart">
+            <h5>Hitachi Storage</h5>
+            <Doughnut class="pie" :data="primaryStorageDataHitachi" :options="options" />
+          </div>
+          </div>
         <button v-if="!showForm" @click="openForm" class="btn">Open Storage Form</button>
       </div>
       <Storageform v-if="showForm" @back="closeForm" @storage-updated="handleStorageUpdated"/>
     </div>
   </div>
 </template>
+
 
 <script>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -91,7 +98,7 @@ export default {
       this.fetchStorageData();
     },
     fetchStorageData() {
-      axios.get('http://192.168.0.112:5000/postSystemInfo')
+      axios.get('http://192.168.0.108:5000/postSystemInfo')
         .then(response => {
           const storageOptions = response.data;
           const hciData = storageOptions["1"];
@@ -191,6 +198,7 @@ h4 {
   height: 150px !important;
 }
 .btn {
+  position: relative;
   background-color: #1a4d57;
   color: white;
   padding: 0.5em 1em;
@@ -221,4 +229,17 @@ h4 {
     flex: 1; 
   }
 }
+
+.pie-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pie-chart h5 {
+  margin-bottom: -40px; /* Remove bottom margin */
+  margin-right: 4em;
+  padding-bottom: 0.2em; /* Add padding if needed */
+}
+
 </style>

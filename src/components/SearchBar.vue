@@ -21,7 +21,7 @@
         <a href="#" @click="toggleDropdown">Site Settings</a>
         <div class="dropdown-content" v-if="dropdownVisible">
           <a @click="handleDropdownClick(handleInfraInventoryClick)">Infra Inventory - Primary</a>
-          <a @click="handleDropdownClick(handleInfraInventoryClick)">Infra Inventory - DR</a>
+          <a @click="handleDropdownClick(handleInfraInventoryDRClick)">Infra Inventory - DR</a>
           <a @click="handleDropdownClick(handleSettingsClick)">Settings</a>
           <a @click="handleDropdownClick(handleUserManagementClick)">Manage Users</a>
         </div>
@@ -73,6 +73,10 @@ export default {
     handleInfraInventoryClick() {
       this.$emit('infraclicked');
       console.log('Infra Inventory clicked');
+    },
+    handleInfraInventoryDRClick() {
+      this.$emit('infradrclicked');
+      console.log('Infra Inventory DR clicked');
     },
     handleHomeClick() {
       console.log('Home clicked');

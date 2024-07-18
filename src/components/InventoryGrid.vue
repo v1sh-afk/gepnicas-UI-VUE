@@ -42,7 +42,7 @@
         <th>Primary DB Backup Node</th>
         <th>Primary DB Backup Path</th>
       </tr>
-      <tr v-for="item in gridData['records']" :key="item.id">
+      <tr v-for="item in gridData" :key="item.id">
         <td><Button @click="edit(item.instancename)" class="edit">Edit</Button>&nbsp;
         <button @click="deleteData(item.instancename)" class="edit">Delete</button></td>
         <td>{{ item.datacentre }}</td>
@@ -88,7 +88,7 @@
 <script>
 import axios from 'axios';
 
-const BASE_URL = 'http://192.168.0.112:8000';
+const BASE_URL = 'http://192.168.0.108:8001';
 
 export default {
   // props: ['instancename'],
@@ -109,7 +109,7 @@ export default {
     //         });
     //     },
     deleteData(instancename) {
-    axios.delete(`${BASE_URL}/deleteConfigMaster?instancename=${instancename}`)
+    axios.delete(`${BASE_URL}/deleteConfig?table=gepnicas_primary_infra&instancename=${instancename}`)
         .then(response => {
             alert(response.data.message);
             this.takeGridData()
@@ -120,7 +120,7 @@ export default {
         });
     },
     takeGridData() {
-      axios.get(`${BASE_URL}/getConfigMaster`)
+      axios.get(`${BASE_URL}/getConfig?table=gepnicas_primary_infra`)
       // axios.get('http://192.168.0.109:8111/getConfig?table=gepnicas_primary_infra')
         .then(response => {
           this.gridData = response.data;
