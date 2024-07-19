@@ -7,28 +7,15 @@
     <div class="menu-content">
       <div class="menu-item">
         <div class="menuu">
-          <!-- <p class="menu-link" @click="handleInfraInventoryClick">Infra Inventory</p> -->
+          <!-- <p>{{ currentPath }}</p>  -->
         </div>
       </div>
       <div class="menu-item">
         <div class="menuu">
         </div>
       </div>
-      <!-- <div class="menu-item">
-        <a>Site Settings</a>
-      </div> -->
 
-
-      <!-- <div class="menu-item rightmost">
-        <a href="#" @mouseover="toggleDropdown" @mouseleave="togglebackDropdown">Site Settings</a>
-        <div class="dropdown-content" v-if="dropdownVisible">
-          <a @click="handleDropdownClick(handleInfraInventoryClick)">Infra Inventory - Primary</a>
-          <a @click="handleDropdownClick(handleInfraInventoryDRClick)">Infra Inventory - DR</a>
-          <a @click="handleDropdownClick(handleSettingsClick)">Settings</a>
-          <a @click="handleDropdownClick(handleUserManagementClick)">Manage Users</a>
-        </div> -->
-
-        <div class="menu-item rightmost" @mouseover="showDropdown" @mouseleave="hideDropdown">
+      <div class="menu-item rightmost" @mouseover="showDropdown" @mouseleave="hideDropdown">
         <a href="#" @mouseover.prevent="showDropdown">Site Settings</a>
         <div class="dropdown-content" v-if="dropdownVisible">
           <a href="#" @click="handleDropdownClick(handleInfraInventoryClick)">Infra Inventory - Primary</a>
@@ -36,28 +23,32 @@
           <a href="#" @click="handleDropdownClick(handleSettingsClick)">Settings</a>
           <a href="#" @click="handleDropdownClick(handleUserManagementClick)">Manage Users</a>
         </div>
-      
-  </div>
-      <div class="menu-item">
-        <!-- <p class="menu-link" @click="handleUserManagementClick">User Management</p> -->
-      </div>
-      <div class="menu-item">
-        <div class="menuu">
-          <!-- <p class="menu-link" @click="handleSettingsClick">Settings</p> -->
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
       date: this.getTime(),
-      dropdownVisible: false
+      dropdownVisible: false,
+      intervalId: null
     };
+  },
+  computed: {
+    currentPath() {
+      const path = this.$route.path;
+      const pathSegments = path.split('/').filter(segment => segment); // remove empty segments
+      let formattedPath = 'Gepnicas';
+
+      if (pathSegments.length > 0) {
+        formattedPath += '/' + pathSegments.map(segment => this.capitalize(segment)).join('/');
+      }
+
+      return formattedPath;
+    }
   },
   methods: {
     getTime() {
@@ -72,18 +63,12 @@ export default {
       const date = `${hours}:${minutes} ${ampm} ${day}-${month}-${year} `;
       return date;
     },
-    // toggleDropdown(event) {
-    //   event.preventDefault();
-    //   this.dropdownVisible = !this.dropdownVisible;
-    // },
-    // togglebackDropdown(event) {
-    //   event.preventDefault();
-    //   this.dropdownVisible = !this.dropdownVisible;
-    // },
-    // handleDropdownClick(action) {
-    //   action();
-    //   this.dropdownVisible = false; // Hide the dropdown
-    // },
+    updateTime() {
+      this.date = this.getTime();
+    },
+    capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    },
     handleSettingsClick() {
       this.$emit('settingsclicked');
     },
@@ -99,12 +84,8 @@ export default {
       console.log('Home clicked');
       this.$emit('homeclicked');
     },
-    handleUserManagementClick() {
-      console.log('User Management Clicked');
-    },
-    homePage(){
+    homePage() {
       console.log('Home clicked');
-      // this.$router.push({ path: '/' });
       this.handleHomeClick();
     },
     showDropdown() {
@@ -117,6 +98,12 @@ export default {
       this.dropdownVisible = false;
       callback();
     }
+  },
+  mounted() {
+    this.intervalId = setInterval(this.updateTime, 40000); // Update time every second
+  },
+  beforeUnmount() {
+    clearInterval(this.intervalId);
   }
 }
 </script>
@@ -140,16 +127,6 @@ export default {
   gap: 10px;
 }
 
-/* .menu-content {
-  width: 80%;
-  display: flex;
-  justify-content: flex-end; 
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-} */
 .menu-item {
   position: relative;
   display: inline-block;
@@ -203,5 +180,9 @@ export default {
 
 .menu-link:hover {
   text-decoration: underline;
+}
+
+img {
+  cursor: pointer;
 }
 </style>
