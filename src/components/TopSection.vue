@@ -18,7 +18,7 @@
             <h5>Hitachi Storage</h5>
             <Doughnut class="pie" :data="primaryStorageDataHitachi" :options="options" />
           </div>
-          </div>
+        </div>
         <button v-if="!showForm" @click="openForm" class="btn">Open Storage Form</button>
       </div>
       <Storageform v-if="showForm" @back="closeForm" @storage-updated="handleStorageUpdated"/>
@@ -26,13 +26,12 @@
   </div>
 </template>
 
-
 <script>
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'vue-chartjs';
 import Storageform from './Storageform.vue';
 import axios from 'axios';
-import { BASE_URL, BASE_URL2 } from '@/config';
+import { BASE_URL } from '@/config';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default {
@@ -44,29 +43,29 @@ export default {
   data() {
     return {
       storageAvailableData: {
-        labels: ['Used','Free',],
+        labels: ['Used', 'Free'],
         datasets: [
           {
-            backgroundColor: ['#072E2D','#42997C'],
-            data: [50, 20]  // Placeholder, will be updated dynamically
+            backgroundColor: ['#072E2D', '#42997C'],
+            data: [0, 0]  // Placeholder, will be updated dynamically
           }
         ]
       },
       primaryStorageDataHCI: {
-        labels: ['Used','Free'],
+        labels: ['Used', 'Free'],
         datasets: [
           {
-            backgroundColor: ['#072E2D','#42997C'],
-            data: [30, 40]  // Placeholder, will be updated dynamically
+            backgroundColor: ['#072E2D', '#42997C'],
+            data: [0, 0]  // Placeholder, will be updated dynamically
           }
         ]
       },
       primaryStorageDataHitachi: {
-        labels: ['Used','Free'],
+        labels: ['Used', 'Free'],
         datasets: [
           {
-            backgroundColor: ['#072E2D','#42997C'],
-            data: [50, 30]  // Placeholder, will be updated dynamically
+            backgroundColor: ['#072E2D', '#42997C'],
+            data: [0, 0]  // Placeholder, will be updated dynamically
           }
         ]
       },
@@ -97,45 +96,63 @@ export default {
       this.closeForm();
       this.fetchStorageData();
     },
-    fetchStorageData() {
-      axios.get(`${BASE_URL}/postSystemInfo`)
-        .then(response => {
-          const storageOptions = response.data;
-          const hciData = storageOptions["1"];
-          const hitachiData = storageOptions["2"];
+    async fetchStorageData() {
+      try {
+        const [storageResponse, folderSizeResponse, configMasterResponse] = await Promise.all([
+          axios.get(`${BASE_URL}/postSystemInfo`),
+          axios.get(`${BASE_URL}/folder-size`),
+          axios.get(`${BASE_URL}/postConfigMaster`)
+        ]);
 
-          this.primaryStorageDataHCI = {
-            ...this.primaryStorageDataHCI,
-            datasets: [
-              {
-                ...this.primaryStorageDataHCI.datasets[0],
-                data: [
-                  hciData.storage_used,
-                  hciData.storage_capacity - hciData.storage_used
-                  
-                ]
-              }
-            ]
-          };
+        const storageOptions = storageResponse.data;
+        const hciData = storageOptions["1"];
+        const hitachiData = storageOptions["2"];
+        const usedFolderSize = parseFloat(folderSizeResponse.data.folder_size_in_tb);
+        console.log(usedFolderSize)
+        const totalStorageCapacity = parseFloat(configMasterResponse.data.nas_storage_capacity);
+        console.log(totalStorageCapacity)
+        this.primaryStorageDataHCI = {
+          ...this.primaryStorageDataHCI,
+          datasets: [
+            {
+              ...this.primaryStorageDataHCI.datasets[0],
+              data: [
+                hciData.storage_used,
+                hciData.storage_capacity - hciData.storage_used
+              ]
+            }
+          ]
+        };
 
-          this.primaryStorageDataHitachi = {
-            ...this.primaryStorageDataHitachi,
-            datasets: [
-              {
-                ...this.primaryStorageDataHitachi.datasets[0],
-                data: [
-                  hitachiData.storage_used,
-                  hitachiData.storage_capacity - hitachiData.storage_used
-                  
-                ]
-              }
-            ]
-          };
-        })
-        .catch(error => {
-          console.error('Error fetching storage data:', error);
-          alert('Error fetching storage data: ' + error.message);
-        });
+        this.primaryStorageDataHitachi = {
+          ...this.primaryStorageDataHitachi,
+          datasets: [
+            {
+              ...this.primaryStorageDataHitachi.datasets[0],
+              data: [
+                hitachiData.storage_used,
+                hitachiData.storage_capacity - hitachiData.storage_used
+              ]
+            }
+          ]
+        };
+
+        this.storageAvailableData = {
+          ...this.storageAvailableData,
+          datasets: [
+            {
+              ...this.storageAvailableData.datasets[0],
+              data: [
+                usedFolderSize,
+                totalStorageCapacity - usedFolderSize
+              ]
+            }
+          ]
+        };
+      } catch (error) {
+        console.error('Error fetching storage data:', error);
+        alert('Error fetching storage data: ' + error.message);
+      }
     }
   },
   mounted() {
