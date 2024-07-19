@@ -77,7 +77,7 @@
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="complete" @click="Archived(details.instancename)">
-                        <h6>Archieved</h6>
+                        <h6>Archived</h6>
                         <div class="instance-name">{{ details.counts.sync_completed_count }}</div>
                     </div>
                     <div class="cols">
@@ -126,8 +126,9 @@
 <script>
 import axios from 'axios';
 import Pagination from './Pagination.vue';
+import { BASE_URL, BASE_URL2 } from '@/config';
 
-const BASE_URL = 'http://192.168.0.108:5000';
+// const BASE_URL = 'http://192.168.0.110:5000';
 
 export default {
     components: {
@@ -270,7 +271,7 @@ export default {
 
                         this.bidstenders.bids = transformedBids;
                         this.bidstenders.tenders = transformedTenders; 
-                        this.title = 'Folders Archieved'
+                        this.title = 'Folders Archived'
                     })
                     .catch(error => {
                         console.error('Error:', error);

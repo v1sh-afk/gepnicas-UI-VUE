@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
-const BASE_URL= 'http://192.168.0.108:5000';
+import { BASE_URL, BASE_URL2 } from '@/config';
+// const BASE_URL= 'http://192.168.0.110:5000';
 export default{
     computed:{
         image() {

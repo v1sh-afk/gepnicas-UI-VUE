@@ -17,15 +17,27 @@
       <!-- <div class="menu-item">
         <a>Site Settings</a>
       </div> -->
-      <div class="menu-item rightmost">
-        <a href="#" @click="toggleDropdown">Site Settings</a>
+
+
+      <!-- <div class="menu-item rightmost">
+        <a href="#" @mouseover="toggleDropdown" @mouseleave="togglebackDropdown">Site Settings</a>
         <div class="dropdown-content" v-if="dropdownVisible">
           <a @click="handleDropdownClick(handleInfraInventoryClick)">Infra Inventory - Primary</a>
           <a @click="handleDropdownClick(handleInfraInventoryDRClick)">Infra Inventory - DR</a>
           <a @click="handleDropdownClick(handleSettingsClick)">Settings</a>
           <a @click="handleDropdownClick(handleUserManagementClick)">Manage Users</a>
+        </div> -->
+
+        <div class="menu-item rightmost" @mouseover="showDropdown" @mouseleave="hideDropdown">
+        <a href="#" @mouseover.prevent="showDropdown">Site Settings</a>
+        <div class="dropdown-content" v-if="dropdownVisible">
+          <a href="#" @click="handleDropdownClick(handleInfraInventoryClick)">Infra Inventory - Primary</a>
+          <a href="#" @click="handleDropdownClick(handleInfraInventoryDRClick)">Infra Inventory - DR</a>
+          <a href="#" @click="handleDropdownClick(handleSettingsClick)">Settings</a>
+          <a href="#" @click="handleDropdownClick(handleUserManagementClick)">Manage Users</a>
         </div>
-      </div>
+      
+  </div>
       <div class="menu-item">
         <!-- <p class="menu-link" @click="handleUserManagementClick">User Management</p> -->
       </div>
@@ -39,6 +51,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -59,14 +72,18 @@ export default {
       const date = `${hours}:${minutes} ${ampm} ${day}-${month}-${year} `;
       return date;
     },
-    toggleDropdown(event) {
-      event.preventDefault();
-      this.dropdownVisible = !this.dropdownVisible;
-    },
-    handleDropdownClick(action) {
-      action();
-      this.dropdownVisible = false; // Hide the dropdown
-    },
+    // toggleDropdown(event) {
+    //   event.preventDefault();
+    //   this.dropdownVisible = !this.dropdownVisible;
+    // },
+    // togglebackDropdown(event) {
+    //   event.preventDefault();
+    //   this.dropdownVisible = !this.dropdownVisible;
+    // },
+    // handleDropdownClick(action) {
+    //   action();
+    //   this.dropdownVisible = false; // Hide the dropdown
+    // },
     handleSettingsClick() {
       this.$emit('settingsclicked');
     },
@@ -89,6 +106,16 @@ export default {
       console.log('Home clicked');
       // this.$router.push({ path: '/' });
       this.handleHomeClick();
+    },
+    showDropdown() {
+      this.dropdownVisible = true;
+    },
+    hideDropdown() {
+      this.dropdownVisible = false;
+    },
+    handleDropdownClick(callback) {
+      this.dropdownVisible = false;
+      callback();
     }
   }
 }

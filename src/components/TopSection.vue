@@ -1,7 +1,7 @@
 <template>
   <div id="containerr">
     <div class="storage-available">
-      <h4>Archieval Storage</h4>
+      <h4>Archival Storage</h4>
       <div id="storage">
         <Doughnut class="pie" :data="storageAvailableData" :options="options"/>
       </div>
@@ -32,7 +32,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'vue-chartjs';
 import Storageform from './Storageform.vue';
 import axios from 'axios';
-
+import { BASE_URL, BASE_URL2 } from '@/config';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default {
@@ -44,28 +44,28 @@ export default {
   data() {
     return {
       storageAvailableData: {
-        labels: ['Free', 'Used'],
+        labels: ['Used','Free',],
         datasets: [
           {
-            backgroundColor: ['#072E2D', '#42997C'],
+            backgroundColor: ['#072E2D','#42997C'],
             data: [50, 20]  // Placeholder, will be updated dynamically
           }
         ]
       },
       primaryStorageDataHCI: {
-        labels: ['Free', 'Used'],
+        labels: ['Used','Free'],
         datasets: [
           {
-            backgroundColor: ['#072E2D', '#42997C'],
+            backgroundColor: ['#072E2D','#42997C'],
             data: [30, 40]  // Placeholder, will be updated dynamically
           }
         ]
       },
       primaryStorageDataHitachi: {
-        labels: ['Free', 'Used'],
+        labels: ['Used','Free'],
         datasets: [
           {
-            backgroundColor: ['#072E2D', '#42997C'],
+            backgroundColor: ['#072E2D','#42997C'],
             data: [50, 30]  // Placeholder, will be updated dynamically
           }
         ]
@@ -98,7 +98,7 @@ export default {
       this.fetchStorageData();
     },
     fetchStorageData() {
-      axios.get('http://192.168.0.108:5000/postSystemInfo')
+      axios.get(`${BASE_URL}/postSystemInfo`)
         .then(response => {
           const storageOptions = response.data;
           const hciData = storageOptions["1"];
@@ -110,8 +110,9 @@ export default {
               {
                 ...this.primaryStorageDataHCI.datasets[0],
                 data: [
-                  hciData.storage_capacity - hciData.storage_used,
-                  hciData.storage_used
+                  hciData.storage_used,
+                  hciData.storage_capacity - hciData.storage_used
+                  
                 ]
               }
             ]
@@ -123,8 +124,9 @@ export default {
               {
                 ...this.primaryStorageDataHitachi.datasets[0],
                 data: [
-                  hitachiData.storage_capacity - hitachiData.storage_used,
-                  hitachiData.storage_used
+                  hitachiData.storage_used,
+                  hitachiData.storage_capacity - hitachiData.storage_used
+                  
                 ]
               }
             ]

@@ -84,7 +84,7 @@
   
 <script>
 import axios from 'axios';
-
+import { BASE_URL, BASE_URL2 } from '@/config';
 export default {
   data() {
     return {
@@ -134,7 +134,7 @@ export default {
     saveConfig() {
       const payload = { ...this.config };
       console.log(payload)
-      axios.post('http://192.168.0.108:8001/postConfig?table=gepnicas_dr_infra', payload)
+      axios.post(`${BASE_URL2}/postConfig?table=gepnicas_dr_infra`, payload)
         .then(response => {
           alert(response.data.message);
           this.resetForm();

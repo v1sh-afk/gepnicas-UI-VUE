@@ -83,8 +83,8 @@
   
   <script>
   import axios from 'axios';
-  
-  const BASE_URL = 'http://192.168.0.108:8001';
+  import { BASE_URL, BASE_URL2 } from '@/config';
+  // const BASE_URL = 'http://192.168.0.110:8001';
   export default {
     props: ['instancename'],
     data() {
@@ -113,7 +113,7 @@
     methods: {
       fetchData(instancename){
         console.log(instancename)
-        axios.get(`${BASE_URL}/getConfig?table=gepnicas_dr_infra&instancename=${instancename}`)
+        axios.get(`${BASE_URL2}/getConfig?table=gepnicas_dr_infra&instancename=${instancename}`)
             .then(response => {
             console.log('gotresponse')
             this.config = response.data[0];
@@ -127,7 +127,7 @@
       saveConfig() {
         const payload = { ...this.config };
         console.log('Saving config with payload:', payload);
-        axios.post(`${BASE_URL}/updateConfig?table=gepnicas_dr_infra`, payload)
+        axios.post(`${BASE_URL2}/updateConfig?table=gepnicas_dr_infra`, payload)
           .then(response => {
             alert(response.data.message);
           })

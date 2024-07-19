@@ -51,8 +51,8 @@
   
   <script>
   import axios from 'axios';
+  import { BASE_URL, BASE_URL2 } from '@/config';
   
-  const BASE_URL = 'http://192.168.0.108:8001';
   
   export default {
     // props: ['instancename'],
@@ -73,7 +73,7 @@
       //         });
       //     },
       deleteData(instancename) {
-        axios.delete(`${BASE_URL}/deleteConfig?table=gepnicas_dr_infra&instancename=${instancename}`)
+        axios.delete(`${BASE_URL2}/deleteConfig?table=gepnicas_dr_infra&instancename=${instancename}`)
         .then(response => { 
               alert(response.data.message);
               this.takeGridData()
@@ -84,7 +84,7 @@
           });
       },
       takeGridData() {
-        axios.get(`${BASE_URL}/getConfig?table=gepnicas_dr_infra`)
+        axios.get(`${BASE_URL2}/getConfig?table=gepnicas_dr_infra`)
         // axios.get('http://192.168.0.109:8111/getConfig?table=gepnicas_primary_infra')
           .then(response => {
             this.gridData = response.data;

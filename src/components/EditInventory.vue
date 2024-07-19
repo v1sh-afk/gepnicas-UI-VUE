@@ -158,8 +158,10 @@
 
 <script>
 import axios from 'axios';
+import { BASE_URL, BASE_URL2 } from '@/config';
 
-const BASE_URL = 'http://192.168.0.108:8000'
+// const BASE_URL = 'http://192.168.0.110:8000'
+
 export default {
     props: ['instancename'],
     data() {
@@ -206,7 +208,7 @@ export default {
     methods: {
         fetchData(instancename){
         console.log(instancename)
-        axios.get(`${BASE_URL}/getConfig?table=gepnicas_primary_infra&instancename=${instancename}`)
+        axios.get(`${BASE_URL2}/getConfig?table=gepnicas_primary_infra&instancename=${instancename}`)
             .then(response => {
             console.log('gotresponse')
             this.config = response.data[0];
@@ -256,7 +258,7 @@ export default {
             primary_dbbackuppath: this.config.primary_dbbackuppath    
         };
         console.log(payload)
-        axios.post(`${BASE_URL}/updateConfigMaster`, payload)
+        axios.post(`${BASE_URL2}/updateConfigMaster`, payload)
             .then(response => {
             alert(response.data.message);
             })

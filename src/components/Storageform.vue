@@ -33,7 +33,7 @@
 
 <script>
 import axios from 'axios';
-
+import { BASE_URL, BASE_URL2 } from '@/config';
 export default {
   data() {
     return {
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     fetchStorageOptions() {
-      axios.get('http://192.168.0.108:5000/postSystemInfo')
+      axios.get(`${BASE_URL}/postSystemInfo`)
         .then(response => {
           console.log('GET response:', response.data);
           this.storageOptions = response.data;
@@ -81,7 +81,7 @@ export default {
       
       console.log('Updated storage options:', updatedStorageOptions);
 
-      axios.post('http://192.168.0.108:5000/postSystemInfo', updatedStorageOptions)
+      axios.post(`${BASE_URL}/postSystemInfo`, updatedStorageOptions)
         .then(response => {
           console.log('POST response:', response.data);
           alert('Storage updated successfully!');
