@@ -10,22 +10,22 @@
                 <div class="detail1">
                     <img class="detail_logos" :src="complete" @click="TotalMain({iname: 'getBidsTenderInstanceArchived', title: 'Folders Completed'})">
                     <h6>Folders Completed</h6>
-                    <div class="instance-name">{{ dashboard.counts.sync_completed_count }}</div>
+                    <div class="instance-name">{{ dashboard.counts.archived_count }}</div>
                 </div>
                 <div class="detail1">
-                    <img class="detail_logos" :src="sync" @click="TotalMain({iname: 'getBidsTenderInstanceSync', title: 'Sync'})">
+                    <img class="detail_logos" :src="sync" @click="TotalMain({iname: 'getBidsTenderInstanceSyncPending', title: 'Sync'})">
                     <h6>Sync</h6>
-                    <div class="instance-name">{{ dashboard.counts.sync_count }}</div>
+                    <div class="instance-name">{{ dashboard.counts.sync_pending_count }}</div>
                 </div>
                 <div class="detail1">
-                    <img class="detail_logos" :src="link" @click="TotalMain({iname: 'getBidsTenderInstanceMetalink', title: 'Meta Data'})">
+                    <img class="detail_logos" :src="link" @click="TotalMain({iname: 'getBidsTenderInstanceMetalinkPending', title: 'Meta Data'})">
                     <h6>Meta Data</h6>
-                    <div class="instance-name">{{ dashboard.counts.meta_link_created }}</div>
+                    <div class="instance-name">{{ dashboard.counts.meta_link_created_count }}</div>
                 </div>
                 <div class="detail1">
-                    <img class="detail_logos" :src="process" @click="TotalMain('d')">
+                    <img class="detail_logos" :src="process" @click="TotalMain({iname: 'getBidsTenderInstanceSoftlinkPending', title: 'Soft Link'})">
                     <h6>Soft Links</h6>
-                    <div class="instance-name">{{ dashboard.counts.soft_link_created }}</div>
+                    <div class="instance-name">{{ dashboard.counts.soft_link_created_count }}</div>
                 </div>
                 <div class="detail1">
                     <img class="detail_logos" :src="error" @click="TotalMain({iname: 'getBidsTenderInstanceError', title: 'Errors'})">
@@ -78,22 +78,22 @@
                     <div class="cols">
                         <img class="detail_logos" :src="complete" @click="Archived(details.instancename)">
                         <h6>Archived</h6>
-                        <div class="instance-name">{{ details.counts.sync_completed_count }}</div>
+                        <div class="instance-name">{{ details.counts.archived_count }}</div>
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="sync">
                         <h6>Sync</h6>
-                        <div class="instance-name">{{ details.counts.sync_count }}</div>
+                        <div class="instance-name">{{ details.counts.sync_pending_count }}</div>
                     </div>
                     <div class= "cols">
                         <img class="detail_logos" :src="process">
                         <h6>Soft Links</h6>
-                        <div class="instance-name">{{ details.counts.soft_link_created }}</div>
+                        <div class="instance-name">{{ details.counts.soft_link_created_count }}</div>
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="link" @click="Metalink(details.instancename)">
                         <h6>Meta Links</h6>
-                        <div class="instance-name">{{ details.counts.meta_link_created }}</div>
+                        <div class="instance-name">{{ details.counts.meta_link_created_count }}</div>
                     </div>
                     <div class="cols">
                         <img class="detail_logos" :src="error" @click="Errorr(details.instancename)">
