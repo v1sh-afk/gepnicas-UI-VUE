@@ -131,7 +131,6 @@
 import axios from 'axios';
 import Pagination from './Pagination.vue';
 import { BASE_URL, BASE_URL2, BASE_URL3 } from '@/config';
-import { useToast } from 'vue-toastification';
 
 // const BASE_URL = 'http://192.168.0.110:5000';
 
@@ -159,9 +158,7 @@ export default {
             displayTenders: true,
             selectedOption: null,
             showformain: false,
-            title: null,
-            toast: useToast(),
-            currentToast : null
+            title: null
         };
     },
     methods: {
@@ -175,16 +172,16 @@ export default {
             this.$refs.scrollContainer.scrollLeft += 100;
         },
         processbids(iname){
-        // axios.get(`${BASE_URL3}/process_bids?instancename=${iname}&folder_type=bids`)
-        //         .then(response => {
-        //             alert(response.data.message);
-        //             console.log('Initial request successful:', response.data);
-        //         })
-        //         .catch(error => {
-        //             console.error('Error saving config:', error);
-        //             alert('Error saving config: ' + error.message);
-        // });
-
+        axios.get(`${BASE_URL3}/process_bids?instancename=${iname}&folder_type=bids`)
+                .then(response => {
+                    alert(response.data.message);
+                    console.log('Initial request successful:', response.data);
+                })
+                .catch(error => {
+                    console.error('Error saving config:', error);
+                    alert('Error saving config: ' + error.message);
+        });
+        
             // axios.get(`${BASE_URL3}/process_bids?instancename=${iname}&folder_type=bids`)
             //         .then(response => {
             //             console.log('Initial request successful:', response.data);
@@ -209,32 +206,6 @@ export default {
             //             console.error('Error initiating process:', error);
             //             alert('Error initiating process: ' + error.message);
             //         });
-
-
-            axios.get(`${BASE_URL3}/process_bids?instancename=${iname}&folder_type=bids`)
-                .then(response => {
-                    console.log('Initial request successful:', response.data);
-                    const source = new EventSource(`${BASE_URL3}/process_bids_stream?instancename=${iname}&folder_type=bids`);
-
-                    source.onmessage = (event) => {
-                        const data = JSON.parse(event.data);
-                        if (data.message) {
-                            this.toast.success(data.message);
-                        } else if (data.error) {
-                            this.toast.error("Error: " + data.error);
-                            source.close();
-                        }
-                    };
-
-                    source.onerror = (event) => {
-                        this.toast.error("An error occurred while processing bids.");
-                        source.close();
-                    };
-                })
-                .catch(error => {
-                    console.error('Error initiating process:', error);
-                    this.toast.error('Error initiating process: ' + error.message);
-                });
                 
         },
         getImages() {
